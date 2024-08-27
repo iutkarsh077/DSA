@@ -44,7 +44,7 @@ using namespace std;
     return 0;
 }*/
 
-int main()
+/*int main()
 {
     vector<int> nums1 = {4, 1, 2};
     vector<int> nums2 = {1, 3, 4, 2};
@@ -83,4 +83,30 @@ int main()
         cout << nums3[i] << " ";
         i++;
     }
+}*/
+
+int main() {
+    vector<int> nums1 = {4, 1, 2};
+    vector<int> nums2 = {1, 3, 4, 2};
+    vector<int> nums3(nums2.size(), -1); // Initialize nums3 with -1
+    stack<int> st;
+
+    for(int i = nums2.size() - 1; i >= 0; i--) {
+        while(!st.empty() && st.top() <= nums2[i]) {
+            st.pop();
+        }
+
+        if(!st.empty()) {
+            nums3[i] = st.top();
+        }
+
+        st.push(nums2[i]);
+    }
+
+    for(int i = 0; i < nums3.size(); i++) {
+        cout << nums3[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
 }
