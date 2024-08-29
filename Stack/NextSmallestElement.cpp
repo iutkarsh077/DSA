@@ -31,7 +31,7 @@ using namespace std;
 
 
 
-int main(){
+/*int main(){
     vector<int> A = {2, 1, 6, 5, -2, 7, 1};
 
     stack<int> st;
@@ -47,6 +47,32 @@ int main(){
         }
 
         st.push(A[i]);
+    }
+
+    for(int i = 0; i < result.size(); i++){
+        cout << result[i] << " ";
+    }
+    return 0;
+}*/
+
+
+int main(){
+    vector<int> A = {2, 1, 6, 5, -2, 7, 1};
+    stack<int> st;
+    vector<int> result(A.size(), -1);
+    int i = 0;
+
+    while(i < A.size()){
+        while(!st.empty() && st.top() >= A[i]){
+            st.pop();
+        }
+
+        if(i < A.size()){
+            result[i] = st.empty() ? -1 : st.top();
+        }
+
+        st.push(A[i]);
+        i++;
     }
 
     for(int i = 0; i < result.size(); i++){
