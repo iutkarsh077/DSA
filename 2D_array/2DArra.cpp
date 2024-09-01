@@ -6,6 +6,9 @@ int main()
     int row;
     int col;
 
+
+
+    
     cin >> row;
 
     cin >> col;
