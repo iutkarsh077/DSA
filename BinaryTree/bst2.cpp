@@ -73,6 +73,29 @@ Node *BuildTree(Node *&root)
     return root;
 }
 
+
+Node *BuildTree2(Node *&root)
+{
+    int d;
+    cout << "Enter your Data: ";
+    cin >> d;
+    cout << endl;
+    root = new Node(d);
+
+    if (d == -1)
+    {
+        return nullptr;
+    }
+
+    cout << "Enter data in left of Node " << d << " ";
+    root->left = BuildTree(root->left);
+    cout << endl;
+    cout << "Enter data in right of Node " << d << " ";
+    root->right = BuildTree(root->right);
+    cout << endl;
+    return root;
+}
+
 void Inorder(Node *root){
     if(root == nullptr){
         return;
