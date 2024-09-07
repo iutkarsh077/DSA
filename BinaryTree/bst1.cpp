@@ -83,7 +83,7 @@ Node *BuildTree(Node *root)
     // cout << endl;
 }*/
 
-/*void LevelOrderTransversal(Node *root)
+void LevelOrderTransversal(Node *root)
 {
     queue<Node *> q;
     q.push(root);
@@ -117,10 +117,12 @@ Node *BuildTree(Node *root)
             }
         }
     }
-}*/
+}
 
-void Inorder(Node *root){
-    if(root == nullptr){
+void Inorder(Node *root)
+{
+    if (root == nullptr)
+    {
         return;
     }
 
@@ -128,12 +130,69 @@ void Inorder(Node *root){
     cout << root->data << " ";
     Inorder(root->right);
 }
+
+void LevelOrdertransversal(Node *root, vector<int> &vec)
+{
+    queue<Node *> que;
+    que.push(root);
+    // que.push(nullptr);
+    int i = 1;
+
+    while (!que.empty())
+    {
+        Node *temp = que.front();
+        que.pop();
+
+        // if(temp == nullptr){
+        //     cout << endl;
+        //     if(!que.empty()){
+        //         que.push(nullptr);
+        //     }
+        // }
+
+        
+        vec.push_back(temp->data);
+        if (i % 2 == 0)
+        {
+            if (temp->left)
+            {
+                que.push(temp->left);
+            }
+
+            if (temp->right)
+            {
+                que.push(temp->right);
+            }
+        }
+
+        else
+        {
+            if (temp->right)
+            {
+                que.push(temp->right);
+            }
+
+            if (temp->left)
+            {
+                que.push(temp->left);
+            }
+        }
+        i++;
+    }
+}
+
 int main()
 {
     Node *root = nullptr;
     root = BuildTree(root);
-    // TransversalTree(root);
-    Inorder(root);
+    // LevelOrderTransversal(root);
+    // Inorder(root);
+    vector<int> vec;
+    LevelOrdertransversal(root, vec);
+
+    for(int i = 0; i < vec.size(); i++){
+        cout << vec[i] << " ";
+    }
     return 0;
 }
 
