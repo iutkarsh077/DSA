@@ -3,8 +3,21 @@
 #include <string>
 using namespace std;
 
+class Node{
+    public:
+    int data;
+    Node *left;
+    Node *right;
 
-bool searchInBST(BinaryTreeNode<int> *root, int x) {
+
+    Node(int data){
+        this->data = data;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+bool searchInBST(Node *root, int x) {
     // Write your code here.
     if (root == nullptr) {
       return false;
