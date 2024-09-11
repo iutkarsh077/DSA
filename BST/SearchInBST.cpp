@@ -34,6 +34,26 @@ bool searchInBST(Node *root, int x) {
         return searchInBST(root->left, x);
     }
 }
+
+bool searchInBST2(Node *root, int x) {
+    // Write your code here.
+    if (root == nullptr) {
+      return false;
+    }
+
+    if (root->data == x){
+        return true;
+    }
+
+    if(x > root->data){
+        return searchInBST(root->right, x);
+    }       
+    else{
+        return searchInBST(root->left, x);
+    }
+}
+
+
 int minVal(Node *root){
     if(root->left == nullptr){
         return root->data;
