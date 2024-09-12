@@ -65,6 +65,23 @@ void Inorder(Node *root, vector<int> &arr)
     Inorder(root->right, arr);
 }
 
+Node *LCAInBST(Node *root, int p, int q){
+    if(root == nullptr){
+        return nullptr;
+    }
+
+    if(root->data < p && root->data < q){
+        return LCAInBST(root->right, p, q);
+    }
+
+
+    if(root->data > p && root->data > q){
+        return LCAInBST(root->left, p, q);
+    }
+
+    return root;
+}
+
 int main()
 {
     Node *root = nullptr;
@@ -72,7 +89,7 @@ int main()
     vector<int> arr;
     Inorder(root, arr);
 
-    int prec = -1;
+    /*int prec = -1;
     int succ = -1;
     int val = 5;
     for (int i = 0; i < arr.size(); i++)
@@ -90,6 +107,12 @@ int main()
     }
     cout << endl;
     cout << "Predeccessor is: " << prec << endl;
-    cout << "Successor is: " << succ << endl;
+    cout << "Successor is: " << succ << endl;*/
+
+
+    Node *d = LCAInBST(root, 1, 3);
+
+    cout << endl;
+    cout << d->data;
     return 0;
 }
