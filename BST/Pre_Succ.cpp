@@ -77,20 +77,17 @@ int main()
     int val = 5;
     for (int i = 0; i < arr.size(); i++)
     {
-        if (val == arr[i])
+        if (arr[i] < val)
         {
-            if (i >= 1)
-            {
-                prec = arr[i - 1];
-            }
+            prec = arr[i];
+        }
 
-            if (i < arr.size() - 1)
-            {
-                succ = arr[i + 1];
-            }
+        if (arr[i] > val)
+        {
+            succ = arr[i];
+            break; 
         }
     }
-
     cout << endl;
     cout << "Predeccessor is: " << prec << endl;
     cout << "Successor is: " << succ << endl;
