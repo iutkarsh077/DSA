@@ -82,6 +82,23 @@ Node *LCAInBST(Node *root, int p, int q){
     return root;
 }
 
+Node *LCAInBST(Node *root, int p, int q){
+    if(root == nullptr){
+        return nullptr;
+    }
+
+    if(root->data < p && root->data < q){
+        return LCAInBST(root->right, p, q);
+    }
+
+
+    if(root->data > p && root->data > q){
+        return LCAInBST(root->left, p, q);
+    }
+
+    return root;
+}
+
 int main()
 {
     Node *root = nullptr;
