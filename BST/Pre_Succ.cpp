@@ -99,6 +99,42 @@ Node *LCAInBST(Node *root, int p, int q){
     return root;
 }
 
+/*int main()
+{
+    Node *root = nullptr;
+    BuildTree(root);
+    vector<int> arr;
+    Inorder(root, arr);
+
+    /*int prec = -1;
+    int succ = -1;
+    int val = 5;
+    for (int i = 0; i < arr.size(); i++)
+    {
+        if (arr[i] < val)
+        {
+            prec = arr[i];
+        }
+
+        if (arr[i] > val)
+        {
+            succ = arr[i];
+            break; 
+        }
+    }
+    cout << endl;
+    cout << "Predeccessor is: " << prec << endl;
+    cout << "Successor is: " << succ << endl;
+
+
+    Node *d = LCAInBST(root, 1, 3);
+
+    cout << endl;
+    cout << d->data;
+    return 0;
+}*/
+
+
 int main()
 {
     Node *root = nullptr;
