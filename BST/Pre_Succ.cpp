@@ -18,6 +18,22 @@ public:
     }
 };
 
+void BuildTree2(Node *&root)
+{
+    cout << "Enter the data: ";
+    int d;
+    cin >> d;
+    cout << endl;
+    while (d != -1)
+    {
+        root = InsertNode(root, d);
+        cout << "Enter the data: ";
+        cin >> d;
+        cout << endl;
+    }
+}
+
+
 Node *InsertNode(Node *root, int data)
 {
     if (root == nullptr)
