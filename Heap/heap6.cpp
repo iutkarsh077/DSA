@@ -9,7 +9,7 @@ public:
 
     heap()
     {
-        arr[0] = -1; // Heap is 1-indexed, so index 0 is unused
+        arr[0] = -1;
         size = 0;
     }
 
@@ -19,11 +19,9 @@ public:
         int index = size;
         arr[index] = val;
 
-        // Perform up-heap bubbling
         while (index > 1)
         {
             int parent = index / 2;
-
             if (arr[parent] < arr[index])
             {
                 swap(arr[parent], arr[index]);
@@ -31,16 +29,18 @@ public:
             }
             else
             {
+
                 return;
             }
         }
     }
 
-    void deleteRootElement()
+    void deleteElementRoot()
     {
         if (size == 0)
         {
-            cout << "Heap is already empty" << endl;
+            cout << "Already empty";
+            cout << endl;
             return;
         }
 
@@ -48,7 +48,7 @@ public:
         size--;
 
         int i = 1;
-        while (i <= size)
+        while (i < size)
         {
             int leftIndex = 2 * i;
             int rightIndex = 2 * i + 1;
@@ -64,13 +64,13 @@ public:
                 largest = rightIndex;
             }
 
-            if (largest != i)
+            if(largest != i)
             {
-                swap(arr[i], arr[largest]);
+                swap(arr[largest], arr[i]);
                 i = largest;
             }
-            else
-            {
+
+            else{
                 break;
             }
         }
@@ -86,56 +86,20 @@ public:
     }
 };
 
-void heapify(int arr[], int n, int i)
-{
-    int largest = i;
-    int leftIndex = 2 * i;
-    int rightIndex = 2 * i + 1;
-
-    if (leftIndex <= n && arr[leftIndex] > arr[largest])
-    {
-        largest = leftIndex;
-    }
-
-    if (rightIndex <= n && arr[rightIndex] > arr[largest])
-    {
-        largest = rightIndex;
-    }
-
-    if (largest != i)
-    {
-        swap(arr[largest], arr[i]);
-        heapify(arr, n, largest);
-    }
-}
-
 int main()
 {
-    // heap h;
-    // h.insert(60);
-    // h.insert(50);
-    // h.insert(40);
-    // h.insert(30);
-    // h.insert(20);
-
-    // h.print(); // Output: 60 50 40 30 20
-    // h.deleteRootElement();
-    // h.print(); // Output: 50 30 40 20 (after deleting the root)
-
-    int arr[] = {-1, 3, 1, 5, 7, 8, 9, 6};
-
-    int n = (sizeof(arr) / sizeof(arr[0])) - 1;
-
-    for (int i = n / 2; i > 0; i--)
-    {
-        heapify(arr, n, i);
-    }
-
-    cout << "Heapify array is: " << endl;
-    for (int i = 1; i <= n; i++)
-    {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
+    heap h;
+    h.insert(60);
+    h.insert(50);
+    h.insert(40);
+    h.insert(30);
+    h.insert(20);
+    h.insert(55);
+    h.insert(100);
+    h.insert(0);
+    h.insert(25);
+    h.print();
+    h.deleteElementRoot();
+    h.print();
     return 0;
 }
