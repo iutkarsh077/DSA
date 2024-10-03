@@ -49,14 +49,14 @@ void DivideArray(int arr[], int low, int high)
         return;
     }
 
-    int mid = (low + high) / 2;
+    int mid = low + ((high - low) / 2);
     DivideArray(arr, low, mid);
     DivideArray(arr, mid + 1, high);
     MergeSort(arr, low, mid, high);
 }
 int main()
 {
-    int arr[] = {3, 1, 2, 4, 1, 5, 2, 6, 4};
+    int arr[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
 
     int low = 0;
     int high = sizeof(arr) / sizeof(arr[0]) - 1;
