@@ -24,7 +24,7 @@ void Rev(vector<int> &nums, int k)
     }
 }
 
-void RevByLoop(vector<int> &nums, int k)
+void RevByLoopByLeft(vector<int> &nums, int k)
 {
     int n = nums.size();
     for (int i = 0; i < k; i++)
@@ -38,12 +38,27 @@ void RevByLoop(vector<int> &nums, int k)
     }
 }
 
+
+void RevByLoopByRight(vector<int> &nums, int k)
+{
+    int n = nums.size();
+    for (int i = 0; i < k; i++)
+    {
+        int temp = nums[n - 1];
+        for (int j = n - 2; j >= 0; j--)
+        {
+            nums[j + 1] = nums[j];
+        }
+        nums[0] = temp;
+    }
+}
+
 int main()
 {
-    vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    vector<int> nums = {1, 2, 3, 4, 5, 6, 7};
     int k = 3;
     int i = 0;
-    RevByLoop(nums, k);
+    RevByLoopByRight(nums, k);
     while (i < nums.size())
     {
         cout << nums[i] << " ";
