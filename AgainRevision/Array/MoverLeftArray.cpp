@@ -24,12 +24,26 @@ void Rev(vector<int> &nums, int k)
     }
 }
 
+void RevByLoop(vector<int> &nums, int k)
+{
+    int n = nums.size();
+    for (int i = 0; i < k; i++)
+    {
+        int temp = nums[0];
+        for (int j = 0; j < n - 1; j++)
+        {
+            nums[j] = nums[j + 1];
+        }
+        nums[n - 1] = temp;
+    }
+}
+
 int main()
 {
     vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     int k = 3;
     int i = 0;
-    Rev(nums, k);
+    RevByLoop(nums, k);
     while (i < nums.size())
     {
         cout << nums[i] << " ";
