@@ -27,6 +27,8 @@ int BetterApporach(vector<int> &nums)
     return -1;
 }
 
+
+//Moore Voting Algorithm
 int OptimalApproach(vector<int> &nums)
 {
     int element = nums[0];
