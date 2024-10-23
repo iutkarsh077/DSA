@@ -28,6 +28,6 @@ int main()
         }
     }
 
-    cout << "Lonest consecutive is: " << maxi;
+    cout << "Longest consecutive is: " << maxi;
     return 0;
 }
