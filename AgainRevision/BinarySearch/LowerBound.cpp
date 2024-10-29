@@ -51,5 +51,6 @@ int main()
     }
 
     cout << "Index is: " << index;
+    
     return 0;
 }
