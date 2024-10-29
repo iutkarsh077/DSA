@@ -29,4 +29,5 @@ int main()
     }
 
     cout << maxi;
+    return 0;
 }
