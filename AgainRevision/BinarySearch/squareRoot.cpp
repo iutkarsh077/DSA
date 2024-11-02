@@ -46,6 +46,8 @@ int main()
         }
     }
 
+    
+
     cout << minVal;
     return 0;
-}
+} 
