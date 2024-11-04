@@ -1,60 +1,52 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int findLoad(vector<int> arr, int mid, int days)
+int findLoad(vector<int> arr, int cap)
 {
     int i = 0;
-    int sum = 0;
-
-    while (i < arr.size())
-    {
-        if (sum >= mid)
-        {
-            days--;
+    int load = 0;
+    int day = 1;
+    for(int i = 0; i < arr.size(); i++){
+        if(load + arr[i] > cap){
+            day = day + 1;
+            load = arr[i];
         }
 
-        else
-        {
-            sum = sum + arr[i];
-            i++;
+        else{
+             load += arr[i];
         }
     }
 
-    if (days == 0)
-    {
-        return mid;
-    }
-
-    return days;
+    return day;
 }
 
 int main()
 {
     vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-    int maxi = 0;
-
+    int sum = 0;
+    int maxi = INT_MIN;
     for (int i = 0; i < arr.size(); i++)
     {
-        maxi += arr[i];
+        sum += arr[i];
+        maxi = max(maxi, arr[i]);
     }
 
-    int s = 0;
-    int e = maxi;
+    int s = maxi;
+    int e = sum;
     int days = 5;
     int minCapacity = 0;
     while (s <= e)
     {
         int mid = s + ((e - s) / 2);
-        int reqVal = findLoad(arr, mid, days);
+        int reqVal = findLoad(arr, mid);
 
-        if(reqVal > 0){
-            minCapacity = reqVal;
+        if(reqVal <= days){
+            minCapacity = mid;
             e = mid - 1;
         }
 
-        else if(reqVal == 0){
-            minCapacity = reqVal;
+        else if(reqVal > days){
             s = mid + 1;
         }
 
