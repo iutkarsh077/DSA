@@ -33,7 +33,7 @@ void BruteMethode()
 
 int main()
 {
-    int n = 5;
+    int n = 6;
     vector<int> sum(n + 1, 0);
 
     for (int i = 1; i <= n; i++)
