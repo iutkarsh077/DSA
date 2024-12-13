@@ -20,6 +20,10 @@ int main()
     {
         cout << "True it is armstrong number";
     }
+if (result == n)
+    {
+        cout << "True it is armstrong number";
+    }
     else
     {
         cout << "No, it is not armstrong number";
