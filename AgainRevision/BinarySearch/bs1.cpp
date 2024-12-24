@@ -46,6 +46,10 @@ int search2(vector<int> &nums, int target)
     {
         return 0;
     }
+     if (nums.size() == 1 && target == nums[0])
+    {
+        return 0;
+    }
     int s = 0;
     int e = nums.size() - 1;
 
