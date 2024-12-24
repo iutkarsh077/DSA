@@ -12,7 +12,8 @@ public:
         data = val;
         left = NULL;
         right = NULL;
-    }
+    }data = val;
+        left = NULL;
 };
 
 Node *BuildTree(Node *&root)

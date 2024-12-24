@@ -15,6 +15,9 @@ public:
     }
 };
 
+
+Node *BuildTree(Node *&root)
+
 Node *BuildTree(Node *&root)
 {
     cout << "Enter data: " << endl;
