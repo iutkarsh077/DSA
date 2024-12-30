@@ -74,28 +74,33 @@ int singleNonDuplicate(vector<int> &nums)
     return -1;
 }
 
-int findPeakElementBrute(vector<int>& nums) {
-        if(nums.size() == 1){
-            return 0;
-        }
-
-        if(nums[0] > nums[1]){
-            return 0;
-        }
-
-        if(nums[nums.size() - 1] > nums[nums.size() - 2]){
-            return nums.size() - 1;
-        }
-
-        for(int i = 1; i < nums.size() - 1; i++){
-            if(nums[i] > nums[i - 1] && nums[i] > nums[i + 1]){
-                return i;
-            }
-        }
-
-
-        return -1;
+int findPeakElementBrute(vector<int> &nums)
+{
+    if (nums.size() == 1)
+    {
+        return 0;
     }
+
+    if (nums[0] > nums[1])
+    {
+        return 0;
+    }
+
+    if (nums[nums.size() - 1] > nums[nums.size() - 2])
+    {
+        return nums.size() - 1;
+    }
+
+    for (int i = 1; i < nums.size() - 1; i++)
+    {
+        if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1])
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
 
 bool search(vector<int> &nums, int target)
 {
@@ -146,23 +151,57 @@ bool search(vector<int> &nums, int target)
     return false;
 }
 
-
-  int floorSqrt(int n) {
-        // Your code goes here
-        int mini = 1;
-        for(int i = 0; i <= n/2; i++){
-            if(i * i == n){
-                return i;
-            }
-            if(i * i < n){
-                mini = i;
-            }
+int floorSqrtBrute(int n)
+{
+    // Your code goes here
+    int mini = 1;
+    for (int i = 0; i <= n / 2; i++)
+    {
+        if (i * i == n)
+        {
+            return i;
         }
-        
-        return mini;
+        if (i * i < n)
+        {
+            mini = i;
+        }
     }
+
+    return mini;
+}
+
+int floorSqrt(int n)
+{
+    if (n == 0)
+    {
+        return 0;
+    }
+    int s = 1;
+    int e = n;
+    int result = 1;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+        if(mid * mid == n){
+            return mid;
+        }
+
+        else if(mid * mid > n){
+            e = mid - 1;
+        }
+        else if(mid * mid < n){
+            s = mid + 1;
+            result = mid;
+        }
+    }
+
+    return result;
+}
 
 int main()
 {
+    int result = floorSqrt(0);
+    cout << result;
     return 0;
 }
