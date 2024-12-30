@@ -146,6 +146,22 @@ bool search(vector<int> &nums, int target)
     return false;
 }
 
+
+  int floorSqrt(int n) {
+        // Your code goes here
+        int mini = 1;
+        for(int i = 0; i <= n/2; i++){
+            if(i * i == n){
+                return i;
+            }
+            if(i * i < n){
+                mini = i;
+            }
+        }
+        
+        return mini;
+    }
+
 int main()
 {
     return 0;
