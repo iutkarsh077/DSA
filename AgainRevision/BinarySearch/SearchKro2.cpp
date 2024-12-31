@@ -183,20 +183,47 @@ int floorSqrt(int n)
     while (s <= e)
     {
         int mid = s + ((e - s) / 2);
-        if(mid * mid == n){
+        if (mid * mid == n)
+        {
             return mid;
         }
 
-        else if(mid * mid > n){
+        else if (mid * mid > n)
+        {
             e = mid - 1;
         }
-        else if(mid * mid < n){
+        else if (mid * mid < n)
+        {
             s = mid + 1;
             result = mid;
         }
     }
 
     return result;
+}
+
+int nthRoot(int n, int m)
+{
+    // Code here.
+    int mini = -1;
+
+    if (n == 1)
+    {
+        return m;
+    }
+    for (int i = 0; i <= m / 2; i++)
+    {
+        if (pow(i, n) == m)
+        {
+            mini = i;
+        }
+        else if (pow(i, n) > m)
+        {
+            break;
+        }
+    }
+
+    return mini;
 }
 
 int main()
