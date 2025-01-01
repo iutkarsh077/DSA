@@ -202,6 +202,37 @@ int floorSqrt(int n)
     return result;
 }
 
+ int search2(vector<int>& nums, int target) {
+        
+        if(nums.size() == 0) return -1;
+
+        if(nums.size() == 1 && target != nums[0]){
+            return -1;
+        }
+
+        if(nums.size() == 1 && target == nums[0]){
+            return 0;
+        }
+        int s = 0;
+        int e = nums.size() - 1;
+
+        while(s <= e){
+            int mid = s + ((e - s)/2);
+
+            if(nums[mid] == target) return mid;
+
+            else if(nums[mid] < target){
+                s = mid + 1;
+            }
+
+            else{
+                e = mid - 1;
+            }
+        }
+
+        return -1;
+    }
+
 int nthRootBrute(int n, int m)
 {
     // Code here.
@@ -226,7 +257,7 @@ int nthRootBrute(int n, int m)
     return mini;
 }
 
-  int nthRoot(int n, int m) {
+int nthRoot(int n, int m) {
         // Code here.
         if(n == 1){
             return m;
