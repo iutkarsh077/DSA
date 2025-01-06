@@ -73,6 +73,33 @@ int shipWithinDays(vector<int> &weights, int days)
     return ans;
 }
 
+
+string removeOuterParentheses(string s) {
+        string ans = "";
+        int cnt = 0;
+
+        for(int i = 0; i < s.size(); i++){
+            if(s[i] == '('){
+                cnt++;
+            }
+
+            else{
+                cnt--;
+            }
+
+
+            if((s[i] == '(' && cnt == 1)|| cnt == 0){
+                continue;
+            }
+
+            else{
+                ans += s[i];
+            }
+        }
+
+        return ans;
+    }
+
 int findKthPositive(vector<int>& arr, int k) {
         int index = 0;
         int i = 1;
