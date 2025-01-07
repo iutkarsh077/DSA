@@ -73,49 +73,58 @@ int shipWithinDays(vector<int> &weights, int days)
     return ans;
 }
 
+string removeOuterParentheses(string s)
+{
+    string ans = "";
+    int cnt = 0;
 
-string removeOuterParentheses(string s) {
-        string ans = "";
-        int cnt = 0;
-
-        for(int i = 0; i < s.size(); i++){
-            if(s[i] == '('){
-                cnt++;
-            }
-
-            else{
-                cnt--;
-            }
-
-
-            if((s[i] == '(' && cnt == 1)|| cnt == 0){
-                continue;
-            }
-
-            else{
-                ans += s[i];
-            }
+    for (int i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '(')
+        {
+            cnt++;
         }
 
-        return ans;
-    }
-
-int findKthPositive(vector<int>& arr, int k) {
-        int index = 0;
-        int i = 1;
-        vector<int> nums;
-
-        while (nums.size() < k) {
-            if (index < arr.size() && arr[index] == i) {
-                index++;
-            } else {
-                nums.push_back(i);
-            }
-            i++;
+        else
+        {
+            cnt--;
         }
 
-        return nums[k - 1];
+        if ((s[i] == '(' && cnt == 1) || cnt == 0)
+        {
+            continue;
+        }
+
+        else
+        {
+            ans += s[i];
+        }
     }
+
+    return ans;
+}
+
+int findKthPositive(vector<int> &arr, int k)
+{
+    int index = 0;
+    int i = 1;
+    vector<int> nums;
+
+    while (nums.size() < k)
+    {
+        if (index < arr.size() && arr[index] == i)
+        {
+            index++;
+        }
+        else
+        {
+            nums.push_back(i);
+        }
+        i++;
+    }
+
+    return nums[k - 1];
+}
 
 int findKthPositiveBrute(vector<int> &arr, int k)
 {
