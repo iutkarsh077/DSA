@@ -13,6 +13,12 @@ public:
         size = 0;
     }
 
+
+MaxHeap()
+    {
+        arr[0] = -1;
+        size = 0;
+    }
     void insert(int data)
     {
         size += 1;
