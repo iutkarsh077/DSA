@@ -14,9 +14,9 @@ public:
     }
 };
 
-void ArrayToLinkedListByHead(vector<int> arr, Node *head)
+void ArrayToLinkedListByHead(vector<int> arr, Node *head, Node *&tail)
 {
-    Node *tail = head;
+
     for (int i = 0; i < arr.size(); i++)
     {
         Node *temp = new Node(arr[i]);
@@ -35,11 +35,64 @@ void PrintList(Node *head)
     }
 }
 
+Node *removesHead(Node *head)
+{
+    Node *temp = head;
+    head = head->next;
+    temp->next = nullptr;
+    delete temp;
+    return head;
+}
+
+void InsertAtHead(Node *&head, int data)
+{
+    Node *temp = new Node(data);
+    temp->next = head;
+    head = temp;
+}
+
+void InsertAtAnyPlace(Node *&head, Node *&tail, int data, int pos)
+{
+    if (pos == 1)
+    {
+        InsertAtHead(head, data);
+        return;
+    }
+
+    Node *prev = nullptr;
+    Node *curr = head;
+    int cnt = 1;
+    while (cnt < pos && curr->next != nullptr)
+    {
+        prev = curr;
+        curr = curr->next;
+        cnt++;
+    }
+
+    if (curr->next == nullptr)
+    {
+        Node *temp = new Node(data);
+        curr->next = temp;
+        tail = temp;
+        return;
+    }
+
+    Node *temp = new Node(data);
+    temp->next = curr;
+    prev->next = temp;
+    return;
+}
+
 int main()
 {
     Node *head = new Node(-1);
+    Node *tail = head;
     vector<int> arr = {1, 2, 3, 4, 5, 6};
-    ArrayToLinkedListByHead(arr, head);
+    ArrayToLinkedListByHead(arr, head, tail);
+    head = removesHead(head);
+    InsertAtHead(head, 0);
+    InsertAtAnyPlace(head, tail, -1, 1);
+    InsertAtAnyPlace(head, tail, 12, 12);
     PrintList(head);
     return 0;
 }
