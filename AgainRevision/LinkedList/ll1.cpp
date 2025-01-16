@@ -83,6 +83,16 @@ void InsertAtAnyPlace(Node *&head, Node *&tail, int data, int pos)
     return;
 }
 
+
+
+void deleteNode(Node *node)
+{
+    Node *deleteNode = node->next;
+    node->data = node->next->data;
+    node->next = node->next->next;
+    delete deleteNode;
+}
+
 int main()
 {
     Node *head = new Node(-1);
