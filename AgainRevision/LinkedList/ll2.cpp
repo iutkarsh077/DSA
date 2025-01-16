@@ -33,6 +33,24 @@ Node *constructLL(vector<int> &arr)
     return head;
 }
 
+Node *insertAtEnd(Node *head, int x)
+{
+    if (head == nullptr)
+    {
+        Node *myNode = new Node(x);
+        return myNode;
+    }
+    Node *temp = head;
+    while (temp->next != nullptr)
+    {
+        temp = temp->next;
+    }
+
+    Node *val = new Node(x);
+    temp->next = val;
+    return head;
+}
+
 int main()
 {
     return 0;
