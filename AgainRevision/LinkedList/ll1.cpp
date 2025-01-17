@@ -83,17 +83,35 @@ void InsertAtAnyPlace(Node *&head, Node *&tail, int data, int pos)
     return;
 }
 
-int getCount(Node* head) {
+int getCount(Node *head)
+{
 
-        Node *temp = head;
-        int cnt = 0;
-        while(temp != nullptr){
-            cnt++;
-            temp = temp->next;
-        }
-        
-        return cnt;
+    Node *temp = head;
+    int cnt = 0;
+    while (temp != nullptr)
+    {
+        cnt++;
+        temp = temp->next;
     }
+
+    return cnt;
+}
+
+bool searchKey(int n, Node *head, int key)
+{
+    // Code here
+    Node *temp = head;
+
+    while (temp != nullptr)
+    {
+        if (key == temp->data)
+        {
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
 
 void deleteNode(Node *node)
 {
