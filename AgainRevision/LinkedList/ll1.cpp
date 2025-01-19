@@ -113,6 +113,22 @@ bool searchKey(int n, Node *head, int key)
     return false;
 }
 
+bool searchKey2(int n, Node *head, int key)
+{
+    // Code here
+    Node *temp = head;
+
+    while (temp != nullptr)
+    {
+        if (key == temp->data)
+        {
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+
 void deleteNode(Node *node)
 {
     Node *deleteNode = node->next;
