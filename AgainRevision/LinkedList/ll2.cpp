@@ -46,6 +46,11 @@ Node *insertAtEnd(Node *head, int x)
         temp = temp->next;
     }
 
+     while (temp->next != nullptr)
+    {
+        temp = temp->next;
+    }
+
     Node *val = new Node(x);
     temp->next = val;
     return head;
