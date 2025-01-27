@@ -115,8 +115,101 @@ ListNode *HeadOfLoop(ListNode *head)
     }
 }
 
+bool isPalindrome(ListNode* head) {
+        ListNode *slow = head;
+        ListNode *fast = head;
+
+        while(fast != nullptr && fast->next != nullptr){
+            slow = slow->next;
+            fast = fast->next;
+
+            if(fast->next != nullptr){
+                fast = fast->next;
+            }
+        }
+
+        ListNode *prev = nullptr;
+        ListNode *curr = slow;
+
+        while(curr != nullptr){
+            ListNode *forward = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = forward;
+        }
+
+        ListNode *newHead = prev;
+        ListNode *tracker = head;
+
+        while(tracker != nullptr && newHead != nullptr){
+            if(tracker->val != newHead->val){
+                return false;
+            }
+
+            tracker = tracker->next;
+            newHead = newHead->next;
+        }
+
+        return true;
+    }
+
+int countNodesinLoop(struct ListNode *head)
+{
+    // Code here
+    ListNode *slow = head;
+    ListNode *fast = head;
+
+    ListNode *begin = nullptr;
+    while (fast != nullptr && fast->next != nullptr)
+    {
+        slow = slow->next;
+        fast = fast->next;
+
+        if (fast == nullptr || fast->next == nullptr)
+        {
+            return 0;
+        }
+
+        if (fast->next != nullptr)
+        {
+            fast = fast->next;
+        }
+
+        if (slow == fast)
+        {
+            slow = head;
+            while (slow != fast)
+            {
+                slow = slow->next;
+                fast = fast->next;
+            }
+            begin = slow;
+            break;
+        }
+    }
+
+    if (begin == nullptr)
+    {
+        return 0;
+    }
+
+    ListNode *track = begin->next;
+    int cnt = 0;
+
+    while (track != begin)
+    {
+        cnt++;
+        track = track->next;
+    }
+
+    if (cnt == 0)
+        return 0;
+
+    return cnt + 1;
+}
+
 int main()
 {
-    
+
     return 0;
 }
