@@ -6,6 +6,8 @@ int main()
     int row;
     int col;
 
+int row;
+    int col;
 
 
     
