@@ -115,43 +115,81 @@ ListNode *HeadOfLoop(ListNode *head)
     }
 }
 
-bool isPalindrome(ListNode* head) {
-        ListNode *slow = head;
-        ListNode *fast = head;
+bool isPalindrome(ListNode *head)
+{
+    ListNode *slow = head;
+    ListNode *fast = head;
 
-        while(fast != nullptr && fast->next != nullptr){
-            slow = slow->next;
+    while (fast != nullptr && fast->next != nullptr)
+    {
+        slow = slow->next;
+        fast = fast->next;
+
+        if (fast->next != nullptr)
+        {
             fast = fast->next;
-
-            if(fast->next != nullptr){
-                fast = fast->next;
-            }
         }
-
-        ListNode *prev = nullptr;
-        ListNode *curr = slow;
-
-        while(curr != nullptr){
-            ListNode *forward = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = forward;
-        }
-
-        ListNode *newHead = prev;
-        ListNode *tracker = head;
-
-        while(tracker != nullptr && newHead != nullptr){
-            if(tracker->val != newHead->val){
-                return false;
-            }
-
-            tracker = tracker->next;
-            newHead = newHead->next;
-        }
-
-        return true;
     }
+
+    ListNode *prev = nullptr;
+    ListNode *curr = slow;
+
+    while (curr != nullptr)
+    {
+        ListNode *forward = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = forward;
+    }
+
+    ListNode *newHead = prev;
+    ListNode *tracker = head;
+
+    while (tracker != nullptr && newHead != nullptr)
+    {
+        if (tracker->val != newHead->val)
+        {
+            return false;
+        }
+
+        tracker = tracker->next;
+        newHead = newHead->next;
+    }
+
+    return true;
+}
+
+ListNode *oddEvenList(ListNode *head)
+{
+    if (!head || !head->next)
+        return head;
+
+    ListNode *oddHead = head, *oddTail = head;
+    ListNode *evenHead = head->next, *evenTail = head->next;
+
+    ListNode *tracker = evenTail->next;
+    int index = 3;
+
+    while (tracker)
+    {
+        if (index % 2 == 1)
+        {
+            oddTail->next = tracker;
+            oddTail = tracker;
+        }
+        else
+        {
+            evenTail->next = tracker;
+            evenTail = tracker;
+        }
+        tracker = tracker->next;
+        index++;
+    }
+
+    evenTail->next = nullptr;
+    oddTail->next = evenHead;
+    return oddHead;
+}
 
 int countNodesinLoop(struct ListNode *head)
 {
