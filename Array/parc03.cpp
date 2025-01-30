@@ -7,6 +7,7 @@ using namespace std;
 //     {
 //         // Complete the function
 //         int maxi = 0;
+int maxi = 0;
 //         for(int i = 0; i < N; i++){
 //             int cnt = 0;
 //             int sum = 0;
