@@ -159,6 +159,49 @@ bool isPalindrome(ListNode *head)
     return true;
 }
 
+ListNode *removeNthFromEnd(ListNode *head, int n)
+{
+    int len = 0;
+    ListNode *tracker = head;
+
+    while (tracker != nullptr)
+    {
+        len++;
+        tracker = tracker->next;
+    }
+
+    int deleteNodeIndex = len - n;
+
+    if (deleteNodeIndex == 0)
+    {
+        ListNode *deleteNode = head;
+        head = head->next;
+        deleteNode->next = nullptr;
+        delete deleteNode;
+        return head;
+    }
+
+    tracker = head;
+    int cnt = 0;
+
+    while (cnt < deleteNodeIndex - 1 && tracker != nullptr)
+    {
+        cnt++;
+        tracker = tracker->next;
+    }
+
+    if (tracker == nullptr)
+    {
+        return head;
+    }
+
+    ListNode *deleteNode = tracker->next;
+    tracker->next = deleteNode->next;
+    deleteNode->next = nullptr;
+    delete deleteNode;
+    return head;
+}
+
 ListNode *oddEvenList(ListNode *head)
 {
     if (!head || !head->next)
