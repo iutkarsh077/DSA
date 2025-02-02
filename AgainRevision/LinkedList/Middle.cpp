@@ -202,6 +202,35 @@ ListNode *removeNthFromEnd(ListNode *head, int n)
     return head;
 }
 
+ListNode *deleteMiddle(ListNode *head)
+{
+    if (head == nullptr)
+    {
+        return head;
+    }
+
+    if (head->next == nullptr)
+    {
+        return nullptr;
+    }
+
+    ListNode *slowPrev = nullptr;
+    ListNode *slow = head;
+    ListNode *fast = head;
+
+    while (fast != nullptr && fast->next != nullptr)
+    {
+        slowPrev = slow;
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    slowPrev->next = slow->next;
+    slow->next = nullptr;
+    delete slow;
+    return head;
+}
+
 ListNode *oddEvenList(ListNode *head)
 {
     if (!head || !head->next)
