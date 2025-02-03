@@ -3,6 +3,19 @@
 #include <string>
 using namespace std;
 
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    Node(int data)
+    {
+        this->data = data;
+        this->next = nullptr;
+    }
+};
+
 struct ListNode
 {
     int val;
@@ -199,6 +212,95 @@ ListNode *removeNthFromEnd(ListNode *head, int n)
     tracker->next = deleteNode->next;
     deleteNode->next = nullptr;
     delete deleteNode;
+    return head;
+}
+
+ListNode *sortList(ListNode *head)
+{
+    if (head == nullptr || head->next == nullptr)
+    {
+        return head;
+    }
+
+    vector<int> arr;
+    ListNode *tracker = head;
+
+    while (tracker != nullptr)
+    {
+        arr.push_back(tracker->val);
+        tracker = tracker->next;
+    }
+
+    sort(arr.begin(), arr.end());
+
+    tracker = head;
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        tracker->val = arr[i];
+        tracker = tracker->next;
+    }
+
+    return head;
+}
+
+Node *segregate(Node *head)
+{
+    if (head == nullptr || head->next == nullptr)
+    {
+        return head;
+    }
+
+    int zeroCnt = 0;
+    int oneCnt = 0;
+    int twoCnt = 0;
+
+    Node *tracker = head;
+
+    while (tracker != nullptr)
+    {
+        if (tracker->data == 0)
+        {
+            zeroCnt++;
+        }
+
+        else if (tracker->data == 1)
+        {
+            oneCnt++;
+        }
+
+        else
+        {
+            twoCnt++;
+        }
+
+        tracker = tracker->next;
+    }
+
+    tracker = head;
+    while (tracker != nullptr)
+    {
+        if (zeroCnt > 0)
+        {
+            tracker->data = 0;
+            zeroCnt--;
+        }
+
+        else if (oneCnt > 0)
+        {
+            tracker->data = 1;
+            oneCnt--;
+        }
+
+        else
+        {
+            tracker->data = 2;
+            twoCnt--;
+        }
+
+        tracker = tracker->next;
+    }
+
     return head;
 }
 
