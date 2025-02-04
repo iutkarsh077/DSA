@@ -73,6 +73,58 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
     return nullptr;
 }
 
+
+
+int findLength(ListNode* head) {
+        ListNode* tracker = head;
+        int cnt = 0;
+
+        while (tracker != nullptr) {
+            cnt++;
+            tracker = tracker->next;
+        }
+
+        return cnt;
+    }
+
+    ListNode *collision(ListNode *head, int jumps){
+        int cnt = 0;
+        ListNode *tracker = head;
+
+        while(cnt < jumps){
+            tracker = tracker->next;
+            cnt++;
+        }
+
+        return tracker;
+    }
+    ListNode* getIntersectionNode2(ListNode* headA, ListNode* headB) {
+        int lenA = 0;
+        int lenB = 0;
+
+        lenA = findLength(headA);
+        lenB = findLength(headB);
+
+        if(lenA < lenB){
+            headB = collision(headB, lenB - lenA);
+        }
+
+        else if(lenA > lenB){
+            headA = collision(headA, lenA - lenB);
+        }
+
+        while(headA != nullptr && headB != nullptr){
+            if(headA == headB){
+                return headA;
+            }
+
+            headA = headA->next;
+            headB = headB->next;
+        }
+
+        return nullptr;
+    }
+
 void Lalala(ListNode *&prev, ListNode *curr)
 {
     if (curr == nullptr)
