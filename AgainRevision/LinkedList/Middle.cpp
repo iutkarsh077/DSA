@@ -47,6 +47,32 @@ ListNode *reverseList(ListNode *head)
     return prev;
 }
 
+ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
+{
+    unordered_map<ListNode *, int> mpp;
+
+    ListNode *tracker = headA;
+    while (tracker != nullptr)
+    {
+        mpp[tracker] = tracker->val;
+        tracker = tracker->next;
+    }
+
+    tracker = headB;
+
+    while (tracker != nullptr)
+    {
+        if (mpp.find(tracker) != mpp.end())
+        {
+            return tracker;
+        }
+
+        tracker = tracker->next;
+    }
+
+    return nullptr;
+}
+
 void Lalala(ListNode *&prev, ListNode *curr)
 {
     if (curr == nullptr)
