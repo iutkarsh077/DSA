@@ -16,6 +16,21 @@ public:
     }
 };
 
+class ListNode
+{
+public:
+    int data;
+    Node *prev;
+    Node *next;
+
+    Node(int data)
+    {
+        this->data = data;
+        this->prev = nullptr;
+        this->next = nullptr;
+    }
+};
+
 void InsertNode(Node *head, Node *&tail, vector<int> nums)
 {
     for (int i = 1; i < nums.size(); i++)
