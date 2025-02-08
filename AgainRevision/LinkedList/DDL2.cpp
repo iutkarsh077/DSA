@@ -19,6 +19,45 @@ public:
     }
 };
 
+Node* addOne2(Node* head) {
+    Node *curr = head, *prev = nullptr;
+    
+    while (curr) {
+        Node *forward = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = forward;
+    }
+    
+    Node *tracker = prev;
+    int carry = 1;
+    
+    while (tracker) {
+        int sum = tracker->data + carry;
+        tracker->data = sum % 10;
+        carry = sum / 10;
+        
+        if (!tracker->next && carry) {
+            tracker->next = new Node(carry);
+            carry = 0;
+        }
+        
+        tracker = tracker->next;
+    }
+    
+    curr = prev;
+    prev = nullptr;
+    
+    while (curr) {
+        Node *forward = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = forward;
+    }
+    
+    return prev;
+}
+
 Node *addNode(Node *head, int pos, int data)
 {
     // code here
