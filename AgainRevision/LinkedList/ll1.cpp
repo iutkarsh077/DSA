@@ -14,6 +14,18 @@ public:
     }
 };
 
+class ListNode
+{
+public:
+    int val;
+    Node *next;
+
+    Node(int data){
+        this->val = data;
+        this->next = nullptr;
+    }
+};
+
 void ArrayToLinkedListByHead(vector<int> arr, Node *head, Node *&tail)
 {
 
@@ -129,8 +141,10 @@ bool searchKey2(int n, Node *head, int key)
     return false;
 }
 
-ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-    if(l1->val == 0 && l2->val == 0){
+ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
+{
+    if (l1->val == 0 && l2->val == 0)
+    {
         return new ListNode(0);
     }
     long long int sum1 = 0;
@@ -139,25 +153,29 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     ListNode *tracker = l1;
     ListNode *tracker2 = l2;
 
-    while(tracker != nullptr || tracker2 != nullptr){
-        if(tracker != nullptr){
+    while (tracker != nullptr || tracker2 != nullptr)
+    {
+        if (tracker != nullptr)
+        {
             int val = tracker->val;
             sum1 = (sum1 * 10) + val;
             tracker = tracker->next;
         }
 
-        if(tracker2 != nullptr){
-              int val = tracker2->val;
+        if (tracker2 != nullptr)
+        {
+            int val = tracker2->val;
             sum2 = (sum2 * 10) + val;
-             tracker2 = tracker2->next;
+            tracker2 = tracker2->next;
         }
     }
 
     long long int total = sum1 + sum2;
-    
+
     ListNode *head = new ListNode(-1);
     ListNode *tail = head;
-    while(total > 0){
+    while (total > 0)
+    {
         int digit = total % 10;
         ListNode *temp = new ListNode(digit);
         tail->next = temp;

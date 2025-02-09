@@ -19,6 +19,22 @@ public:
     }
 };
 
+class ListNode
+{
+public:
+    int data;
+    Node *prev;
+    Node *next;
+
+    Node(int data)
+    {
+        this->data = data;
+        this->prev = nullptr;
+        this->next = nullptr;
+    }
+};
+
+
 Node* addOne2(Node* head) {
     Node *curr = head, *prev = nullptr;
     
