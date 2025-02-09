@@ -129,6 +129,48 @@ bool searchKey2(int n, Node *head, int key)
     return false;
 }
 
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    if(l1->val == 0 && l2->val == 0){
+        return new ListNode(0);
+    }
+    long long int sum1 = 0;
+    long long int sum2 = 0;
+
+    ListNode *tracker = l1;
+    ListNode *tracker2 = l2;
+
+    while(tracker != nullptr || tracker2 != nullptr){
+        if(tracker != nullptr){
+            int val = tracker->val;
+            sum1 = (sum1 * 10) + val;
+            tracker = tracker->next;
+        }
+
+        if(tracker2 != nullptr){
+              int val = tracker2->val;
+            sum2 = (sum2 * 10) + val;
+             tracker2 = tracker2->next;
+        }
+    }
+
+    long long int total = sum1 + sum2;
+    
+    ListNode *head = new ListNode(-1);
+    ListNode *tail = head;
+    while(total > 0){
+        int digit = total % 10;
+        ListNode *temp = new ListNode(digit);
+        tail->next = temp;
+        tail = temp;
+        total = total / 10;
+    }
+
+    ListNode *deleteNode = head;
+    head = head->next;
+    delete deleteNode;
+    return head;
+}
+
 void deleteNode(Node *node)
 {
     Node *deleteNode = node->next;
