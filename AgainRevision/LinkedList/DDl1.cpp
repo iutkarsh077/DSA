@@ -23,13 +23,66 @@ public:
     Node *prev;
     Node *next;
 
-    Node(int data)
+    ListNode(int data)
     {
         this->data = data;
         this->prev = nullptr;
         this->next = nullptr;
     }
 };
+
+
+
+class Solution {
+    public:
+      void deleteAllOccurOfX(struct Node** head_ref, int x) {
+      if (*head_ref == nullptr) {
+          return;
+      }
+  
+      Node* current = *head_ref;
+  
+      // Handle the case where the head node(s) need to be deleted
+      while (current != nullptr && current->data == x) {
+          Node* deleteNode = current;
+          current = current->next;
+          if (current != nullptr) {
+              current->prev = nullptr;
+          }
+          *head_ref = current;
+          delete deleteNode;
+      }
+  
+      // If the list becomes empty after deleting the head nodes
+      if (current == nullptr) {
+          return;
+      }
+  
+      // Now handle the remaining nodes
+      while (current != nullptr) {
+          if (current->data == x) {
+              Node* deleteNode = current;
+              Node* prevNode = deleteNode->prev;
+              Node* nextNode = deleteNode->next;
+  
+              if (prevNode != nullptr) {
+                  prevNode->next = nextNode;
+              }
+  
+              if (nextNode != nullptr) {
+                  nextNode->prev = prevNode;
+              }
+  
+              current = nextNode;
+  
+              delete deleteNode;
+          } else {
+              current = current->next;
+          }
+      }
+  }
+  
+  };
 
 void InsertNode(Node *head, Node *&tail, vector<int> nums)
 {
