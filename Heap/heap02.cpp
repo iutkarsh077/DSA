@@ -13,6 +13,8 @@ public:
         size = 0;
     }
 
+
+
     void insert(int data)
     {
         if (size == 101)
