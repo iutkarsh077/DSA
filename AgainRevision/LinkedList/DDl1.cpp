@@ -29,6 +29,10 @@ public:
         this->prev = nullptr;
         this->next = nullptr;
     }
+
+    void hello(){
+        cout << "Hello World";
+    }
 };
 
 
