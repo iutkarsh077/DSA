@@ -5,7 +5,7 @@ using namespace std;
 
 bool result(int n, int index){
 	
-	if(index == n/2) return true;
+	if(index == n/2)   return true;
 
 	if(n % index == 0) return false;
 
