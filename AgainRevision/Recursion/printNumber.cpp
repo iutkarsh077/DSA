@@ -1,15 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
-void printNumbers(int n, int i){
-    if(i > n) return;
+int printNumbers(int n, int i)
+{
+    if (i >= n)
+    return n;
 
     cout << i << endl;
-    printNumbers(n, i + 1);
+    return printNumbers(n, i + 1);
 }
 
-int main() {
-    printNumbers(10, 1);
+int main()
+{
+    int result = printNumbers(10, 1);
+
+    cout << endl;
+    cout << endl;
+    cout << result;
     return 0;
 }
