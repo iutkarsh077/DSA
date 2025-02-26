@@ -20,7 +20,7 @@ void sayDigit(int x, string engNumber){
 
 
 int main() {
-    int x = 12345;
+    int x = 12345;  
     if(x == 0){
         cout << "zero";
         return 0;
