@@ -12,6 +12,6 @@ void printVal(string val, int i){
 
 int main(){
     string val = "abcde";
-    printVal(val, val.length());
+    printVal(val, val.length() - 1);
     return 0;
 }
