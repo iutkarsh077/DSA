@@ -10,7 +10,7 @@ bool IsPalindrome(string ans, int i){
 }
 
 int main() {
-    string ans = "abcba";
+    string ans = "aabbccbbaa";
     bool result = IsPalindrome(ans, 0);
     if(result){
         cout << "It is a Palindrome String";
