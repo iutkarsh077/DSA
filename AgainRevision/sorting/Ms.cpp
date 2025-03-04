@@ -17,6 +17,7 @@ void MergeSort(int arr[], int low, int mid, int high) {
             right++;
         }
     }
+    //strick
 
     while (left <= mid) {
         temp.push_back(arr[left]);
