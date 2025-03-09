@@ -1,7 +1,7 @@
 //Make a stack with the help of array
 
 #include <iostream>
-#include <string>
+
 using namespace std;
 
 void printStack(int arr[], int top){
