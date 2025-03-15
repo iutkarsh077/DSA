@@ -2,6 +2,34 @@
 #include<stack>
 using namespace std;
 
+
+
+void InsertAtBottom(int x, stack<int>&st){
+    if(st.empty()){
+        st.push(x);
+        return;
+    }
+
+    int num = st.top();
+    st.pop();
+
+    InsertAtBottom(x, st);
+    st.push(num);
+}
+
+void reverseStack(stack<int> &stack) {
+    if (stack.empty()) {
+        return;
+    }
+
+    int topElement = stack.top();
+    stack.pop();
+
+    reverseStack(stack); 
+    InsertAtBottom(topElement, stack); 
+}
+
+
 int main(){
     string name = "Utkarsh";
     stack<char> st;
