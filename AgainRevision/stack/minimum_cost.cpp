@@ -19,6 +19,7 @@ int findMinimumCost(string str){
         }
     }
 
+    
     if(st.size()%2 == 0){
         int ans = st.size() / 2;
         return ans;
