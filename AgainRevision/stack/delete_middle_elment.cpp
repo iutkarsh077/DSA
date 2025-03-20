@@ -1,3 +1,4 @@
+#include<stack>
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -48,6 +49,27 @@ class MyStack{
         }
     }
 };
+
+vector<int> nextSmallerElement(vector<int> &arr, int n)
+{
+    // Write your code here.
+    stack<int> st;
+    st.push(-1);
+    vector<int> myarr(n);
+
+    for(int i = n - 1; i >=0; i--){
+        int curr = arr[i];
+
+        while(st.top() >= curr){
+            st.pop();
+        }
+
+        myarr[i] = st.top();
+        st.push(curr);
+    }
+
+    return myarr;
+}
 
 int main() {
     MyStack st1(5);
