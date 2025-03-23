@@ -8,7 +8,7 @@ int main(){
         q.push(i);
     }
 
-    swap(q.front(), q.back());
+    // swap(q.front(), q.back());
     q.pop();
     cout << q.back() << endl;
     cout << q.front() << endl;
