@@ -1,0 +1,1 @@
+ cout << d.popElement() << endl;

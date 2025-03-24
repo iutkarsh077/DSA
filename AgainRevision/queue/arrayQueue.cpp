@@ -16,7 +16,7 @@ public:
     }
 
     void PushIntoQueue(int val) {
-        if (rear >= size - 1) {  // Corrected overflow condition
+        if (rear >= size - 1) {  
             cout << "Queue Overflow" << endl;
             return;
         }
@@ -25,7 +25,7 @@ public:
     }
 
     void PopIntoQueue() {
-        if (front > rear) {  // Corrected underflow condition
+        if (front > rear) {  
             cout << "Queue Underflow" << endl;
             return;
         }
@@ -41,7 +41,7 @@ public:
     }
 
     void CheckBack() {
-        if (rear == -1) {  // Corrected condition
+        if (rear == -1) {  
             cout << "Queue Underflow" << endl;
             return;
         }
@@ -54,7 +54,7 @@ public:
             return;
         }
 
-        for (int i = front; i <= rear; i++) { // Fixed loop condition
+        for (int i = front; i <= rear; i++) { 
             cout << arr[i] << " ";
         }
         cout << endl;
@@ -69,7 +69,7 @@ int main() {
         q1.PushIntoQueue(i);
     }
 
-    q1.printAllQueue();  // Expected Output: 1 2 3 4 5 6
+    q1.printAllQueue();  
 
     return 0;
 }
