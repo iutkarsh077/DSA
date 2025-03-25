@@ -61,15 +61,76 @@ public:
     }
 };
 
-int main() {
-    int n = 6;
-    CustomQueue q1(n);
-    
-    for (int i = 1; i <= n; i++) {
-        q1.PushIntoQueue(i);
+
+class CircularQueue{
+    public:
+    int *arr;
+    int size;
+    int front;
+    int rear;
+
+    CircularQueue(int n){
+        this->size = n;
+        this->arr = new int[size];
+        front = -1;
+        rear = -1;
     }
 
-    q1.printAllQueue();  
+    int pushElement(int val){
+        if(((rear + 1) % size) == front){
+            cout << "Queue Overflow" << endl;
+            return -1;
+        }
 
+        if(front == -1) front = 0;
+        rear = (rear + 1) % size;
+        arr[rear] = val;
+    }
+
+    int popElement(){
+        if(front == -1){
+            cout << "Queue underflow" << endl;
+            return -1;
+        }
+
+        int ans = arr[front];
+        if(front == rear) front = rear = -1;
+        front = (front + 1) % size;
+        return ans;
+    }
+
+    void printAll(){
+        int i = front;
+        while (true) {
+            cout << arr[i] << " ";
+            if (i == rear) break;  
+            i = (i + 1) % size;
+        }
+    }
+};
+
+int main() {
+    // int n = 6;
+    // CustomQueue q1(n);
+    
+    // for (int i = 1; i <= n; i++) {
+    //     q1.PushIntoQueue(i);
+    // }
+
+    // q1.printAllQueue();  
+
+    CircularQueue q(6);
+    q.pushElement(2);
+    q.pushElement(8);
+    q.pushElement(45);
+    q.pushElement(98);
+    q.pushElement(23);
+    q.pushElement(56);
+
+    cout << q.popElement() << endl;
+    cout << q.popElement() << endl;
+    cout << endl;
+    cout << endl;
+    q.printAll();
     return 0;
 }
