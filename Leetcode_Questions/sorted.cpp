@@ -97,6 +97,17 @@ void merge(vector<int> &nums1, int m, vector<int> &nums2, int n)
     return;
 }
 
+int maxProfit(vector<int>& prices) {
+    int maxProfit1 = 0;
+    int minPrice = INT_MAX;
+    for(int i = 0; i < prices.size(); i++){
+        minPrice = min(minPrice, prices[i]);
+        maxProfit1 = max(maxProfit1, prices[i] - minPrice);
+    }
+
+    return maxProfit1;
+}
+
 int main()
 {
     return 0;
