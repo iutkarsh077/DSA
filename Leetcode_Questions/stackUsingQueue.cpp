@@ -16,6 +16,9 @@ public:
         rear = -1;
     }
 
+
+    
+
     void Enqueue(int data)
     {
         if (rear >= size - 1)
