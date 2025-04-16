@@ -12,6 +12,8 @@ int main() {
         n = n / 2;
     }
 
+
+
     cout << val << endl;
     string str = to_string(val);
     // reverse(str.begin(), str.end());
