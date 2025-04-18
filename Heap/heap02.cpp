@@ -15,6 +15,9 @@ public:
 
 
 
+
+
+
     void insert(int data)
     {
         if (size == 101)
