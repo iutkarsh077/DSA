@@ -91,7 +91,25 @@ void moveZeroesBrute(vector<int>& nums) {
         return;
     }
 
+void moveZeroesBetter(vector<int>& nums) {
+        int zeroCnt = 0;
+        int tracker = 0;
+        while(tracker < nums.size()){
+            if(nums[tracker] == 0){
+                zeroCnt++;
+                nums.erase(nums.begin() + tracker);
+            }
+            else{
+                tracker++;
+            }
+        }
 
+        for(int i = 0; i < zeroCnt; i++){
+            nums.push_back(0);
+        }
+
+        return;
+    }
 
 int main()
 {
