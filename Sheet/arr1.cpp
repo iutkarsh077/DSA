@@ -40,25 +40,31 @@ int findKthLargest(vector<int> &nums, int k)
     return -1;
 }
 
-bool check(vector<int>& nums) {
+bool check(vector<int> &nums)
+{
     int cnt = 0;
 
-    for(int i = 0; i < nums.size() - 1; i++){
-        if(nums[i] > nums[i + 1]){
+    for (int i = 0; i < nums.size() - 1; i++)
+    {
+        if (nums[i] > nums[i + 1])
+        {
             cnt++;
         }
     }
 
-    if(nums[0] < nums[nums.size() - 1]){
+    if (nums[0] < nums[nums.size() - 1])
+    {
         cnt++;
     }
 
-    if(cnt <= 1) return true;
+    if (cnt <= 1)
+        return true;
 
     return false;
 }
 
-void rotate(vector<int>& nums, int k) {
+void rotate(vector<int> &nums, int k)
+{
     k = k % nums.size();
     reverse(nums.begin(), nums.end());
     reverse(nums.begin(), nums.begin() + k);
@@ -66,50 +72,88 @@ void rotate(vector<int>& nums, int k) {
     return;
 }
 
+void moveZeroesBrute(vector<int> &nums)
+{
+    vector<int> dup;
+    int zeroCnt = 0;
 
-void moveZeroesBrute(vector<int>& nums) {
-        vector<int> dup;
-        int zeroCnt = 0;
-
-        for(int i = 0; i < nums.size(); i++){
-            if(nums[i] != 0){
-                dup.push_back(nums[i]);
-            }
-            else{
-                zeroCnt++;
-            }
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] != 0)
+        {
+            dup.push_back(nums[i]);
         }
-
-        for(int i = 0; i < zeroCnt; i++){
-            dup.push_back(0);
+        else
+        {
+            zeroCnt++;
         }
-
-        nums.clear();
-        nums = dup;
-
-
-        return;
     }
 
-void moveZeroesBetter(vector<int>& nums) {
-        int zeroCnt = 0;
-        int tracker = 0;
-        while(tracker < nums.size()){
-            if(nums[tracker] == 0){
-                zeroCnt++;
-                nums.erase(nums.begin() + tracker);
-            }
-            else{
-                tracker++;
-            }
-        }
-
-        for(int i = 0; i < zeroCnt; i++){
-            nums.push_back(0);
-        }
-
-        return;
+    for (int i = 0; i < zeroCnt; i++)
+    {
+        dup.push_back(0);
     }
+
+    nums.clear();
+    nums = dup;
+
+    return;
+}
+
+void moveZeroesBetter(vector<int> &nums)
+{
+    int zeroCnt = 0;
+    int tracker = 0;
+    while (tracker < nums.size())
+    {
+        if (nums[tracker] == 0)
+        {
+            zeroCnt++;
+            nums.erase(nums.begin() + tracker);
+        }
+        else
+        {
+            tracker++;
+        }
+    }
+
+    for (int i = 0; i < zeroCnt; i++)
+    {
+        nums.push_back(0);
+    }
+
+    return;
+}
+
+void moveZeroes(vector<int> &nums)
+{
+    if (nums.size() == 0 || nums.size() == 1)
+        return;
+
+    int i = 0;
+    int j = 1;
+
+    while (i < nums.size() && j < nums.size())
+    {
+        if (nums[j] != 0 && nums[i] == 0)
+        {
+            swap(nums[i], nums[j]);
+            i = i + 1;
+        }
+
+        else if (nums[j] != 0 && nums[i] != 0 && j > i)
+        {
+            i = i + 1;
+        }
+
+        else
+        {
+            j = j + 1;
+        }
+    }
+
+    return;
+}
 
 int main()
 {
