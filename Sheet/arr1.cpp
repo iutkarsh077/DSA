@@ -66,6 +66,33 @@ void rotate(vector<int>& nums, int k) {
     return;
 }
 
+
+void moveZeroesBrute(vector<int>& nums) {
+        vector<int> dup;
+        int zeroCnt = 0;
+
+        for(int i = 0; i < nums.size(); i++){
+            if(nums[i] != 0){
+                dup.push_back(nums[i]);
+            }
+            else{
+                zeroCnt++;
+            }
+        }
+
+        for(int i = 0; i < zeroCnt; i++){
+            dup.push_back(0);
+        }
+
+        nums.clear();
+        nums = dup;
+
+
+        return;
+    }
+
+
+
 int main()
 {
     map<int, int> mp;
