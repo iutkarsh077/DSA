@@ -155,6 +155,37 @@ void moveZeroes(vector<int> &nums)
     return;
 }
 
+vector<int> findUnionBrute(vector<int> &a, vector<int> &b)
+{
+    vector<int> ans;
+    for (int i = 0; i < a.size(); i++)
+    {
+        ans.push_back(a[i]);
+    }
+
+    for (int i = 0; i < b.size(); i++)
+    {
+        ans.push_back(b[i]);
+    }
+
+    sort(ans.begin(), ans.end());
+
+    int i = 0;
+    while (i < ans.size() - 1)
+    {
+        if (ans[i] == ans[i + 1])
+        {
+            ans.erase(ans.begin() + i);
+        }
+        else
+        {
+            i++;
+        }
+    }
+
+    return ans;
+}
+
 int main()
 {
     map<int, int> mp;
