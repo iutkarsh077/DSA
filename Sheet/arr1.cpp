@@ -199,6 +199,22 @@ int missingNumber(vector<int>& nums) {
     return totalSum - arrSum;
 }
 
+int findMaxConsecutiveOnes(vector<int>& nums) {
+    int totalCnt = 0;
+    int maxCnt = 0;
+    for(int i = 0; i < nums.size(); i++){
+        if(nums[i] == 1){
+            totalCnt++;
+            maxCnt = max(maxCnt, totalCnt);
+        }
+        else{
+            totalCnt = 0;
+        }
+    }
+
+    return maxCnt;
+}
+
 int main()
 {
     map<int, int> mp;
