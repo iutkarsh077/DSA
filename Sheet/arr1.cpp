@@ -186,6 +186,19 @@ vector<int> findUnionBrute(vector<int> &a, vector<int> &b)
     return ans;
 }
 
+
+int missingNumber(vector<int>& nums) {
+    int arrSum = 0;
+    int n = nums.size();
+
+    for(int i = 0; i < nums.size(); i++){
+        arrSum += nums[i];
+    }
+
+    int totalSum = (n * (n + 1))/2;
+    return totalSum - arrSum;
+}
+
 int main()
 {
     map<int, int> mp;
