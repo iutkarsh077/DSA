@@ -186,33 +186,65 @@ vector<int> findUnionBrute(vector<int> &a, vector<int> &b)
     return ans;
 }
 
-
-int missingNumber(vector<int>& nums) {
+int missingNumber(vector<int> &nums)
+{
     int arrSum = 0;
     int n = nums.size();
 
-    for(int i = 0; i < nums.size(); i++){
+    for (int i = 0; i < nums.size(); i++)
+    {
         arrSum += nums[i];
     }
 
-    int totalSum = (n * (n + 1))/2;
+    int totalSum = (n * (n + 1)) / 2;
     return totalSum - arrSum;
 }
 
-int findMaxConsecutiveOnes(vector<int>& nums) {
+int findMaxConsecutiveOnes(vector<int> &nums)
+{
     int totalCnt = 0;
     int maxCnt = 0;
-    for(int i = 0; i < nums.size(); i++){
-        if(nums[i] == 1){
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] == 1)
+        {
             totalCnt++;
             maxCnt = max(maxCnt, totalCnt);
         }
-        else{
+        else
+        {
             totalCnt = 0;
         }
     }
 
     return maxCnt;
+}
+
+int singleNumber(vector<int> &nums)
+{
+    if (nums.size() == 1)
+        return nums[0];
+    sort(nums.begin(), nums.end());
+
+    if (nums[0] != nums[1])
+    {
+        return nums[0];
+    }
+
+    for (int i = 0; i < nums.size() - 1; i = i + 2)
+    {
+        if (nums[i] != nums[i + 1])
+        {
+            return nums[i];
+        }
+    }
+
+    if (nums[nums.size() - 1] != nums[nums.size() - 2])
+    {
+        return nums[nums.size() - 1];
+    }
+
+    return -1;
 }
 
 int main()
