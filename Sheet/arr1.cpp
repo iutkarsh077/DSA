@@ -247,13 +247,26 @@ int singleNumber(vector<int> &nums)
     return -1;
 }
 
+void LongestSubarr(vector<int> arr){
+    int maxi = 0;
+    int sum = 0;
+
+    for(int i = 0; i < arr.size(); i++){
+        sum = sum + arr[i];
+        maxi = max(maxi, sum);
+
+        if(sum < 0){
+            sum = 0;
+        }
+    }
+
+    cout << "Maximum subarray is: " << maxi;
+    cout << endl;
+}
+
 int main()
 {
-    map<int, int> mp;
-    vector<int> arr = {3, 2, 3, 1, 2, 4, 5, 5, 6};
-    for (int i = 0; i < arr.size(); i++)
-    {
-        mp[arr[i]]++;
-    }
+    vector<int> arr = {3, 1, 7, 6, 8, -9, 3, 2};
+    LongestSubarr(arr);
     return 0;
 }
