@@ -264,6 +264,28 @@ void LongestSubarr(vector<int> arr){
     cout << endl;
 }
 
+int longestSubarrayWithSumK(vector<int> a, long long k) {
+    // Write your code here
+    int maxi = 0;
+    map<int, int> mp;
+    int sum = 0;
+
+   mp[1] = 0;
+
+    for(auto i = 0; i < a.size(); i++){
+      sum = sum + a[i];
+      int need = sum - k;
+      if(mp.find(need) != mp.end()){
+        auto digit = mp.find(need);
+        maxi = max(maxi, i - digit->second);
+      }
+
+      mp[sum] = i;
+    }
+
+    return maxi;
+}
+
 int main()
 {
     vector<int> arr = {3, 1, 7, 6, 8, -9, 3, 2};
