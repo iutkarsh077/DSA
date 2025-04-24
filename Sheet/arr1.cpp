@@ -247,15 +247,18 @@ int singleNumber(vector<int> &nums)
     return -1;
 }
 
-void LongestSubarr(vector<int> arr){
+void LongestSubarr(vector<int> arr)
+{
     int maxi = 0;
     int sum = 0;
 
-    for(int i = 0; i < arr.size(); i++){
+    for (int i = 0; i < arr.size(); i++)
+    {
         sum = sum + arr[i];
         maxi = max(maxi, sum);
 
-        if(sum < 0){
+        if (sum < 0)
+        {
             sum = 0;
         }
     }
@@ -264,31 +267,54 @@ void LongestSubarr(vector<int> arr){
     cout << endl;
 }
 
-int longestSubarrayWithSumK(vector<int> a, long long k) {
+int longestSubarrayWithSumK(vector<int> a, long long k)
+{
     // Write your code here
     int maxi = 0;
     map<int, int> mp;
     int sum = 0;
 
-   mp[1] = 0;
+    mp[1] = 0;
 
-    for(auto i = 0; i < a.size(); i++){
-      sum = sum + a[i];
-      int need = sum - k;
-      if(mp.find(need) != mp.end()){
-        auto digit = mp.find(need);
-        maxi = max(maxi, i - digit->second);
-      }
+    for (auto i = 0; i < a.size(); i++)
+    {
+        sum = sum + a[i];
+        int need = sum - k;
+        if (mp.find(need) != mp.end())
+        {
+            auto digit = mp.find(need);
+            maxi = max(maxi, i - digit->second);
+        }
 
-      mp[sum] = i;
+        mp[sum] = i;
     }
 
     return maxi;
 }
 
+void LongestSubarrayPositiveNegative(vector<int> arr, int k)
+{
+    int maxi = 0;
+    int n = arr.size();
+    for (int i = 0; i < n; i++)
+    {
+        int sum = 0;
+        for (int j = i; j < n; j++)
+        {
+            sum = sum + arr[j];
+            if (sum == k)
+            {
+                maxi = max(maxi, j - i + 1);
+            }
+        }
+    }
+
+    cout << maxi;
+}
+
 int main()
 {
-    vector<int> arr = {3, 1, 7, 6, 8, -9, 3, 2};
-    LongestSubarr(arr);
+    vector<int> arr = {1, 2, 3};
+    LongestSubarrayPositiveNegative(arr, 3);
     return 0;
 }
