@@ -328,7 +328,24 @@ vector<int> twoSumBrute(vector<int> &nums, int target)
     return {-1, -1};
 }
 
+vector<int> twoSumBetter(vector<int> &nums, int target)
+{
+    unordered_map<int, int> mp;
 
+    for (auto i = 0; i < nums.size(); i++)
+    {
+        int val = nums[i];
+        int needed = target - val;
+        if (mp.find(needed) != mp.end())
+        {
+            auto digit = mp.find(needed);
+            return {i, digit->second};
+        }
+        mp[nums[i]] = i;
+    }
+
+    return {-1, -1};
+}
 
 int main()
 {
