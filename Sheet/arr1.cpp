@@ -312,21 +312,36 @@ void LongestSubarrayPositiveNegative(vector<int> arr, int k)
     cout << maxi;
 }
 
-vector<int> twoSumBrute(vector<int>& nums, int target) {
-    for(int i = 0; i < nums.size() - 1; i++){
-        for(int j = i + 1; j < nums.size(); j++){
-            if(nums[i] + nums[j] == target){
+vector<int> twoSumBrute(vector<int> &nums, int target)
+{
+    for (int i = 0; i < nums.size() - 1; i++)
+    {
+        for (int j = i + 1; j < nums.size(); j++)
+        {
+            if (nums[i] + nums[j] == target)
+            {
                 return {i, j};
             }
         }
     }
 
-    return { -1, -1 };
+    return {-1, -1};
 }
+
+
 
 int main()
 {
-    vector<int> arr = {1, 2, 3};
-    LongestSubarrayPositiveNegative(arr, 3);
+    unordered_map<int, int> mp;
+    for (int i = 0; i < 3; i++)
+    {
+        mp[i + 1] = i;
+    }
+
+    for (auto i = mp.begin(); i != mp.end(); i++)
+    {
+        auto val = i;
+        cout << val->first << endl;
+    }
     return 0;
 }
