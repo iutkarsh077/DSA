@@ -347,6 +347,56 @@ vector<int> twoSumBetter(vector<int> &nums, int target)
     return {-1, -1};
 }
 
+void sortColors(vector<int> &nums)
+{
+    int zeroCnt = 0;
+    int oneCnt = 0;
+    int twoCnt = 0;
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] == 0)
+        {
+            zeroCnt++;
+        }
+
+        else if (nums[i] == 1)
+        {
+            oneCnt++;
+        }
+
+        else
+        {
+            twoCnt++;
+        }
+    }
+
+    nums.clear();
+
+    while (zeroCnt > 0 || oneCnt > 0 || twoCnt > 0)
+    {
+        if (zeroCnt > 0)
+        {
+            nums.push_back(0);
+            zeroCnt--;
+        }
+
+        else if (oneCnt > 0)
+        {
+            nums.push_back(1);
+            oneCnt--;
+        }
+
+        else
+        {
+            nums.push_back(2);
+            twoCnt--;
+        }
+    }
+
+    return;
+}
+
 int main()
 {
     unordered_map<int, int> mp;
