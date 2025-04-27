@@ -411,6 +411,22 @@ void sortColors(vector<int>& nums) {
     return;
 }
 
+int majorityElement(vector<int>& nums) {
+    unordered_map<int, int> mp;
+
+    for(int i = 0; i < nums.size(); i++){
+        mp[nums[i]]++;
+    }
+
+    for(auto i = mp.begin(); i != mp.end(); i++){
+        if(i->second > nums.size()/2){
+            return i->first;
+        }
+    }
+
+    return -1;
+}
+
 int main()
 {
     unordered_map<int, int> mp;
