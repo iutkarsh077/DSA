@@ -449,6 +449,15 @@ int majorityElement(vector<int>& nums) {
     return maxi;
 }
 
+int majorityElement(vector<int>& nums) {
+    if(nums.size() == 1){
+        return nums[0];
+    }
+
+    sort(nums.begin(), nums.end());
+    return nums[nums.size() / 2];
+}
+
 int main()
 {
     unordered_map<int, int> mp;
