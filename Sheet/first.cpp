@@ -107,6 +107,23 @@ class Solution {
         }
     };
 
+     void rotate(vector<vector<int>>& matrix) {
+        for(int i = 0; i < matrix.size(); i++){
+            for(int j = i + 1; j < matrix[i].size(); j++){
+                if(i == j) continue;
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+
+        for(int i = 0; i < matrix.size(); i++){
+            reverse(matrix[i].begin(), matrix[i].end());
+        }
+
+        return;
+    }
+
     void setZeroes(vector<vector<int>>& matrix) {
         vector<int> rows(matrix.size(), 0);
         vector<int> cols(matrix[0].size(), 0);
