@@ -124,6 +124,42 @@ class Solution {
         return;
     }
 
+    int subarraySumBrute(vector<int>& nums, int k) {
+        int maxi = 0;
+        for(int i = 0; i < nums.size() - 1; i++){
+            int sum  = 0;
+            for(int j = i; j < nums.size(); j++){
+                sum = sum + nums[j];
+                if(sum == k){
+                    maxi++;
+                }
+            }
+        }
+
+        if(nums[nums.size() - 1] == k){
+            maxi++;
+        }
+
+        return maxi;
+    }
+
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> mp;
+        mp[0] = 1;
+
+        int sum = 0;
+
+        int maxi = 0;
+        for(auto i = 0; i != nums.size(); i++){
+            sum = nums[i] + sum;
+            int val =  sum - k;
+            maxi += mp[val];
+            mp[sum] += 1;
+        }
+
+        return maxi;
+    }
+
     void setZeroes(vector<vector<int>>& matrix) {
         vector<int> rows(matrix.size(), 0);
         vector<int> cols(matrix[0].size(), 0);
