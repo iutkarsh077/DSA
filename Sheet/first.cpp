@@ -195,6 +195,50 @@ class Solution {
         return { -1, -1 };
     }
 
+
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int> ans;
+
+        if(matrix.size() == 0) return ans;
+
+        int top = 0;
+        int left = 0;
+        int bottom = matrix.size();
+        int right = matrix[0].size();
+
+        while(left < right  && top < bottom){
+            // Left To Right
+            for(int i = left; i < right; i++){
+                ans.push_back(matrix[top][i]);
+            }
+            top++;
+
+            //Top To Bottom
+            for(int i = top; i < bottom; i++){
+                ans.push_back(matrix[i][right - 1]);
+            }
+            right--;
+
+            // Right To Left
+           if(top < bottom){
+             for(int i = right - 1; i >= left; i--){
+                ans.push_back(matrix[bottom - 1][i]);
+            }
+            bottom--;
+           }
+
+            // Bottom To Top
+           if(left < right){
+             for(int i = bottom - 1; i >= top; i--){
+                ans.push_back(matrix[i][left]);
+            }
+            left++;
+           }
+        }
+
+        return ans;
+    }
+
 int main(){
 
 }
