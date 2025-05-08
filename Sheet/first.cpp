@@ -239,6 +239,32 @@ class Solution {
         return ans;
     }
 
+
+
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> ans;
+        ans.push_back({1});
+
+        if(numRows == 1) return ans;
+
+        for(int i = 1; i < numRows; i++){
+            vector<int> result;
+            for(int j = 0; j <= i; j++){
+                if(j == 0 || j == i){
+                    result.push_back(1);
+                }
+
+                else{
+                    int sum = ans[i - 1][j - 1] + ans[i - 1][j];
+                    result.push_back(sum);
+                }
+            }
+            ans.push_back(result);
+        }
+
+        return ans;
+    }
+
 int main(){
 
 }
