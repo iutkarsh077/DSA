@@ -265,6 +265,24 @@ class Solution {
         return ans;
     }
 
+
+    vector<int> majorityElementBrute(vector<int>& nums) {
+        unordered_map<int, int> mp;
+        vector<int> ans;
+
+        for(int i = 0; i < nums.size(); i++){
+            mp[nums[i]]++; 
+        }
+
+        for(auto i = mp.begin(); i != mp.end(); i++){
+            if(i->second > nums.size()/3){
+                ans.push_back(i->first);
+            }
+        }
+
+        return ans;
+    }
+
 int main(){
 
 }
