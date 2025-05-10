@@ -303,6 +303,35 @@ class Solution {
         return vector<vector<int>>(ans.begin(), ans.end());
     }
 
+
+    vector<vector<int>> threeSumBetter(vector<int>& nums) {
+        set<vector<int>> ans;
+        sort(nums.begin(), nums.end());
+        for (int i = 0; i < nums.size() - 2; i++) {
+            int l = i + 1;
+            int r = nums.size() - 1;
+
+            while (l < r) {
+                int sum = nums[i] + nums[l] + nums[r];
+                if (sum == 0) {
+                   ans.insert({nums[i], nums[l], nums[r]});
+                    l = l + 1;
+                    r = r - 1;
+                }
+
+                else if (sum > 0) {
+                    r = r - 1;
+                }
+
+                else {
+                    l = l + 1;
+                }
+            }
+        }
+
+        return vector<vector<int>>(ans.begin(), ans.end());
+    }
+
 int main(){
 
 }
