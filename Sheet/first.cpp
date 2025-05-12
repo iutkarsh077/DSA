@@ -462,6 +462,37 @@ public:
     }
 };
 
+
+ vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
+        vector<int> dup;
+        for(int i = 0; i < grid.size(); i++){
+            for(int j = 0; j < grid[i].size(); j++){
+                dup.push_back(grid[i][j]);
+            }
+        }
+
+        sort(dup.begin(), dup.end());
+        int repeated = -1;
+
+        for(int i = 0; i < dup.size() - 1; i++){
+            if(dup[i] == dup[i + 1]){
+                repeated = dup[i];
+                break;
+            }
+        }
+
+        int sum = 0;
+        for(int i = 0; i < dup.size(); i++){
+            sum = sum + dup[i];
+        }
+
+        sum = sum - repeated;
+        int n = dup.size();
+        int total = (n * (n + 1))/2;
+        int ans = total - sum;
+        return {repeated, ans};
+    }
+
 int main()
 {
 }
