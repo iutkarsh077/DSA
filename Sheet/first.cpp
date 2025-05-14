@@ -607,6 +607,28 @@ public:
         return -1;
     }
 
+int lowerBound(vector<int>& arr, int target) {
+        // code here
+        int s = 0;
+        int e = arr.size() - 1;
+        int maxi = arr.size();
+        while(s <= e){
+            int mid = s + ((e - s)/2);
+            
+            if(arr[mid] >= target){
+                maxi = mid;
+                e = mid - 1;
+            }
+            
+            else if(arr[mid] < target){
+                s = mid + 1;
+            }
+        }
+        
+        return maxi;
+    }
+
+
 int main()
 {
 }
