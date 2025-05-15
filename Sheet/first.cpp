@@ -628,6 +628,107 @@ int lowerBound(vector<int>& arr, int target) {
         return maxi;
     }
 
+    //{ Driver Code Starts
+// Initial function template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+
+class Solution {
+  public:
+    int countFreq(vector<int>& arr, int target) {
+        // code here
+        int first = -1;
+        int last = -1;
+        
+        int s = 0;
+        int e = arr.size() - 1;
+        
+        while(s <= e){
+            int mid = s + ((e - s)/2);
+            if(arr[mid] == target){
+                first = mid;
+                e = mid - 1;
+            }
+            
+            else if(arr[mid] < target){
+                s = mid + 1;
+            }
+            
+            else{
+                e = mid - 1;
+            }
+        }
+        
+        if(first == -1){
+            return 0;
+        }
+        
+        s = 0;
+        e = arr.size() - 1;
+        
+           while(s <= e){
+            int mid = s + ((e - s)/2);
+            if(arr[mid] == target){
+                last = mid;
+                s = mid + 1;
+            }
+            
+            else if(arr[mid] < target){
+                s = mid + 1;
+            }
+            
+            else{
+                e = mid - 1;
+            }
+        }
+        
+        int occur = last - first + 1;
+    return occur;
+    }
+};
+
+
+
+//{ Driver Code Starts.
+
+int main() {
+    int test_case;
+    cin >> test_case;
+    cin.ignore();
+    while (test_case--) {
+
+        int d;
+        vector<int> arr, brr, crr;
+        string input;
+        getline(cin, input);
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            arr.push_back(number);
+        }
+        getline(cin, input);
+        ss.clear();
+        ss.str(input);
+        while (ss >> number) {
+            crr.push_back(number);
+        }
+        d = crr[0];
+        int n = arr.size();
+        Solution ob;
+        int ans = ob.countFreq(arr, d);
+        cout << ans << endl;
+
+        cout << "~"
+             << "\n";
+    }
+    return 0;
+}
+// } Driver Code Ends
+
 
 int main()
 {
