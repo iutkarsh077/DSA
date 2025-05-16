@@ -462,273 +462,294 @@ public:
     }
 };
 
-
- vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
-        vector<int> dup;
-        for(int i = 0; i < grid.size(); i++){
-            for(int j = 0; j < grid[i].size(); j++){
-                dup.push_back(grid[i][j]);
-            }
+vector<int> findMissingAndRepeatedValues(vector<vector<int>> &grid)
+{
+    vector<int> dup;
+    for (int i = 0; i < grid.size(); i++)
+    {
+        for (int j = 0; j < grid[i].size(); j++)
+        {
+            dup.push_back(grid[i][j]);
         }
-
-        sort(dup.begin(), dup.end());
-        int repeated = -1;
-
-        for(int i = 0; i < dup.size() - 1; i++){
-            if(dup[i] == dup[i + 1]){
-                repeated = dup[i];
-                break;
-            }
-        }
-
-        int sum = 0;
-        for(int i = 0; i < dup.size(); i++){
-            sum = sum + dup[i];
-        }
-
-        sum = sum - repeated;
-        int n = dup.size();
-        int total = (n * (n + 1))/2;
-        int ans = total - sum;
-        return {repeated, ans};
     }
 
+    sort(dup.begin(), dup.end());
+    int repeated = -1;
 
-    
-      int inversionCountBrute(vector<int> &arr) {
-       int cnt = 0;
-       for(int i = 0; i < arr.size() - 1; i++){
-           for(int j = i + 1; j < arr.size(); j++){
-               if(arr[i] > arr[j]){
-                   cnt++;
-               }
-           }
-       }
-       return cnt;
+    for (int i = 0; i < dup.size() - 1; i++)
+    {
+        if (dup[i] == dup[i + 1])
+        {
+            repeated = dup[i];
+            break;
+        }
     }
 
+    int sum = 0;
+    for (int i = 0; i < dup.size(); i++)
+    {
+        sum = sum + dup[i];
+    }
 
-    class Solution {
-  public:
+    sum = sum - repeated;
+    int n = dup.size();
+    int total = (n * (n + 1)) / 2;
+    int ans = total - sum;
+    return {repeated, ans};
+}
+
+int inversionCountBrute(vector<int> &arr)
+{
+    int cnt = 0;
+    for (int i = 0; i < arr.size() - 1; i++)
+    {
+        for (int j = i + 1; j < arr.size(); j++)
+        {
+            if (arr[i] > arr[j])
+            {
+                cnt++;
+            }
+        }
+    }
+    return cnt;
+}
+
+class Solution
+{
+public:
     // Function to count inversions in the array.
     int cnt = 0;
-    void merge(int low, int mid,  int high, vector<int> &arr){
+    void merge(int low, int mid, int high, vector<int> &arr)
+    {
         int left = low;
         int right = mid + 1;
-        
+
         vector<int> temp;
-        
-        while(left <= mid && right <= high){
-            if(arr[left] <= arr[right]){
+
+        while (left <= mid && right <= high)
+        {
+            if (arr[left] <= arr[right])
+            {
                 temp.push_back(arr[left]);
                 left++;
             }
-            
-            else {
+
+            else
+            {
                 temp.push_back(arr[right]);
                 cnt += mid - left + 1;
                 right++;
             }
         }
-        
-        while(left <= mid){
-              temp.push_back(arr[left]);
-                left++;
+
+        while (left <= mid)
+        {
+            temp.push_back(arr[left]);
+            left++;
         }
-        
-        
-        while(right <= high){
-             temp.push_back(arr[right]);
-                right++;
+
+        while (right <= high)
+        {
+            temp.push_back(arr[right]);
+            right++;
         }
-        
-        for(int i = low; i <= high; i++){
+
+        for (int i = low; i <= high; i++)
+        {
             arr[i] = temp[i - low];
         }
     }
-    
-    
-    void divide(int low, int high, vector<int> &arr){
-        if(low >= high) return;
-        
-        int mid = low + ((high - low)/2);
+
+    void divide(int low, int high, vector<int> &arr)
+    {
+        if (low >= high)
+            return;
+
+        int mid = low + ((high - low) / 2);
         divide(low, mid, arr);
         divide(mid + 1, high, arr);
-        merge(low,mid,  high, arr);
-        
+        merge(low, mid, high, arr);
     }
-    int inversionCount(vector<int> &arr) {
+    int inversionCount(vector<int> &arr)
+    {
         // Your Code Here
         divide(0, arr.size() - 1, arr);
         return cnt;
     }
 };
 
- int maxProduct(vector<int>& nums) {
-        if(nums.size() == 1) return nums[0];
+int maxProduct(vector<int> &nums)
+{
+    if (nums.size() == 1)
+        return nums[0];
 
-        int maxi = 0;
+    int maxi = 0;
 
-        int prefix = 1;
-        int suffix = 1;
+    int prefix = 1;
+    int suffix = 1;
 
-        for(int i = 0; i < nums.size(); i++){
-            if(prefix == 0) prefix = 1;
-            if(suffix == 0) suffix = 1;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (prefix == 0)
+            prefix = 1;
+        if (suffix == 0)
+            suffix = 1;
 
-            prefix = prefix * nums[i];
-            suffix = suffix * nums[nums.size() - i - 1];
-            maxi = max(maxi, max(suffix, prefix));
-        }
-
-        return maxi;
+        prefix = prefix * nums[i];
+        suffix = suffix * nums[nums.size() - i - 1];
+        maxi = max(maxi, max(suffix, prefix));
     }
 
-     int search(vector<int>& nums, int target) {
-        int s = 0;
-        int e = nums.size() - 1;
+    return maxi;
+}
 
-        while(s <= e){
-            int mid = s + ((e - s)/2);
+int search(vector<int> &nums, int target)
+{
+    int s = 0;
+    int e = nums.size() - 1;
 
-            if(nums[mid] == target){
-                return mid;
-            }
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
 
-            else if(nums[mid] < target){
-                s = mid + 1;
-            }
-
-            else{
-                e = mid - 1;
-            }
+        if (nums[mid] == target)
+        {
+            return mid;
         }
 
-        return -1;
-    }
-
-int lowerBound(vector<int>& arr, int target) {
-        // code here
-        int s = 0;
-        int e = arr.size() - 1;
-        int maxi = arr.size();
-        while(s <= e){
-            int mid = s + ((e - s)/2);
-            
-            if(arr[mid] >= target){
-                maxi = mid;
-                e = mid - 1;
-            }
-            
-            else if(arr[mid] < target){
-                s = mid + 1;
-            }
+        else if (nums[mid] < target)
+        {
+            s = mid + 1;
         }
-        
-        return maxi;
+
+        else
+        {
+            e = mid - 1;
+        }
     }
 
-    //{ Driver Code Starts
+    return -1;
+}
+
+int lowerBound(vector<int> &arr, int target)
+{
+    // code here
+    int s = 0;
+    int e = arr.size() - 1;
+    int maxi = arr.size();
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        if (arr[mid] >= target)
+        {
+            maxi = mid;
+            e = mid - 1;
+        }
+
+        else if (arr[mid] < target)
+        {
+            s = mid + 1;
+        }
+    }
+
+    return maxi;
+}
+
+//{ Driver Code Starts
 // Initial function template for C++
 
 #include <bits/stdc++.h>
 using namespace std;
 
-
 // } Driver Code Ends
 
-class Solution {
-  public:
-    int countFreq(vector<int>& arr, int target) {
+class Solution
+{
+public:
+    int countFreq(vector<int> &arr, int target)
+    {
         // code here
         int first = -1;
         int last = -1;
-        
+
         int s = 0;
         int e = arr.size() - 1;
-        
-        while(s <= e){
-            int mid = s + ((e - s)/2);
-            if(arr[mid] == target){
+
+        while (s <= e)
+        {
+            int mid = s + ((e - s) / 2);
+            if (arr[mid] == target)
+            {
                 first = mid;
                 e = mid - 1;
             }
-            
-            else if(arr[mid] < target){
+
+            else if (arr[mid] < target)
+            {
                 s = mid + 1;
             }
-            
-            else{
+
+            else
+            {
                 e = mid - 1;
             }
         }
-        
-        if(first == -1){
+
+        if (first == -1)
+        {
             return 0;
         }
-        
+
         s = 0;
         e = arr.size() - 1;
-        
-           while(s <= e){
-            int mid = s + ((e - s)/2);
-            if(arr[mid] == target){
+
+        while (s <= e)
+        {
+            int mid = s + ((e - s) / 2);
+            if (arr[mid] == target)
+            {
                 last = mid;
                 s = mid + 1;
             }
-            
-            else if(arr[mid] < target){
+
+            else if (arr[mid] < target)
+            {
                 s = mid + 1;
             }
-            
-            else{
+
+            else
+            {
                 e = mid - 1;
             }
         }
-        
+
         int occur = last - first + 1;
-    return occur;
+        return occur;
     }
 };
 
+ int findMin(vector<int>& nums) {
+        int mini = INT_MAX;
+        int s = 0;
+        int e = nums.size() - 1;
 
+        while (s <= e) {
+            int mid = s + ((e - s) / 2);
 
-//{ Driver Code Starts.
+            if (nums[s] <= nums[mid]) {
+                mini = min(nums[s], mini);
+                s = mid + 1;
+            }
 
-int main() {
-    int test_case;
-    cin >> test_case;
-    cin.ignore();
-    while (test_case--) {
-
-        int d;
-        vector<int> arr, brr, crr;
-        string input;
-        getline(cin, input);
-        stringstream ss(input);
-        int number;
-        while (ss >> number) {
-            arr.push_back(number);
+            else if (nums[mid] <= nums[e]) {
+                mini = min(nums[mid], mini);
+                e = mid - 1;
+            }
         }
-        getline(cin, input);
-        ss.clear();
-        ss.str(input);
-        while (ss >> number) {
-            crr.push_back(number);
-        }
-        d = crr[0];
-        int n = arr.size();
-        Solution ob;
-        int ans = ob.countFreq(arr, d);
-        cout << ans << endl;
 
-        cout << "~"
-             << "\n";
+        return mini;
     }
-    return 0;
-}
-// } Driver Code Ends
-
 
 int main()
 {
