@@ -729,6 +729,12 @@ public:
     }
 };
 
+
+ int mySqrt(int x) {
+        int ans = sqrt(x);
+        return ans;
+    }
+
  int findMin(vector<int>& nums) {
         int mini = INT_MAX;
         int s = 0;
