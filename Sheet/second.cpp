@@ -74,6 +74,33 @@ int mySqrt(int x) {
         return -1;
     }
 
+     long long calculateHours(vector<int> piles, int h) {
+        long long totalHours = 0;
+
+        for (int i = 0; i < piles.size(); i++) {
+            totalHours += ceil((double)(piles[i]) / (double)(h));
+        }
+
+        return totalHours;
+    }
+
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int maxi = piles.size();
+
+        for (int i = 0; i < piles.size(); i++) {
+            maxi = max(maxi, piles[i]);
+        }
+
+        for (int i = 1; i <= maxi; i++) {
+            long long cal = calculateHours(piles, i);
+            if (cal <= h) {
+                return i;
+            }
+        }
+
+        return maxi;
+    }
+
      int singleNonDuplicateBinary(vector<int>& nums) {
         if (nums.size() == 1)
             return nums[0];
