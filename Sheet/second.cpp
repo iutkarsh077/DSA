@@ -143,6 +143,28 @@ int mySqrt(int x) {
         return -1;
     }
 
+
+     string removeOuterParentheses(string s) {
+        string ans = "";
+        int cnt = -1;
+
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] == '(')
+                cnt++;
+
+            if (s[i] == ')')
+                cnt--;
+
+            if (s[i] == '(' && cnt >= 1)
+                ans += s[i];
+
+            if (s[i] == ')' && cnt >= 0)
+                ans += s[i];
+        }
+
+        return ans;
+    }
+
     class Solution {
 public:
     long long calculateHours(vector<int> piles, int hour){
