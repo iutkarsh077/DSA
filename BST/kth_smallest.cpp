@@ -16,6 +16,8 @@ class Node{
     }
 };
 
+
+
 Node *InsertAtTree(Node *root, int data){
     if(root == nullptr){
         root = new Node(data);
