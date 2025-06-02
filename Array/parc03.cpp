@@ -15,6 +15,8 @@ int maxi = 0;
 //                 sum = sum + A[j];
 //                 cnt++;
 
+
+
 //                 if(sum == K){
 //                     cout << "The count is: " << cnt << endl;
 //                     maxi = max(cnt, maxi);
