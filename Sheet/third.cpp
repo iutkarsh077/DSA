@@ -1,20 +1,24 @@
-#include<iostream>
+#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
- bool rotateString(string s, string goal) {
-        for (int i = 0; i < s.size(); i++) {
-            rotate(s.begin(), s.begin() + 1, s.end());
-            if (s == goal)
-                return true;
-        }
-        return false;
+bool rotateString(string s, string goal)
+{
+    for (int i = 0; i < s.size(); i++)
+    {
+        rotate(s.begin(), s.begin() + 1, s.end());
+        if (s == goal)
+            return true;
     }
+    return false;
+}
 
-int main(){
+
+
+int main()
+{
     string a = "abcde";
-    string b = "abcdde";
-  if(a == b){
-    cout << "a is equal to b";
-  }
+    rotate(a.begin(), a.begin() + 1, a.end());
+    cout << a;
     return 0;
 }
