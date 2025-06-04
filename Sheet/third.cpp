@@ -15,6 +15,7 @@ bool rotateString(string s, string goal)
 
 
 
+
 int main()
 {
     string a = "abcde";
