@@ -1,14 +1,62 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
- void deleteNode(ListNode* node) {
-        ListNode *deleteNode = node->next;
-        node->val = node->next->val;
-        node->next = deleteNode->next;
-        deleteNode->next = nullptr;
-        delete deleteNode;
+class ListNode
+{
+public:
+    int val;
+    ListNode *next;
+
+    ListNode(int data)
+    {
+        this->val = data;
+        this->next = nullptr
+    }
+};
+
+void deleteNode(ListNode *node)
+{
+    ListNode *deleteNode = node->next;
+    node->val = node->next->val;
+    node->next = deleteNode->next;
+    deleteNode->next = nullptr;
+    delete deleteNode;
+}
+
+ListNode *middleNode(ListNode *head)
+{
+    ListNode *slow = head;
+    ListNode *fast = head;
+
+    while (fast != nullptr && fast->next != nullptr)
+    {
+        slow = slow->next;
+        fast = fast->next;
+        if (fast->next != nullptr)
+        {
+            fast = fast->next;
+        }
     }
 
-int main(){
+    return slow;
+}
+
+ ListNode* reverseList(ListNode* head) {
+        if(head == nullptr) return nullptr;
+
+        ListNode *dupHead = new ListNode(head->val);
+        ListNode *tracker = head->next;
+        while(tracker != nullptr){
+            ListNode *newHead = new ListNode(tracker->val);
+            newHead->next = dupHead;
+            dupHead = newHead;
+            tracker = tracker->next;
+        }
+
+        return dupHead;
+    }
+
+int main()
+{
     return 0;
 }
