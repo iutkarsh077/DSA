@@ -84,6 +84,58 @@ ListNode *reverseList(ListNode *head)
     return dupHead;
 }
 
+ bool hasCycle(ListNode *head) {
+        ListNode *slow = head;
+        ListNode *fast = head;
+
+        while(fast != nullptr && fast->next != nullptr){
+            slow = slow->next;
+            fast = fast = fast->next->next;
+            if(slow == fast){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+     bool isPalindrome(ListNode* head) {
+        if(head == nullptr || head->next == nullptr) return head;
+
+        ListNode *slow = head;
+        ListNode *fast = head;
+
+        while(fast != nullptr && fast->next != nullptr){
+            slow = slow->next;
+            fast = fast->next;
+
+            if(fast->next != nullptr){
+                fast = fast->next;
+            }
+        }
+
+        ListNode *curr = slow;
+        ListNode *prev = nullptr;
+        while(curr != nullptr){
+           ListNode *forward = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = forward;  
+        }
+
+        ListNode *temp = head;
+        ListNode *newHead = prev;
+        while(newHead != nullptr && temp != nullptr){
+            if(newHead->val !=  temp->val){
+                return false;
+            }
+            newHead = newHead->next;
+            temp = temp->next;
+        }
+
+        return true;
+    }
+
 int main()
 {
     return 0;
