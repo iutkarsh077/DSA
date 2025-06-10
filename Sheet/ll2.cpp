@@ -136,6 +136,41 @@ ListNode *reverseList(ListNode *head)
         return true;
     }
 
+     ListNode* oddEvenList(ListNode* head) {
+        if(head == nullptr || head->next == nullptr) return head;
+        ListNode *oddNodeHead = new ListNode(-1);
+        ListNode *oddNodeTail = oddNodeHead;
+        ListNode *evenNodeHead = new ListNode(-1);
+        ListNode *evenNodeTail = evenNodeHead;
+        ListNode *tracker = head;
+        int index = 1;
+
+        while(tracker != nullptr){
+            int val = tracker->val;
+            if(index % 2 == 0){
+                ListNode *newNode = new ListNode(val);
+                evenNodeTail->next = newNode;
+                evenNodeTail = newNode;
+            }
+            else{
+                 ListNode *newNode = new ListNode(val);
+                oddNodeTail->next = newNode;
+                oddNodeTail = newNode;
+            }
+            tracker = tracker->next;
+            index = index + 1;
+        }
+
+        ListNode *deleteEvenHead = evenNodeHead;
+        evenNodeHead = evenNodeHead->next;
+        ListNode *deleteOddHead = oddNodeHead;
+        oddNodeHead = oddNodeHead->next;
+        delete deleteEvenHead;
+        delete deleteOddHead;
+        oddNodeTail->next = evenNodeHead;
+        return oddNodeHead;
+    }
+
 int main()
 {
     return 0;
