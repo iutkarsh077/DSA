@@ -81,43 +81,28 @@ int myAtoi(string s)
     return sign * ans;
 }
 
-int countGoodNumbers(long long n)
-{
-    long long int start = 1;
-    string startStr = to_string(start);
-    long long int count = 1;
-    unordered_map<int, int> mp;
-    mp.insert({2, 1});
-    mp.insert({3, 1});
-    mp.insert({5, 1});
-    mp.insert({7, 1});
+ int findPower(long long a, long long b) {
+        if(b == 0) {
+            return 1;
+        }   
 
-    while(startStr.size() <= n){
-        int i = 0;
-        while(i < startStr.size()){
-            int val = startStr[i] - '0';
+        long long half = findPower(a, b/2);
+        long long result = (half * half) % MOD;
 
-            if(val % 2 == 0 && i % 2 == 0){
-                count++;
-                i++;
-            }
-            else if((mp.find(val) != mp.end()) && (mp.find(i) != mp.end())){
-                count++;
-                i++;
-            }
-            else{
-                break;
-            }
+        if(b % 2 == 1) {
+            result = (result * a) % MOD;
         }
-        start = start + 1;
-        startStr = to_string(start);
+
+        return result;
     }
-    return count % MOD;
-}
+
+    int countGoodNumbers(long long n) {
+        return (long long)findPower(5, (n+1)/2) * findPower(4, n/2) % MOD;
+    }
 
 int main()
 {
-    long long int ans = countGoodNumbers(4);
+    long long int ans = (long long int)countGoodNumbers(50);
     cout << ans;
     return 0;
 }
