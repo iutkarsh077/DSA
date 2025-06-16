@@ -81,28 +81,33 @@ int myAtoi(string s)
     return sign * ans;
 }
 
- int findPower(long long a, long long b) {
-        if(b == 0) {
-            return 1;
-        }   
-
-        long long half = findPower(a, b/2);
-        long long result = (half * half) % MOD;
-
-        if(b % 2 == 1) {
-            result = (result * a) % MOD;
-        }
-
-        return result;
+int findPower(long long a, long long b)
+{
+    if (b == 0)
+    {
+        return 1;
     }
 
-    int countGoodNumbers(long long n) {
-        return (long long)findPower(5, (n+1)/2) * findPower(4, n/2) % MOD;
+    long long half = findPower(a, b / 2);
+    long long result = (half * half) % MOD;
+
+    if (b % 2 == 1)
+    {
+        result = (result * a) % MOD;
     }
+
+    return result;
+}
+
+
+
+int countGoodNumbers(long long n)
+{
+    return (long long)findPower(5, (n + 1) / 2) * findPower(4, n / 2) % MOD;
+}
 
 int main()
 {
-    long long int ans = (long long int)countGoodNumbers(50);
-    cout << ans;
+   
     return 0;
 }
