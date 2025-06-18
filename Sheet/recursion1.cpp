@@ -104,6 +104,8 @@ int findPower(long long a, long long b)
 int countGoodNumbers(long long n)
 {
     return (long long)findPower(5, (n + 1) / 2) * findPower(4, n / 2) % MOD;
+
+    
 }
 
 int main()
