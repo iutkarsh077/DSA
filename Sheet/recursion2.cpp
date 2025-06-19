@@ -10,7 +10,14 @@ void printN(int n){
     cout << n << " ";
 }
 
+int facto(int n){
+    if(n == 1) return 1;
+
+    return n * facto(n - 1);
+}
+
 int main(){
-    printN(10);
+    int ans = facto(10);
+    cout << ans << endl;
     return 0;
 }
