@@ -65,8 +65,17 @@ void rev(int top, stack<int> &st, int start, int end){
         return;
     }
 
-    int mytop = st.top();
-    st.pop();
+    int mytop = -1;
+    if(top < st.top()){
+        mytop = top;
+        top = st.top();
+        st.pop();
+    }
+    else{
+         top = max(st.top(), top);
+        mytop = st.top();
+        st.pop();
+    }
 
     rev(top, st, start + 1, end);
     st.push(mytop);
@@ -75,11 +84,11 @@ void rev(int top, stack<int> &st, int start, int end){
 int main()
 {
     stack<int> st;
-    st.push(2);
-    st.push(4);
     st.push(1);
+    st.push(2);
     st.push(3);
-    st.push(8);
+    st.push(4);
+    st.push(5);
 
     int cnt = 0;
     int len = st.size();
