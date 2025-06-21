@@ -1,6 +1,7 @@
 #include <iostream>
 #include <climits>
 #include <vector>
+#include<stack>
 using namespace std;
 
 void printN(int n)
@@ -57,11 +58,41 @@ void recur(vector<int> &arr, int maxi, int i)
      recur(arr, maxi, i + 1);
 }
 
+
+void rev(int top, stack<int> &st, int start, int end){
+    if(start >= end - 1 || st.empty()){
+        st.push(top);
+        return;
+    }
+
+    int mytop = st.top();
+    st.pop();
+
+    rev(top, st, start + 1, end);
+    st.push(mytop);
+}
+
 int main()
 {
-    int maxi = INT_MIN;
-    vector<int> arr = {9, 2, 31, 8, 72, 6, 40, 31};
-    recur(arr, INT_MIN, 0);
-    printArr(arr, 0);
+    stack<int> st;
+    st.push(2);
+    st.push(4);
+    st.push(1);
+    st.push(3);
+    st.push(8);
+
+    int cnt = 0;
+    int len = st.size();
+    while(cnt < len){
+        int top = st.top();
+        st.pop();
+        rev(top, st, 0, len - cnt);
+        cnt = cnt + 1;
+    }
+
+    while(!st.empty()){
+        cout << st.top() << " ";
+        st.pop();
+    }
     return 0;
 }
