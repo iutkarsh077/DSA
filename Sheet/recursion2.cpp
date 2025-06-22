@@ -81,14 +81,13 @@ void rev(int top, stack<int> &st, int start, int end){
     st.push(mytop);
 }
 
-int main()
-{
-    stack<int> st;
-    st.push(1);
-    st.push(2);
-    st.push(3);
-    st.push(4);
+void myStack(){
+     stack<int> st;
     st.push(5);
+    st.push(2);
+    st.push(1);
+    st.push(8);
+    // st.push(5);
 
     int cnt = 0;
     int len = st.size();
@@ -103,5 +102,40 @@ int main()
         cout << st.top() << " ";
         st.pop();
     }
+}
+
+void deleteMiddle(stack<int> &st, int count, int len){
+    if(count == len/2){
+        st.pop();
+        return;
+    }
+
+    int element = st.top();
+    st.pop();
+
+    deleteMiddle(st, count + 1, len);
+    st.push(element);
+}
+
+void printStack(stack<int> st){
+    while(!st.empty()){
+        cout << st.top() << " ";
+        st.pop();
+    }
+}
+
+int main()
+{
+   stack<int> st;
+    st.push(1);
+    st.push(2);
+    st.push(3);
+    st.push(4);
+    st.push(5);
+    st.push(6);
+    st.push(7);
+    st.push(8);
+    deleteMiddle(st, 0, st.size());
+    printStack(st);
     return 0;
 }
