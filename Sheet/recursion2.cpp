@@ -124,6 +124,24 @@ void printStack(stack<int> st){
     }
 }
 
+void deleteMe(stack<int> st){
+     deleteMiddle(st, 0, st.size());
+    printStack(st);
+}
+
+void reverseStack(stack<int> &st, int end, int start, int val){
+    if(st.empty() || end - 1 == start){
+        st.push(val);
+        return;
+    }
+
+    int mytop = st.top();
+    st.pop();
+
+    reverseStack(st, end, start + 1, val);
+    st.push(mytop);
+}   
+
 int main()
 {
    stack<int> st;
@@ -135,7 +153,16 @@ int main()
     st.push(6);
     st.push(7);
     st.push(8);
-    deleteMiddle(st, 0, st.size());
+    int cnt = 0;
+    int len = st.size();
+
+    for(int i = 0; i < len; i++){
+        int top = st.top();
+        st.pop();
+        reverseStack(st, len - cnt, 0, top);
+        cnt++;
+    }
+
     printStack(st);
     return 0;
 }
