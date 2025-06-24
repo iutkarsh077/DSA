@@ -14,6 +14,8 @@ int main() {
 
 
 
+
+
     cout << val << endl;
     string str = to_string(val);
     // reverse(str.begin(), str.end());
