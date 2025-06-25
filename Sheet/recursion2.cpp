@@ -140,7 +140,14 @@ void reverseStack(stack<int> &st, int end, int start, int val){
 
     reverseStack(st, end, start + 1, val);
     st.push(mytop);
-}   
+};
+
+int facto(int n, int &multiple){
+    if(n == 0) return 1;
+
+    multiple = multiple * n;
+    return facto(n - 1, multiple);
+}
 
 int main()
 {
@@ -156,13 +163,17 @@ int main()
     int cnt = 0;
     int len = st.size();
 
-    for(int i = 0; i < len; i++){
-        int top = st.top();
-        st.pop();
-        reverseStack(st, len - cnt, 0, top);
-        cnt++;
-    }
+    // for(int i = 0; i < len; i++){
+    //     int top = st.top();
+    //     st.pop();
+    //     reverseStack(st, len - cnt, 0, top);
+    //     cnt++;
+    // }
 
-    printStack(st);
+    // printStack(st);
+
+    int multiple = 1;
+    int ans = facto(5, multiple);
+    cout << "The answer is: " << multiple;
     return 0;
 }
