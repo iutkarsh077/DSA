@@ -58,9 +58,19 @@ int solve(int n, int k){
     }
 }
 
+void reverseStr(string str, int index){
+    if(index >= str.length()) return;
+
+    reverseStr(str, index + 1);
+    cout << str[index] << " ";
+}
+
 int main()
 {
-    int ans = solve(4, 5);
-    cout << ans;
+    // int ans = solve(4, 5);
+    // cout << ans;
+
+    reverseStr("Project", 0);
+    
     return 0;
 }
