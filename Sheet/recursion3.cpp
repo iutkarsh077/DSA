@@ -65,13 +65,22 @@ void reverseStr(string str, int index){
     cout << str[index] << " ";
 }
 
+void reverseNumber(int n){
+    if(n <= 0) return;
+
+    int digit = n % 10;
+    cout << digit << " ";
+    n = n / 10;
+    reverseNumber(n);
+}
+
 
 int main()
 {
     // int ans = solve(4, 5);
     // cout << ans;
 
-    reverseStr("Project", 0);
-    
+    // reverseStr("Project", 0);
+    reverseNumber(2456);
     return 0;
 }
