@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include<cmath>
+#include<stack>
 using namespace std;
 
 void IterativeKthSymbol()
@@ -74,13 +75,43 @@ void reverseNumber(int n){
     reverseNumber(n);
 }
 
+void reverseStack(stack<int> &st, int start, int end, int val){
+    if(st.empty() || start == end - 1){
+        st.push(val);
+        return;
+    }
+
+    int mytop = st.top();
+    st.pop();
+
+    reverseStack(st, start + 1, end, val);
+    st.push(mytop);
+}
+
 
 int main()
 {
-    // int ans = solve(4, 5);
-    // cout << ans;
+    stack<int> st;
+    st.push(3);
+    st.push(2);
+    st.push(1);
+    st.push(7);
+    st.push(6);
 
-    // reverseStr("Project", 0);
-    reverseNumber(2456);
+    int len = st.size();
+    int count = 0;
+
+    for(int i = 0; i < len; i++){
+        int top = st.top();
+        st.pop();
+
+        reverseStack(st, 0, len - count, top);
+        count++;
+    }
+
+    while(!st.empty()){
+        cout << st.top() << " ";
+        st.pop();
+    }
     return 0;
 }
