@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
-#include<cmath>
-#include<stack>
+#include <cmath>
+#include <stack>
 using namespace std;
 
 void IterativeKthSymbol()
@@ -43,31 +43,39 @@ void IterativeKthSymbol()
     }
 }
 
-int solve(int n, int k){
-    if(n == 1 || k == 1){
+int solve(int n, int k)
+{
+    if (n == 1 || k == 1)
+    {
         return 0;
     }
 
     int len = pow(2, n - 1);
-    int mid = len/2;
+    int mid = len / 2;
 
-    if(k <= mid){
+    if (k <= mid)
+    {
         return solve(n - 1, k);
     }
-    else{
+    else
+    {
         return !solve(n - 1, k - mid);
     }
 }
 
-void reverseStr(string str, int index){
-    if(index >= str.length()) return;
+void reverseStr(string str, int index)
+{
+    if (index >= str.length())
+        return;
 
     reverseStr(str, index + 1);
     cout << str[index] << " ";
 }
 
-void reverseNumber(int n){
-    if(n <= 0) return;
+void reverseNumber(int n)
+{
+    if (n <= 0)
+        return;
 
     int digit = n % 10;
     cout << digit << " ";
@@ -75,8 +83,10 @@ void reverseNumber(int n){
     reverseNumber(n);
 }
 
-void reverseStack(stack<int> &st, int start, int end, int val){
-    if(st.empty() || start == end - 1){
+void reverseStack(stack<int> &st, int start, int end, int val)
+{
+    if (st.empty() || start == end - 1)
+    {
         st.push(val);
         return;
     }
@@ -88,6 +98,18 @@ void reverseStack(stack<int> &st, int start, int end, int val){
     st.push(mytop);
 }
 
+void toh(int n, char from_rod, char to_rod,
+         char aux_rod)
+{
+    if (n == 0)
+    {
+        return;
+    }
+    toh(n - 1, from_rod, aux_rod, to_rod);
+    cout << "Move disk " << n << " from rod " << from_rod
+         << " to rod " << to_rod << endl;
+    toh(n - 1, aux_rod, to_rod, from_rod);
+}
 
 int main()
 {
@@ -101,7 +123,8 @@ int main()
     int len = st.size();
     int count = 0;
 
-    for(int i = 0; i < len; i++){
+    for (int i = 0; i < len; i++)
+    {
         int top = st.top();
         st.pop();
 
@@ -109,7 +132,8 @@ int main()
         count++;
     }
 
-    while(!st.empty()){
+    while (!st.empty())
+    {
         cout << st.top() << " ";
         st.pop();
     }
