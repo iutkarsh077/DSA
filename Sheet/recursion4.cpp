@@ -1,16 +1,20 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-int factorial(int n){
-    if(n == 0){
+int factorial(int n)
+{
+    if (n == 0)
+    {
         return 1;
     }
 
     return n * factorial(n - 1);
 }
 
-void reachSchool(int src, int dest){
-    if(src == dest){
+void reachSchool(int src, int dest)
+{
+    if (src == dest)
+    {
         cout << "Reached School" << endl;
         return;
     }
@@ -20,8 +24,10 @@ void reachSchool(int src, int dest){
     reachSchool(src + 1, dest);
 }
 
-void fibo(int n, int first, int second){
-    if(n == 2) return;
+void fibo(int n, int first, int second)
+{
+    if (n == 2)
+        return;
 
     int sum = first + second;
     cout << sum << " ";
@@ -31,11 +37,13 @@ void fibo(int n, int first, int second){
     return fibo(n - 1, first, second);
 }
 
-void fiboIterative(int n){
+void fiboIterative(int n)
+{
     int first = 0;
     int second = 1;
 
-    for(int i = 3; i <= n; i++){
+    for (int i = 3; i <= n; i++)
+    {
         int sum = first + second;
         cout << sum << " ";
 
@@ -44,8 +52,26 @@ void fiboIterative(int n){
     }
 }
 
-int main(){
-    cout << 0 << " " << 1 << " ";
-    fibo(8, 0, 1);
+void isSorted(int arr[], int start, int end)
+{
+    if (start == end - 1)
+    {
+        cout << "Sorted hai";
+        return;
+    }
+
+    if (arr[start] > arr[start + 1])
+    {
+        cout << "Not sorted";
+        return;
+    }
+
+    isSorted(arr, start + 1, end);
+}
+
+int main()
+{
+    int arr[] = {1, 2, 3, 44, 5, 6};
+    isSorted(arr, 0, sizeof(arr) / sizeof(arr[0]));
     return 0;
 }
