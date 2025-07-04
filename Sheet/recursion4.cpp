@@ -104,6 +104,43 @@ int mysum(int arr[], int start, int end)
     return ans;
 }
 
+ int myAtoi(string s) {
+        int sign = 1;
+        long long ans = 0;
+        int i = 0;
+
+        while(i < s.size()){
+            if(s[i] == '-'){
+                sign = -1;
+                i = i + 1;
+                break;
+            } 
+
+            if(s[i] == '+'){
+                i = i + 1;
+                break;
+            }
+
+            else if(s[i] == ' '){
+                i = i + 1;
+            }
+            else{
+                break;
+            }
+        }
+
+        while(i < s.size() && isdigit(s[i])){
+            int digit = s[i] - '0';
+            ans = (ans * 10) + digit;
+
+            if(sign * ans > INT_MAX) return INT_MAX;
+            if(sign * ans < INT_MIN) return INT_MIN;
+            i = i + 1;
+        }
+
+        return sign * ans;
+    }
+
 double myPow(double x, long n)
 {
     if (n == 1)
