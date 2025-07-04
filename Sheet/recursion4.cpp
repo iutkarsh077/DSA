@@ -69,9 +69,76 @@ void isSorted(int arr[], int start, int end)
     isSorted(arr, start + 1, end);
 }
 
+void BinarySearch(int arr[], int start, int end, int target)
+{
+    if (start > end)
+        return;
+
+    int mid = start + ((end - start) / 2);
+
+    if (target == arr[mid])
+    {
+        cout << "Foudn at index: " << mid << endl;
+        return;
+    }
+
+    else if (arr[mid] < target)
+    {
+        start = mid + 1;
+    }
+    else
+    {
+        end = mid - 1;
+    }
+
+    BinarySearch(arr, start, end, target);
+}
+
+int mysum(int arr[], int start, int end)
+{
+    if (start == end - 1)
+        return arr[start];
+
+    int val = mysum(arr, start + 1, end);
+    int ans = arr[start] + val;
+    return ans;
+}
+
+double myPow(double x, long n)
+{
+    if (n == 1)
+    {
+        return x;
+    }
+
+    if (n % 2 == 1)
+    {
+        return 2 * myPow(x, n / 2) * myPow(x, n / 2);
+    }
+
+    else if (n % 2 == 0)
+    {
+        return myPow(x, n / 2) * myPow(x, n / 2);
+    }
+}
+
 int main()
 {
-    int arr[] = {1, 2, 3, 44, 5, 6};
-    isSorted(arr, 0, sizeof(arr) / sizeof(arr[0]));
-    return 0;
+    double x = 0;
+    int n = -2;
+    long dup = n;
+    if(n < 0){
+        dup = -1 * n;
+    }
+    double ans = myPow(x, dup);
+
+    
+    if (n < 0){
+        ans = 1/ans;
+        cout << "Answer is: " << ans;
+    }
+    else{
+        cout << "Answer is: " << ans;
+    }
+        return 0;
 }
