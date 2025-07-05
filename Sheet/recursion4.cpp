@@ -1,4 +1,5 @@
 #include <iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
 int factorial(int n)
@@ -104,42 +105,51 @@ int mysum(int arr[], int start, int end)
     return ans;
 }
 
- int myAtoi(string s) {
-        int sign = 1;
-        long long ans = 0;
-        int i = 0;
+int myAtoi(string s)
+{
+    int sign = 1;
+    long long ans = 0;
+    int i = 0;
 
-        while(i < s.size()){
-            if(s[i] == '-'){
-                sign = -1;
-                i = i + 1;
-                break;
-            } 
-
-            if(s[i] == '+'){
-                i = i + 1;
-                break;
-            }
-
-            else if(s[i] == ' '){
-                i = i + 1;
-            }
-            else{
-                break;
-            }
+    while (i < s.size())
+    {
+        if (s[i] == '-')
+        {
+            sign = -1;
+            i = i + 1;
+            break;
         }
 
-        while(i < s.size() && isdigit(s[i])){
-            int digit = s[i] - '0';
-            ans = (ans * 10) + digit;
+        if (s[i] == '+')
+        {
+            i = i + 1;
+            break;
+        }
 
-            if(sign * ans > INT_MAX) return INT_MAX;
-            if(sign * ans < INT_MIN) return INT_MIN;
+        else if (s[i] == ' ')
+        {
             i = i + 1;
         }
-
-        return sign * ans;
+        else
+        {
+            break;
+        }
     }
+
+    while (i < s.size() && isdigit(s[i]))
+    {
+        int digit = s[i] - '0';
+        ans = (ans * 10) + digit;
+
+        if (sign * ans > INT_MAX)
+            return INT_MAX;
+        if (sign * ans < INT_MIN)
+            return INT_MIN;
+        i = i + 1;
+    }
+
+    return sign * ans;
+}
 
 double myPow(double x, long n)
 {
@@ -159,23 +169,39 @@ double myPow(double x, long n)
     }
 }
 
+void recurAns(set<string> &result, int a, int b, string ans){
+    if(b == ans.size()) return;
+    string dupans = ans;
+    swap(dupans[a], dupans[b]);
+
+    result.insert(dupans);
+
+    recurAns(result, a, b + 1, dupans);
+}
+
 int main()
 {
-    double x = 0;
-    int n = -2;
-    long dup = n;
-    if(n < 0){
-        dup = -1 * n;
-    }
-    double ans = myPow(x, dup);
+    int n = 3;
+    string ans(n, '0');
+    ans[n - 1] = '1';
 
-    
-    if (n < 0){
-        ans = 1/ans;
-        cout << "Answer is: " << ans;
+    int a = 0;
+    int b = 0;
+    set<string> result;
+     for (int a = 0; a < ans.size(); a++) {
+        ans = string(n, '0');
+        ans[n - a - 1] = '1'; 
+        recurAns(result, a, 0, ans);
     }
-    else{
-        cout << "Answer is: " << ans;
+
+    result.insert(string(n, '1'));
+
+    vector<string> val(result.begin(), result.end());
+
+
+    for(int i = 0; i < val.size(); i++){
+        cout << val[i] << " ";
     }
-        return 0;
+
+    return 0;
 }
