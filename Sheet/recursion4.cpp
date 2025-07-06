@@ -183,18 +183,17 @@ int main()
 {
     int n = 3;
     string ans(n, '0');
-    ans[n - 1] = '1';
+    // ans[n - 1] = '1';
 
     int a = 0;
     int b = 0;
     set<string> result;
-     for (int a = 0; a < ans.size(); a++) {
-        ans = string(n, '0');
+     for (int i = 0; i < ans.size(); i++) {
+         recurAns(result, a, 0, ans);
+         ans = string(n, '0');
         ans[n - a - 1] = '1'; 
-        recurAns(result, a, 0, ans);
     }
 
-    result.insert(string(n, '1'));
 
     vector<string> val(result.begin(), result.end());
 
