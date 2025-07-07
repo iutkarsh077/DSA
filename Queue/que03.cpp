@@ -99,20 +99,26 @@ void extra1()
     cout << "The size is: " << q.size() << endl;
 }
 
+class CircularQueue{
+    public:
+    int *arr;
+    int front = 0;
+    int rear = -1;
+    int size;
+
+    void push(int data){
+        if(rear + 1 == front || (rear == size - 1 && front == 0)){
+            cout << "Queue is full" << endl;
+            return;
+        }
+
+        rear++;
+        rear = rear % size;
+        arr[rear] = data;
+    }
+};
+
 int main()
 {
-    MyQueue q(5);
-    q.enQueue(1);
-    q.enQueue(2);
-    q.enQueue(3);
-    q.enQueue(4);
-    q.enQueue(5);
-    q.deQueue();
-    q.deQueue();
-    q.deQueue();
-    q.deQueue();
-    q.Front();
-    q.myback();
-
     return 0;
 }
