@@ -99,26 +99,124 @@ void extra1()
     cout << "The size is: " << q.size() << endl;
 }
 
-class CircularQueue{
-    public:
+class CircularQueue
+{
+public:
     int *arr;
-    int front = 0;
-    int rear = -1;
+    int front;
+    int rear;
     int size;
 
-    void push(int data){
-        if(rear + 1 == front || (rear == size - 1 && front == 0)){
+    CircularQueue(int size)
+    {
+        this->size = size;
+        arr = new int[size];
+        front = -1;
+        rear = -1;
+    }
+
+    void EnQueue(int data)
+    {
+        if ((this->front == 0 && this->rear == this->size - 1) || (this->rear + 1 == this->front))
+        {
             cout << "Queue is full" << endl;
             return;
         }
 
-        rear++;
-        rear = rear % size;
+        if (this->front > 0 && this->rear == this->size - 1)
+        {
+            this->rear = 0;
+            arr[this->rear] = data;
+            return;
+        }
+
+        if (this->front == -1 && this->rear == -1)
+        {
+            this->front = this->rear = 0;
+            arr[this->rear] = data;
+            return;
+        }
+
+        rear = rear + 1;
         arr[rear] = data;
     }
+
+    void DeQueue()
+    {
+        if (this->front == -1)
+        {
+            cout << "Queue is already empty" << endl;
+            return;
+        }
+
+        if (this->front == this->rear)
+        {
+            this->front = this->rear = -1;
+            return;
+        }
+
+        if (this->front == this->size - 1)
+        {
+            this->front = 0;
+            return;
+        }
+
+        this->front = this->front + 1;
+    }
+
+    void Front()
+    {
+        if (this->front == -1)
+        {
+            cout << "Queue is empty" << endl;
+            return;
+        }
+
+        cout << "Front is: " << this->arr[this->front] << endl;
+    }
+
+    void Back()
+    {
+        if (this->front == -1 || this->rear == -1)
+        {
+            cout << "Queue is empty" << endl;
+            return;
+        }
+
+        cout << "Back is: " << this->arr[this->rear] << endl;
+    }
+
+    void isEmpty()
+    {
+        if (front == -1)
+        {
+            cout << "Yes, queue is empty" << endl;
+        }
+        else
+        {
+            cout << "No, Queue is not empty" << endl;
+        }
+    }
+
+    
 };
 
 int main()
 {
+    CircularQueue q(5);
+    q.EnQueue(1);
+    q.EnQueue(2);
+    q.EnQueue(3);
+    q.EnQueue(4);
+    q.EnQueue(5);
+    q.DeQueue();
+    q.DeQueue();
+    q.DeQueue();
+    q.DeQueue();
+    q.DeQueue();
+    q.EnQueue(4);
+    q.EnQueue(5);
+    q.Front();
+    q.Back();
     return 0;
 }
