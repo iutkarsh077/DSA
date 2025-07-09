@@ -219,6 +219,124 @@ void extra2(){
     q.Back();
 }
 
+class Deque {
+private:
+    int *arr;
+    int front;
+    int rear;
+    int size;
+
+public:
+    Deque(int n) {
+        size = n;
+        arr = new int[size];
+        front = -1;
+        rear = 0;
+    }
+
+    // Check if deque is full
+    bool isFull() {
+        return (front == 0 && rear == size - 1) || (front == rear + 1);
+    }
+
+    // Check if deque is empty
+    bool isEmpty() {
+        return (front == -1);
+    }
+
+    // Insert at front
+    void insertFront(int key) {
+        if (isFull()) {
+            cout << "Overflow: Cannot insert at front\n";
+            return;
+        }
+        // First element
+        if (front == -1) {
+            front = rear = 0;
+        }
+        else if (front == 0) {
+            front = size - 1;
+        }
+        else {
+            front--;
+        }
+        arr[front] = key;
+    }
+
+    // Insert at rear
+    void insertRear(int key) {
+        if (isFull()) {
+            cout << "Overflow: Cannot insert at rear\n";
+            return;
+        }
+        // First element
+        if (front == -1) {
+            front = rear = 0;
+        }
+        else if (rear == size - 1) {
+            rear = 0;
+        }
+        else {
+            rear++;
+        }
+        arr[rear] = key;
+    }
+
+    // Delete from front
+    void deleteFront() {
+        if (isEmpty()) {
+            cout << "Underflow: Cannot delete from front\n";
+            return;
+        }
+        // Only one element
+        if (front == rear) {
+            front = rear = -1;
+        }
+        else if (front == size - 1) {
+            front = 0;
+        }
+        else {
+            front++;
+        }
+    }
+
+    // Delete from rear
+    void deleteRear() {
+        if (isEmpty()) {
+            cout << "Underflow: Cannot delete from rear\n";
+            return;
+        }
+        // Only one element
+        if (front == rear) {
+            front = rear = -1;
+        }
+        else if (rear == 0) {
+            rear = size - 1;
+        }
+        else {
+            rear--;
+        }
+    }
+
+    // Get front element
+    int getFront() {
+        if (isEmpty()) {
+            cout << "Deque is empty\n";
+            return -1;
+        }
+        return arr[front];
+    }
+
+    // Get rear element
+    int getRear() {
+        if (isEmpty()) {
+            cout << "Deque is empty\n";
+            return -1;
+        }
+        return arr[rear];
+    }
+};
+
 int main()
 {
     
