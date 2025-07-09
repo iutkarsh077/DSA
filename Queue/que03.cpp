@@ -201,8 +201,7 @@ public:
     
 };
 
-int main()
-{
+void extra2(){
     CircularQueue q(5);
     q.EnQueue(1);
     q.EnQueue(2);
@@ -218,5 +217,10 @@ int main()
     q.EnQueue(5);
     q.Front();
     q.Back();
+}
+
+int main()
+{
+    
     return 0;
 }
