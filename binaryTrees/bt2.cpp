@@ -143,6 +143,17 @@ void heightOfBT(Node *root)
     cout << "The height is: " << cnt << endl;
 }
 
+
+int heightBtRecursion(Node *root){
+    if(root == nullptr) return 0;
+
+    int left = heightBtRecursion(root->left);
+    int right = heightBtRecursion(root->right);
+
+    int ans = max(left, right) + 1;
+    return ans;
+}
+
 int main()
 {
     Node *root = nullptr;
@@ -160,7 +171,9 @@ int main()
     //      << "Pre Order is: ";
     // PreOrder(root);
 
-    heightOfBT(root);
+    // heightOfBT(root);
+    int result = heightBtRecursion(root);
+    cout << "The height is: " << result;
     return 0;
 }
 
