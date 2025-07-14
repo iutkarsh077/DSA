@@ -18,6 +18,8 @@ public:
     }
 };
 
+
+
 void BuildTree2(Node *&root)
 {
     cout << "Enter the data: ";
