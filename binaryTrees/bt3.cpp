@@ -101,16 +101,17 @@ vector<int> ZigZag(Node *root)
             int index = leftToRight ? i : size - i - 1;
             ans[index] = temp->data;
 
-
-            if(temp->left){
+            if (temp->left)
+            {
                 q.push(temp->left);
             }
 
-            if(temp->right){
+            if (temp->right)
+            {
                 q.push(temp->right);
             }
         }
-        for (auto i: ans)
+        for (auto i : ans)
         {
             result.push_back(i);
         }
@@ -120,18 +121,57 @@ vector<int> ZigZag(Node *root)
     return result;
 }
 
+vector<int> ZigZagAgain(Node *root)
+{
+    queue<Node *> q;
+    q.push(root);
+    bool LeftToRight = true;
+    vector<int> result;
+    while (!q.empty())
+    {
+        int size = q.size();
+        vector<int> ans(size);
+
+        for (int i = 0; i < size; i++)
+        {
+            Node *temp = q.front();
+            q.pop();
+
+            int index = LeftToRight ? i : size - i - 1;
+            ans[index] = temp->data;
+
+            if (temp->left)
+            {
+                q.push(temp->left);
+            }
+
+            if (temp->right)
+            {
+                q.push(temp->right);
+            }
+        }
+
+        for(auto i : ans){
+            result.push_back(i);
+        }
+        LeftToRight = !LeftToRight;
+    }
+    return result;
+}
+
 int main()
 {
     Node *root = nullptr;
     BuiltTree(root);
     cout << endl;
-    Inorder(root);
+    // Inorder(root);
     cout << endl;
     // LevelOrderTransversal(root);
 
-    vector<int> ans = ZigZag(root);
+    vector<int> ans = ZigZagAgain(root);
 
-    for(int i = 0; i < ans.size(); i++){
+    for (int i = 0; i < ans.size(); i++)
+    {
         cout << ans[i] << " ";
     }
     return 0;
