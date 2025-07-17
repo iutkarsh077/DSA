@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <queue>
 using namespace std;
 
@@ -151,7 +152,8 @@ vector<int> ZigZagAgain(Node *root)
             }
         }
 
-        for(auto i : ans){
+        for (auto i : ans)
+        {
             result.push_back(i);
         }
         LeftToRight = !LeftToRight;
@@ -159,17 +161,62 @@ vector<int> ZigZagAgain(Node *root)
     return result;
 }
 
+void TransverseLeft(Node *root, vector<int> &ans)
+{
+    if (root == nullptr || (root->left == nullptr && root->right == nullptr))
+        return;
+
+    ans.push_back(root->data);
+    if (root->left)
+    {
+        TransverseLeft(root->left, ans);
+    }
+    else
+    {
+        TransverseLeft(root->right, ans);
+    }
+}
+
+void TransverseLeaf(Node *root, vector<int> &ans)
+{
+    if(root == nullptr) return;
+    if (root->left == nullptr && root->right == nullptr)
+    {
+        ans.push_back(root->data);
+        return;
+    }
+
+   TransverseLeaf(root->left, ans);
+        TransverseLeaf(root->right, ans);
+
+}
+
+void TransverseRight(Node *root, vector<int> &ans)
+{
+    if (root == nullptr || (root->left == nullptr && root->right == nullptr))
+        return;
+
+    if (root->right)
+    {
+        TransverseRight(root->right, ans);
+    }
+    else
+    {
+        TransverseRight(root->left, ans);
+    }
+    ans.push_back(root->data);
+}
+
 int main()
 {
     Node *root = nullptr;
     BuiltTree(root);
     cout << endl;
-    // Inorder(root);
-    cout << endl;
-    // LevelOrderTransversal(root);
-
-    vector<int> ans = ZigZagAgain(root);
-
+    vector<int> ans;
+    if (root) ans.push_back(root->data);
+    TransverseLeft(root->left, ans);
+    TransverseLeaf(root, ans);
+    TransverseRight(root->right, ans);
     for (int i = 0; i < ans.size(); i++)
     {
         cout << ans[i] << " ";
