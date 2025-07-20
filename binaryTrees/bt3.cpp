@@ -207,6 +207,20 @@ void TransverseRight(Node *root, vector<int> &ans)
     ans.push_back(root->data);
 }
 
+ bool isSameTree(Node* p, Node* q) {
+        if(p == nullptr && q == nullptr) return true;
+
+        if(p == nullptr || q == nullptr) return false;
+
+        if(p->data != q->data) return false;
+
+        bool ans = isSameTree(p->left, q->left);
+        bool ans2 = isSameTree(p->right, q->right);
+
+        if(ans == false || ans2 == false) return false;
+        return true;
+    }
+
 int main()
 {
     Node *root = nullptr;
