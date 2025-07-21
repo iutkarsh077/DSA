@@ -39,6 +39,17 @@ Node *BuiltTree(Node *&root)
     return root;
 }
 
+ int maxDepth(Node* root) {
+        if(root == nullptr) return 0;
+
+        int left = maxDepth(root->left);
+        int right = maxDepth(root->right);
+
+        int result = max(left, right) + 1;
+
+        return result;
+    }
+
 void Inorder(Node *&root)
 {
     if (root == nullptr)
