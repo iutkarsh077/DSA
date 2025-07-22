@@ -39,6 +39,35 @@ Node *BuiltTree(Node *&root)
     return root;
 }
 
+ void BuildTree(TreeNode *&root, bool left, int i, vector<int> nums){
+        if(i >= nums.size()) return;
+
+        TreeNode *myLeft = new TreeNode(nums[i]);
+        TreeNode *myRight = nullptr;
+        if(i + 1 < nums.size()){
+            myRight = new TreeNode(nums[i + 1]);
+        }
+        root->left = myLeft;
+        root->right = myRight;
+
+        if(left == true){
+            BuildTree(root->left, false, i + 2, nums);
+        }
+        else{
+            BuildTree(root->right, true, i + 2, nums);
+        }
+
+    }
+    
+    TreeNode* sortedArrayToBST(vector<int>& nums) {
+        if(nums.size() == 0) return nullptr;
+        TreeNode *root = new TreeNode(nums[0]);
+        if(nums.size() == 1) return root;
+
+        BuildTree(root, true, 1, nums);
+        return root;
+    }
+
  int maxDepth(Node* root) {
         if(root == nullptr) return 0;
 
