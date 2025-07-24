@@ -39,13 +39,13 @@ Node *BuiltTree(Node *&root)
     return root;
 }
 
- void BuildTree(TreeNode *&root, bool left, int i, vector<int> nums){
+ void BuildTree(Node *&root, bool left, int i, vector<int> nums){
         if(i >= nums.size()) return;
 
-        TreeNode *myLeft = new TreeNode(nums[i]);
-        TreeNode *myRight = nullptr;
+        Node *myLeft = new Node(nums[i]);
+        Node *myRight = nullptr;
         if(i + 1 < nums.size()){
-            myRight = new TreeNode(nums[i + 1]);
+            myRight = new Node(nums[i + 1]);
         }
         root->left = myLeft;
         root->right = myRight;
@@ -59,9 +59,9 @@ Node *BuiltTree(Node *&root)
 
     }
     
-    TreeNode* sortedArrayToBST(vector<int>& nums) {
+    Node* sortedArrayToBST(vector<int>& nums) {
         if(nums.size() == 0) return nullptr;
-        TreeNode *root = new TreeNode(nums[0]);
+        Node *root = new Node(nums[0]);
         if(nums.size() == 1) return root;
 
         BuildTree(root, true, 1, nums);
@@ -88,6 +88,40 @@ void Inorder(Node *&root)
     cout << root->data << " ";
     Inorder(root->right);
 }
+
+
+void myRight(Node* root, vector<int>& nums) {
+        queue<Node*> q;
+        q.push(root);
+
+        while (!q.empty()) {
+            int size = q.size();
+
+            for (int i = 0; i < size; i++) {
+                Node* temp = q.front();
+                q.pop();
+                if (i == size - 1) {
+                    nums.push_back(temp->data);
+                }
+
+                if (temp->left) {
+                    q.push(temp->left);
+                }
+
+                if (temp->right) {
+                    q.push(temp->right);
+                }
+            }
+        }
+    }
+    vector<int> rightSideView(Node* root) {
+        if (root == nullptr)
+            return {};
+        vector<int> nums;
+        myRight(root, nums);
+
+        return nums;
+    }
 
 void LevelOrderTransversal(Node *root)
 {
