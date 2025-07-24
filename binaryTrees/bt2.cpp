@@ -154,6 +154,14 @@ int heightBtRecursion(Node *root){
     return ans;
 }
 
+   void RightHeight(Node *root, int &height){
+        if(root == nullptr) return;
+
+        height = height + 1;
+
+        RightHeight(root->right, height);
+    }
+
 int main()
 {
     Node *root = nullptr;
