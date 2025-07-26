@@ -39,45 +39,54 @@ Node *BuiltTree(Node *&root)
     return root;
 }
 
- void BuildTree(Node *&root, bool left, int i, vector<int> nums){
-        if(i >= nums.size()) return;
+void BuildTree(Node *&root, bool left, int i, vector<int> nums)
+{
+    if (i >= nums.size())
+        return;
 
-        Node *myLeft = new Node(nums[i]);
-        Node *myRight = nullptr;
-        if(i + 1 < nums.size()){
-            myRight = new Node(nums[i + 1]);
-        }
-        root->left = myLeft;
-        root->right = myRight;
-
-        if(left == true){
-            BuildTree(root->left, false, i + 2, nums);
-        }
-        else{
-            BuildTree(root->right, true, i + 2, nums);
-        }
-
+    Node *myLeft = new Node(nums[i]);
+    Node *myRight = nullptr;
+    if (i + 1 < nums.size())
+    {
+        myRight = new Node(nums[i + 1]);
     }
-    
-    Node* sortedArrayToBST(vector<int>& nums) {
-        if(nums.size() == 0) return nullptr;
-        Node *root = new Node(nums[0]);
-        if(nums.size() == 1) return root;
+    root->left = myLeft;
+    root->right = myRight;
 
-        BuildTree(root, true, 1, nums);
+    if (left == true)
+    {
+        BuildTree(root->left, false, i + 2, nums);
+    }
+    else
+    {
+        BuildTree(root->right, true, i + 2, nums);
+    }
+}
+
+Node *sortedArrayToBST(vector<int> &nums)
+{
+    if (nums.size() == 0)
+        return nullptr;
+    Node *root = new Node(nums[0]);
+    if (nums.size() == 1)
         return root;
-    }
 
- int maxDepth(Node* root) {
-        if(root == nullptr) return 0;
+    BuildTree(root, true, 1, nums);
+    return root;
+}
 
-        int left = maxDepth(root->left);
-        int right = maxDepth(root->right);
+int maxDepth(Node *root)
+{
+    if (root == nullptr)
+        return 0;
 
-        int result = max(left, right) + 1;
+    int left = maxDepth(root->left);
+    int right = maxDepth(root->right);
 
-        return result;
-    }
+    int result = max(left, right) + 1;
+
+    return result;
+}
 
 void Inorder(Node *&root)
 {
@@ -89,39 +98,65 @@ void Inorder(Node *&root)
     Inorder(root->right);
 }
 
+void myRight(Node *root, vector<int> &nums)
+{
+    queue<Node *> q;
+    q.push(root);
 
-void myRight(Node* root, vector<int>& nums) {
-        queue<Node*> q;
-        q.push(root);
+    while (!q.empty())
+    {
+        int size = q.size();
 
-        while (!q.empty()) {
-            int size = q.size();
+        for (int i = 0; i < size; i++)
+        {
+            Node *temp = q.front();
+            q.pop();
+            if (i == size - 1)
+            {
+                nums.push_back(temp->data);
+            }
 
-            for (int i = 0; i < size; i++) {
-                Node* temp = q.front();
-                q.pop();
-                if (i == size - 1) {
-                    nums.push_back(temp->data);
-                }
+            if (temp->left)
+            {
+                q.push(temp->left);
+            }
 
-                if (temp->left) {
-                    q.push(temp->left);
-                }
-
-                if (temp->right) {
-                    q.push(temp->right);
-                }
+            if (temp->right)
+            {
+                q.push(temp->right);
             }
         }
     }
-    vector<int> rightSideView(Node* root) {
-        if (root == nullptr)
-            return {};
-        vector<int> nums;
-        myRight(root, nums);
+}
 
-        return nums;
+void DFS(Node *root, int level=, vector<int> &ans)
+{
+    if (root == nullptr)
+        return;
+
+    if (ans.size() < level)
+    {
+        ans.push_back(root->data);
     }
+
+    myRight(root->right, level + 1, ans);
+    myRight(root->left, level + 1, ans);
+}
+vector<int> rightSideView(Node *root)
+{
+    vector<int> ans;
+    DFS(root, 1, ans);
+    return ans;
+}
+vector<int> rightSideView(Node *root)
+{
+    if (root == nullptr)
+        return {};
+    vector<int> nums;
+    myRight(root, nums);
+
+    return nums;
+}
 
 void LevelOrderTransversal(Node *root)
 {
@@ -253,16 +288,16 @@ void TransverseLeft(Node *root, vector<int> &ans)
 
 void TransverseLeaf(Node *root, vector<int> &ans)
 {
-    if(root == nullptr) return;
+    if (root == nullptr)
+        return;
     if (root->left == nullptr && root->right == nullptr)
     {
         ans.push_back(root->data);
         return;
     }
 
-   TransverseLeaf(root->left, ans);
-        TransverseLeaf(root->right, ans);
-
+    TransverseLeaf(root->left, ans);
+    TransverseLeaf(root->right, ans);
 }
 
 void TransverseRight(Node *root, vector<int> &ans)
@@ -281,19 +316,24 @@ void TransverseRight(Node *root, vector<int> &ans)
     ans.push_back(root->data);
 }
 
- bool isSameTree(Node* p, Node* q) {
-        if(p == nullptr && q == nullptr) return true;
-
-        if(p == nullptr || q == nullptr) return false;
-
-        if(p->data != q->data) return false;
-
-        bool ans = isSameTree(p->left, q->left);
-        bool ans2 = isSameTree(p->right, q->right);
-
-        if(ans == false || ans2 == false) return false;
+bool isSameTree(Node *p, Node *q)
+{
+    if (p == nullptr && q == nullptr)
         return true;
-    }
+
+    if (p == nullptr || q == nullptr)
+        return false;
+
+    if (p->data != q->data)
+        return false;
+
+    bool ans = isSameTree(p->left, q->left);
+    bool ans2 = isSameTree(p->right, q->right);
+
+    if (ans == false || ans2 == false)
+        return false;
+    return true;
+}
 
 int main()
 {
@@ -301,7 +341,8 @@ int main()
     BuiltTree(root);
     cout << endl;
     vector<int> ans;
-    if (root) ans.push_back(root->data);
+    if (root)
+        ans.push_back(root->data);
     TransverseLeft(root->left, ans);
     TransverseLeaf(root, ans);
     TransverseRight(root->right, ans);
