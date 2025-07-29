@@ -133,6 +133,7 @@ int longestSubStr()
     string s = "cadbzabcd";
     int n = s.size();
     int maxLen = 0;
+    string ans = "";
     for (int i = 0; i < n; i++)
     {
         unordered_map<int, int> mp;
@@ -143,13 +144,17 @@ int longestSubStr()
                 break;
 
             int len = j - i + 1;
-            maxLen = max(maxLen, len);
+            if (len > maxLen)
+            {
+                maxLen = max(maxLen, len);
+                ans = s.substr(i, j - i + 1);
+            }
 
             mp[s[j]] = 1;
         }
     }
 
-    cout << "Longest sub string is: " << maxLen;
+    cout << "Longest sub string is: " << maxLen << " " << ans;
 }
 
 int main()
