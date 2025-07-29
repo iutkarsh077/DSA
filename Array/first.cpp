@@ -100,10 +100,60 @@ void DS()
 
     cout << "Max consecutive sum is: " << maxi;
 }
+
+void DSFrontBack()
+{
+    vector<int> arr = {6, 2, 3, 4, 7, 2, 1, 7, 1};
+    int k = 4;
+    int n = arr.size();
+    int l = arr.size() - k;
+    int r = l + k - 1;
+    int cnt = 0;
+    int maxi = 0;
+    while (cnt <= k)
+    {
+        int sum = 0;
+        for (int i = l; i <= r; i++)
+        {
+            int dup = i % n;
+            sum = sum + arr[dup];
+        }
+
+        maxi = max(maxi, sum);
+        cnt = cnt + 1;
+        l = l + 1;
+        r = r + 1;
+    }
+
+    cout << "Max value is: " << maxi;
+}
+
+int longestSubStr()
+{
+    string s = "cadbzabcd";
+    int n = s.size();
+    int maxLen = 0;
+    for (int i = 0; i < n; i++)
+    {
+        unordered_map<int, int> mp;
+
+        for (int j = i; j < n; j++)
+        {
+            if (mp[s[j]] == 1)
+                break;
+
+            int len = j - i + 1;
+            maxLen = max(maxLen, len);
+
+            mp[s[j]] = 1;
+        }
+    }
+
+    cout << "Longest sub string is: " << maxLen;
+}
+
 int main()
 {
-    // vector<int> nums = {2, -1, 3, 3, 8, -1, -4};
-    // slideWindow(nums, 4);
-    DS();
+    longestSubStr();
     return 0;
 }
