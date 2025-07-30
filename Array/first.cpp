@@ -157,8 +157,50 @@ int longestSubStr()
     cout << "Longest sub string is: " << maxLen << " " << ans;
 }
 
+int betterLongestStr(){
+    string s = "cadbzabcd";
+    unordered_map<int, int> mp;
+    int n = s.size();
+    int l = 0;
+    int r = 0;
+    int maxLen = 0;
+
+    while(r < s.size()){
+        if(mp[s[r]] != -1){
+            if(mp[s[r]] >= l){
+                l = mp[s[r]] + 1;
+            }
+        }
+
+        int len = r - l + 1;
+        maxLen = max(len, maxLen);
+        mp[s[r]] = r;
+        r++;
+    }
+
+    cout << "Max Len is: " << maxLen;
+}
+
+void maxConsecOnes(){
+    vector<int> nums = { 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 };
+    int maxi = 0;
+    int sum = 0;
+
+    for(int i = 0; i < nums.size(); i++){
+        sum = sum + nums[i];
+
+        if(nums[i] == 0){
+            sum = 0;
+        }
+
+        maxi = max(sum, maxi);
+    }
+
+    cout << "Max one is: " << maxi;
+}
+
 int main()
 {
-    longestSubStr();
+    maxConsecOnes();
     return 0;
 }
