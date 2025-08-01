@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include<map>
 using namespace std;
 
 vector<int> twoSumBrute(vector<int> &nums, int target)
@@ -288,6 +289,22 @@ void sum(){
     }
     cout << "The longest subarray is: " << maxi;
 }
+
+ vector<int> findDuplicates(vector<int>& nums) {
+        vector<int> result;
+
+
+        for(int i = 0; i < nums.size(); i++){
+            for(int j = i + 1; j < nums.size(); j++){
+                if(nums[i] == nums[j]){
+                    result.push_back(nums[i]);
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
 
 int main()
 {
