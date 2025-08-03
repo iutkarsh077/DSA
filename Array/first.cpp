@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-#include<map>
+#include <map>
 using namespace std;
 
 vector<int> twoSumBrute(vector<int> &nums, int target)
@@ -243,14 +243,19 @@ void slideWindowConecOnes()
     int l = 0;
     int r = 0;
     int zeroes = 0;
-    while(r < nums.size()){
-        if(nums[r] == 0){
+    while (r < nums.size())
+    {
+        if (nums[r] == 0)
+        {
             zeroes++;
         }
 
-        if(zeroes > 2){
-            while(zeroes > 2){
-                if(nums[l] == 0){
+        if (zeroes > 2)
+        {
+            while (zeroes > 2)
+            {
+                if (nums[l] == 0)
+                {
                     zeroes--;
                 }
                 l++;
@@ -262,70 +267,99 @@ void slideWindowConecOnes()
     }
 }
 
-void sum(){
-     int arr[] = {2, 0, 0, 3, -1, -1};
+void sum()
+{
+    int arr[] = {2, 0, 0, 3, -1, -1};
     map<long long, int> mp;
     long long sum = 0;
     int maxi = 0;
-    int n = sizeof(arr)/sizeof(arr[0]);
+    int n = sizeof(arr) / sizeof(arr[0]);
     int k = -2;
-    for(int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++)
+    {
         sum = sum + arr[i];
 
-        if(sum == k){
+        if (sum == k)
+        {
             maxi = max(maxi, i + 1);
         }
 
         long long rem = sum - k;
-        if(mp.find(rem) != mp.end()){
+        if (mp.find(rem) != mp.end())
+        {
             int len = i - mp[rem];
             maxi = max(maxi, len);
         }
 
-        if(mp.find(sum) == mp.end()){
+        if (mp.find(sum) == mp.end())
+        {
             mp[sum] = i;
         }
-
     }
     cout << "The longest subarray is: " << maxi;
 }
 
- vector<int> findDuplicates(vector<int>& nums) {
-        vector<int> result;
+vector<int> findDuplicates2(vector<int> &nums)
+{
+    vector<int> result;
 
-
-        for(int i = 0; i < nums.size(); i++){
-            for(int j = i + 1; j < nums.size(); j++){
-                if(nums[i] == nums[j]){
-                    result.push_back(nums[i]);
-                    break;
-                }
+    for (int i = 0; i < nums.size(); i++)
+    {
+        for (int j = i + 1; j < nums.size(); j++)
+        {
+            if (nums[i] == nums[j])
+            {
+                result.push_back(nums[i]);
+                break;
             }
         }
-
-        return result;
     }
 
+    return result;
+}
 
-vector<int> findDuplicates(vector<int>& nums) {
-        vector<int> result;
-        unordered_map<int, int> mp;
+vector<int> findDuplicates(vector<int> &nums)
+{
+    vector<int> result;
+    unordered_map<int, int> mp;
 
-        for(int i = 0; i < nums.size(); i++){
-          mp[nums[i]]++;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        mp[nums[i]]++;
+    }
+
+    for (auto i = mp.begin(); i != mp.end(); i++)
+    {
+        if (i->second >= 2)
+        {
+            result.push_back(i->first);
         }
+    }
 
-        for(auto i = mp.begin(); i != mp.end(); i++){
-            if(i->second >= 2){
-                result.push_back(i->first);
+    return result;
+}
+
+ vector<int> findDuplicates3(vector<int>& nums) {
+        int n = nums.size();
+        
+        vector<int> result; 
+        for(int i = 0; i < n; i++) {
+            int num = abs(nums[i]);
+            
+            if(nums[num-1] < 0) {
+                result.push_back(num);
+                cout << num << " ";
+            } else {
+                nums[num-1] *= -1;
             }
         }
-
+        
         return result;
+        
     }
 
 int main()
 {
-    maxConsecOnesTwo();
+    
     return 0;
 }
