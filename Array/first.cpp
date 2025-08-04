@@ -358,6 +358,45 @@ vector<int> findDuplicates(vector<int> &nums)
         
     }
 
+     vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int> result;
+
+        int product = 1;
+        bool zeroExist = false;
+        int cntZero = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] == 0) {
+                zeroExist = true;
+                cntZero++;
+                continue;
+            }
+            product = product * nums[i];
+        }
+
+        for (int i = 0; i < nums.size(); i++) {
+            if (zeroExist && nums[i] == 0) {
+                if (cntZero > 1) {
+                    result.push_back(0);
+                } else {
+                    result.push_back(product);
+                }
+            } else {
+                int isNegative = 1;
+                if (nums[i] < 0) {
+                    isNegative *= -1;
+                }
+                int val = (product / abs(nums[i])) * isNegative;
+                if (zeroExist) {
+                    result.push_back(0);
+                } else {
+                    result.push_back(val);
+                }
+            }
+        }
+
+        return result;
+    }
+
 int main()
 {
     
