@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <set>
 #include <map>
+#include <algorithm>
 using namespace std;
 
 vector<int> twoSumBrute(vector<int> &nums, int target)
@@ -339,107 +341,172 @@ vector<int> findDuplicates(vector<int> &nums)
     return result;
 }
 
-int search(vector<int>& nums, int target) {
-        int s = 0;
-        int e = nums.size() - 1;
+int search(vector<int> &nums, int target)
+{
+    int s = 0;
+    int e = nums.size() - 1;
 
-        while(s <= e){
-            int mid = s + ((e - s)/2);
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
 
-            if(nums[mid] == target) return mid;
+        if (nums[mid] == target)
+            return mid;
 
-            if(nums[s] <= nums[mid]){
-                if(nums[mid] >= target && nums[s] <= target){
-                    e = mid - 1;
-                }
-                else{
-                    s = mid + 1;
-                }
+        if (nums[s] <= nums[mid])
+        {
+            if (nums[mid] >= target && nums[s] <= target)
+            {
+                e = mid - 1;
             }
-
-            if(nums[mid] < nums[e]){
-                if(nums[mid] <= target && nums[e] >= target){
-                    s = mid + 1;
-                }
-                else{
-                     e = mid - 1;
-                }
+            else
+            {
+                s = mid + 1;
             }
         }
 
-        return -1;
+        if (nums[mid] < nums[e])
+        {
+            if (nums[mid] <= target && nums[e] >= target)
+            {
+                s = mid + 1;
+            }
+            else
+            {
+                e = mid - 1;
+            }
+        }
     }
 
- int findMin(vector<int>& nums) {
-        int mini = nums[0];
+    return -1;
+}
 
-        for(int i = 0; i < nums.size(); i++){
-            mini = min(nums[i], mini);
-        }
+int findMin(vector<int> &nums)
+{
+    int mini = nums[0];
 
-        return mini;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        mini = min(nums[i], mini);
     }
 
- vector<int> findDuplicates3(vector<int>& nums) {
-        int n = nums.size();
-        
-        vector<int> result; 
-        for(int i = 0; i < n; i++) {
-            int num = abs(nums[i]);
-            
-            if(nums[num-1] < 0) {
-                result.push_back(num);
-                cout << num << " ";
-            } else {
-                nums[num-1] *= -1;
-            }
+    return mini;
+}
+
+vector<int> findDuplicates3(vector<int> &nums)
+{
+    int n = nums.size();
+
+    vector<int> result;
+    for (int i = 0; i < n; i++)
+    {
+        int num = abs(nums[i]);
+
+        if (nums[num - 1] < 0)
+        {
+            result.push_back(num);
+            cout << num << " ";
         }
-        
-        return result;
-        
+        else
+        {
+            nums[num - 1] *= -1;
+        }
     }
 
-     vector<int> productExceptSelf(vector<int>& nums) {
-        vector<int> result;
+    return result;
+}
 
-        int product = 1;
-        bool zeroExist = false;
-        int cntZero = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            if (nums[i] == 0) {
-                zeroExist = true;
-                cntZero++;
-                continue;
-            }
-            product = product * nums[i];
+vector<int> productExceptSelf(vector<int> &nums)
+{
+    vector<int> result;
+
+    int product = 1;
+    bool zeroExist = false;
+    int cntZero = 0;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] == 0)
+        {
+            zeroExist = true;
+            cntZero++;
+            continue;
         }
-
-        for (int i = 0; i < nums.size(); i++) {
-            if (zeroExist && nums[i] == 0) {
-                if (cntZero > 1) {
-                    result.push_back(0);
-                } else {
-                    result.push_back(product);
-                }
-            } else {
-                int isNegative = 1;
-                if (nums[i] < 0) {
-                    isNegative *= -1;
-                }
-                int val = (product / abs(nums[i])) * isNegative;
-                if (zeroExist) {
-                    result.push_back(0);
-                } else {
-                    result.push_back(val);
-                }
-            }
-        }
-
-        return result;
+        product = product * nums[i];
     }
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (zeroExist && nums[i] == 0)
+        {
+            if (cntZero > 1)
+            {
+                result.push_back(0);
+            }
+            else
+            {
+                result.push_back(product);
+            }
+        }
+        else
+        {
+            int isNegative = 1;
+            if (nums[i] < 0)
+            {
+                isNegative *= -1;
+            }
+            int val = (product / abs(nums[i])) * isNegative;
+            if (zeroExist)
+            {
+                result.push_back(0);
+            }
+            else
+            {
+                result.push_back(val);
+            }
+        }
+    }
+
+    return result;
+}
+
+void ThreeSum()
+{
+    vector<int> nums = {-1, 0, 1, 2, -1, -4};
+    set<vector<int>> st;
+    vector<vector<int>> ans;
+    int n = nums.size();
+    for (int i = 0; i < n - 1; i++)
+    {
+        unordered_map<int, int> mp;
+        for (int j = 0; j < n; j++)
+        {
+            int val = -1 * (nums[i] + nums[j]);
+            if (mp.find(val) != mp.end())
+            {
+                vector<int> temp = {nums[i], nums[j], val};
+                sort(temp.begin(), temp.end());
+                st.insert(temp);
+            }
+            else
+            {
+                mp.insert({nums[j], j});
+            }
+        }
+    }
+    ans.insert(ans.end(), st.begin(), st.end());
+
+    for (int i = 0; i < ans.size(); i++)
+    {
+        for (int j = 0; j < ans[i].size(); j++)
+        {
+            cout << ans[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
 
 int main()
 {
-    
+    ThreeSum();
     return 0;
 }
