@@ -507,20 +507,28 @@ void ThreeSumBetter()
 }
 
 
-void mostWaterBrute(){
-    vector<int> nums = {1,8,6,2,5,4,8,3,7};
-    int maxi = INT_MIN;
-    int n = nums.size();
-    for(int i = 0; i < n - 1; i++){
-        for(int j = i + 1; j < n; j++){
+int maxAreaBetter(vector<int>& nums) {
+        int maxi = INT_MIN;
+        int n = nums.size();
+        int i = 0;
+        int j = nums.size() - 1;
+
+        while (i < j) {
             int diff = j - i;
             int mini = min(nums[i], nums[j]);
             maxi = max(maxi, (mini * diff));
+
+            if(nums[i] > nums[j]){
+                j--;
+            }
+            else{
+                i++;
+            }
         }
+
+        return maxi;
     }
 
-    cout << "Maxi is: " << maxi;
-}
 
 int main()
 {
