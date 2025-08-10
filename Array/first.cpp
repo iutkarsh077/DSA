@@ -4,6 +4,7 @@
 #include <set>
 #include <map>
 #include <algorithm>
+#include<climits>
 using namespace std;
 
 vector<int> twoSumBrute(vector<int> &nums, int target)
@@ -469,7 +470,7 @@ vector<int> productExceptSelf(vector<int> &nums)
     return result;
 }
 
-void ThreeSum()
+void ThreeSumBetter()
 {
     vector<int> nums = {-1, 0, 1, 2, -1, -4};
     set<vector<int>> st;
@@ -478,7 +479,7 @@ void ThreeSum()
     for (int i = 0; i < n - 1; i++)
     {
         unordered_map<int, int> mp;
-        for (int j = 0; j < n; j++)
+        for (int j = i + 1; j < n; j++)
         {
             int val = -1 * (nums[i] + nums[j]);
             if (mp.find(val) != mp.end())
@@ -505,8 +506,24 @@ void ThreeSum()
     }
 }
 
+
+void mostWaterBrute(){
+    vector<int> nums = {1,8,6,2,5,4,8,3,7};
+    int maxi = INT_MIN;
+    int n = nums.size();
+    for(int i = 0; i < n - 1; i++){
+        for(int j = i + 1; j < n; j++){
+            int diff = j - i;
+            int mini = min(nums[i], nums[j]);
+            maxi = max(maxi, (mini * diff));
+        }
+    }
+
+    cout << "Maxi is: " << maxi;
+}
+
 int main()
 {
-    ThreeSum();
+    mostWaterBrute();
     return 0;
 }
