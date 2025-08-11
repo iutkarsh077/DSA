@@ -532,6 +532,5 @@ int maxAreaBetter(vector<int>& nums) {
 
 int main()
 {
-    mostWaterBrute();
     return 0;
 }
