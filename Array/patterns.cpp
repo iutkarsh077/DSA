@@ -63,18 +63,36 @@ void ReverseStars()
 
 void pyramidStars()
 {
-    int n = 50;
+    int n = 5;
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j <= (n - 1) + i; j++)
+        for (int j = 0; j < n + i; j++)
         {
             if (i + j >= n - 1)
             {
                 cout << "*";
             }
+            
+        }
+        cout << endl;
+    }
+}
+
+void pyramidStarsReverse()
+{
+    int n = 5;
+    for (int i = 0; i < n; i++)
+    {
+        if(i == 0) continue;
+        for (int j = 0; j <= ((n - 1) * 2) - i; j++)
+        {
+            if (j < i)
+            {
+                continue;
+            }
             else
             {
-                cout << " ";
+                cout << "*";
             }
         }
         cout << endl;
@@ -84,5 +102,6 @@ void pyramidStars()
 int main()
 {
     pyramidStars();
+    pyramidStarsReverse();
     return 0;
 }
