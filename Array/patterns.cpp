@@ -99,9 +99,42 @@ void pyramidStarsReverse()
     }
 }
 
+void ZeroOnes(){
+    int n = 10;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j <= i; j++){
+            if((i + j) % 2 == 0){
+                cout << 1 << " ";
+            }
+            else{
+                cout << 0 << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+
+void TajMahal(){
+    int n = 10;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n * 2; j++){
+            if(j <= i){
+                cout << j + 1 << " ";
+            }
+
+            else if(i + j >= (n * 2) - 1){
+                cout << (n * 2) - j << " ";
+            }
+            else{
+                cout << "_" << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+
 int main()
 {
-    pyramidStars();
-    pyramidStarsReverse();
+    TajMahal();
     return 0;
 }
