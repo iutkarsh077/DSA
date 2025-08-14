@@ -203,8 +203,32 @@ void OneCharRow()
     }
 }
 
+void pyramidChars(){
+    int n = 5;
+
+    for(int i = 0; i < n; i++){
+        int count = 65;
+        int val = 1;
+        for(int j = 0; j <= (n + i); j++){
+            if(i + j < n){
+                cout << "_" << ' ';
+            }
+
+            else if(i + j >= n && j <= n){
+                cout << char(count) << " ";
+                count++;
+            }
+            else{
+                cout << char((65 + i) - val) << " ";
+                val++;
+            }
+        }
+        cout << endl;
+    }
+}
+
 int main()
 {
-    OneCharRow();
+    pyramidChars();
     return 0;
 }
