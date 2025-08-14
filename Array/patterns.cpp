@@ -72,7 +72,6 @@ void pyramidStars()
             {
                 cout << "*";
             }
-            
         }
         cout << endl;
     }
@@ -83,7 +82,8 @@ void pyramidStarsReverse()
     int n = 5;
     for (int i = 0; i < n; i++)
     {
-        if(i == 0) continue;
+        if (i == 0)
+            continue;
         for (int j = 0; j <= ((n - 1) * 2) - i; j++)
         {
             if (j < i)
@@ -99,14 +99,19 @@ void pyramidStarsReverse()
     }
 }
 
-void ZeroOnes(){
+void ZeroOnes()
+{
     int n = 10;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j <= i; j++){
-            if((i + j) % 2 == 0){
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j <= i; j++)
+        {
+            if ((i + j) % 2 == 0)
+            {
                 cout << 1 << " ";
             }
-            else{
+            else
+            {
                 cout << 0 << " ";
             }
         }
@@ -114,18 +119,24 @@ void ZeroOnes(){
     }
 }
 
-void TajMahal(){
+void TajMahal()
+{
     int n = 10;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n * 2; j++){
-            if(j <= i){
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n * 2; j++)
+        {
+            if (j <= i)
+            {
                 cout << j + 1 << " ";
             }
 
-            else if(i + j >= (n * 2) - 1){
+            else if (i + j >= (n * 2) - 1)
+            {
                 cout << (n * 2) - j << " ";
             }
-            else{
+            else
+            {
                 cout << "_" << " ";
             }
         }
@@ -133,8 +144,67 @@ void TajMahal(){
     }
 }
 
+void CountNumber()
+{
+    int count = 1;
+    int n = 10;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j <= i; j++)
+        {
+            cout << count << " ";
+            count++;
+        }
+        cout << endl;
+    }
+}
+
+void ShowChar()
+{
+    int n = 26;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j <= i; j++)
+        {
+            char val = 65 + j;
+            cout << val << " ";
+        }
+        cout << endl;
+    }
+}
+
+void ShowReversechar()
+{
+    int n = 20;
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = n; j > i; j--)
+        {
+            char val = 65 + (n - j);
+            cout << val << " ";
+        }
+        cout << endl;
+    }
+}
+
+void OneCharRow()
+{
+    int n = 10;
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j <= i; j++)
+        {
+            char val = 65 + i;
+            cout << val << " ";
+        }
+        cout << endl;
+    }
+}
+
 int main()
 {
-    TajMahal();
+    OneCharRow();
     return 0;
 }
