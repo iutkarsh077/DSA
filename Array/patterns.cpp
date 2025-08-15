@@ -227,8 +227,55 @@ void pyramidChars(){
     }
 }
 
+void randomCharStart(){
+    int n = 26;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j <= i; j++){
+            cout << char((65 + (n - 1)) + (j - i)) << ' ';
+        }
+        cout << endl;
+    }
+}
+
+void DiamondStars(){
+    int n = 10;
+    int upperHalf = n / 2;
+    int spaces = 0;
+    for(int i = 0; i < upperHalf; i++){
+        for(int j = 0; j < (n - spaces) / 2; j++){
+            cout << '*' << " ";
+        }
+        for(int j = 0; j < spaces; j++){
+            cout << ' ' << " ";
+        }
+
+        for(int j = 0; j < (n - spaces) / 2; j++){
+            cout << '*' << " ";
+        }
+
+        spaces = spaces + 2;
+        cout << endl;
+    }
+
+    for(int i = 0; i <= upperHalf; i++){
+        for(int j = 0; j < (n - spaces) / 2; j++){
+            cout << '*' << " ";
+        }
+        for(int j = 0; j < spaces; j++){
+            cout << ' ' << " ";
+        }
+
+        for(int j = 0; j < (n - spaces) / 2; j++){
+            cout << '*' << " ";
+        }
+
+        spaces = spaces - 2;
+        cout << endl;
+    }
+}
+
 int main()
 {
-    pyramidChars();
+    DiamondStars();
     return 0;
 }
