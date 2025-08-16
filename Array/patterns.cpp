@@ -274,9 +274,8 @@ void DiamondStars(){
     }
 }
 
-
 void HorizontalX(){
-    int n = 5;
+    int n = 8;
 
     int spaces = (n * 2) - 2;
     int stars = 2;
@@ -319,8 +318,29 @@ void HorizontalX(){
     }
 }
 
+void DubaiFrame(){
+    int n = 6;
+
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            if(i == 0 || i == n - 1){
+                cout << "*" << " ";
+            }
+
+            else if(j == 0 || j == n - 1){
+                cout << "*" << " ";
+            }
+
+            else{
+                cout << "_" << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+
 int main()
 {
-    HorizontalX();
+    DubaiFrame();
     return 0;
 }
