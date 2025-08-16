@@ -274,8 +274,53 @@ void DiamondStars(){
     }
 }
 
+
+void HorizontalX(){
+    int n = 5;
+
+    int spaces = (n * 2) - 2;
+    int stars = 2;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < stars/2; j++){
+            cout << "*" << " ";
+        }
+
+        for(int j = 0; j < spaces; j++){
+            cout << "_" << " ";
+        }
+
+        for(int j = 0; j < stars/2; j++){
+            cout << "*" << " ";
+        }
+
+        spaces = spaces - 2;
+        stars = stars + 2;
+        cout << endl;
+    }
+    spaces = spaces  + 2;
+    stars = stars - 2;
+
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < stars/2; j++){
+            cout << "*" << " ";
+        }
+
+        for(int j = 0; j < spaces; j++){
+            cout << "_" << " ";
+        }
+
+        for(int j = 0; j < stars/2; j++){
+            cout << "*" << " ";
+        }
+
+        spaces = spaces + 2;
+        stars = stars - 2;
+        cout << endl;
+    }
+}
+
 int main()
 {
-    DiamondStars();
+    HorizontalX();
     return 0;
 }
