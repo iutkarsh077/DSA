@@ -1,4 +1,5 @@
 #include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 void squareBracket()
@@ -319,7 +320,7 @@ void HorizontalX(){
 }
 
 void DubaiFrame(){
-    int n = 6;
+    int n = 9;
 
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
@@ -339,8 +340,24 @@ void DubaiFrame(){
     }
 }
 
+void matrix(){
+    int n = 11;
+
+    for(int i = 0; i < ( 2 * n ) - 1; i++){
+        for(int j = 0; j < (2 * n) - 1; j++){
+            int top = i;
+            int left = j;
+            int right = (2  * n - 2) - j;
+            int bottom = (2 * n - 2) - i;
+            
+            cout << (n - min(min(top, bottom), min(left, right))) << " ";
+        }
+        cout << endl;
+    }
+}
+
 int main()
 {
-    DubaiFrame();
+    matrix();
     return 0;
 }
