@@ -97,8 +97,23 @@ void armStrong(){
     }
 }
 
+void GCD(){
+    int n1 = 30;
+    int n2 = 45;
+    int mini = min(n1, n2);
+    int ans = 1;
+
+    for(int i = 1; i <= mini; i++){
+        if(n1 % i == 0 && n2 % i == 0){
+            ans = max(ans, i);
+        }
+    }
+
+    cout << "GCD is: " << ans;
+}
+
 int main()
 {
-    armStrong();
+    GCD();
     return 0;
 }
