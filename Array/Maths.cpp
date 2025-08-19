@@ -98,22 +98,35 @@ void armStrong(){
 }
 
 void GCD(){
-    int n1 = 30;
-    int n2 = 45;
+    int n1 = 20;
+    int n2 = 40;
     int mini = min(n1, n2);
     int ans = 1;
 
-    for(int i = 1; i <= mini; i++){
+    for(int i = mini; i >= 1; i--){
         if(n1 % i == 0 && n2 % i == 0){
             ans = max(ans, i);
+            break;
         }
     }
 
     cout << "GCD is: " << ans;
 }
 
+int GCDBetter(int big, int small){
+    if(big == 0 || small == 0){
+        return max(big, small);
+    }
+
+    big = big % small;
+    int myBig = max(big, small);
+    int mySmall1 = min(big, small);
+    return GCDBetter(myBig, mySmall1);
+}
+
 int main()
 {
-    GCD();
+    int ans= GCDBetter(13, 0);
+    cout << ans;
     return 0;
 }
