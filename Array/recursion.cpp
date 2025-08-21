@@ -54,6 +54,6 @@ int fibo(int n){
 
 int main(){
 
-    cout << fibo(5);
+    cout << fibo(6);
     return 0;
 }
