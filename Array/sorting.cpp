@@ -12,7 +12,8 @@ void selectionSort()
         int mini = i;
         for (int j = i + 1; j < nums.size(); j++)
         {
-            if(nums[mini] > nums[j]){
+            if (nums[mini] > nums[j])
+            {
                 mini = j;
             }
         }
@@ -21,55 +22,120 @@ void selectionSort()
 
     for (int i = 0; i < nums.size(); i++)
     {
-       cout << nums[i] << " ";
+        cout << nums[i] << " ";
     }
 }
 
-void bubbleSort(){
+void bubbleSort()
+{
     vector<int> nums;
     nums = {-4, -1, -2, -6, -74, -6, -1, -87, -56, -43};
 
-    for(int i = 0; i < nums.size(); i++){
-        for(int j = 0; j < nums.size() - i - 1; j++){
-            if(nums[j] > nums[j + 1]){
+    for (int i = 0; i < nums.size(); i++)
+    {
+        for (int j = 0; j < nums.size() - i - 1; j++)
+        {
+            if (nums[j] > nums[j + 1])
+            {
                 swap(nums[j], nums[j + 1]);
             }
         }
     }
 
-    for(int i = 0; i < nums.size(); i++){
+    for (int i = 0; i < nums.size(); i++)
+    {
         cout << nums[i] << " ";
     }
 }
 
-
-void insertionSort(){
+void insertionSort()
+{
     vector<int> nums;
     nums = {4, 1, 2, -6, -74, -6, -1, -87, -56, -43};
 
-    
-    for(int i = 1; i < nums.size(); i++){
+    for (int i = 0; i < nums.size(); i++)
+    {
         int j = i - 1;
         int temp = nums[i];
-        while(j >= 0){
-            if(nums[j] > temp){
+        for (; j >= 0; j--)
+        {
+            if (nums[j] > temp)
+            {
                 nums[j + 1] = nums[j];
             }
-            else{
+            else
+            {
                 break;
             }
-            j--;
         }
         nums[j + 1] = temp;
     }
 
-    for(int i = 0; i < nums.size(); i++){
+    for (int i = 0; i < nums.size(); i++)
+    {
         cout << nums[i] << " ";
     }
 }
 
+void merge(vector<int> &nums, int low, int high, int mid)
+{
+    int left = low;
+    int right = mid + 1;
+
+    vector<int> temp;
+
+    while (left <= mid && right <= high)
+    {
+        if (nums[left] <= nums[right])
+        {
+            temp.push_back(nums[left]);
+            left = left + 1;
+        }
+        else
+        {
+            temp.push_back(nums[right]);
+            right = right + 1;
+        }
+    }
+
+    while (left <= mid)
+    {
+        temp.push_back(nums[left]);
+        left = left + 1;
+    }
+
+    while (right <= high)
+    {
+        temp.push_back(nums[right]);
+        right = right + 1;
+    }
+
+    for(int i = low; i <= high; i++){
+        nums[i] = temp[i - low];
+    }
+}
+
+void divide(vector<int> &nums, int low, int high)
+{
+    if (low >= high)
+        return;
+
+    int mid = low + ((high - low) / 2);
+    divide(nums, low, mid);
+    divide(nums, mid + 1, high);
+    merge(nums, low, high, mid);
+}
+
 int main()
 {
-    insertionSort();
+    vector<int> nums = {4, 1, 2, 7, 4, 3, 9, 8 ,6, 5 ,6, 3};
+    int s = 0;
+    int e = nums.size() - 1;
+    divide(nums, s, e);
+
+
+    for(int i = 0; i < nums.size(); i++){
+        cout << nums[i] << " ";
+    }
     return 0;
 }
