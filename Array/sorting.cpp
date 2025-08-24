@@ -47,21 +47,20 @@ void insertionSort(){
     vector<int> nums;
     nums = {4, 1, 2, -6, -74, -6, -1, -87, -56, -43};
 
-    int i = 1;
-
-    while(i < nums.size()){
+    
+    for(int i = 1; i < nums.size(); i++){
         int j = i - 1;
-        int temp;
-        for(; j >= 0; j--){
-            if(nums[i] < nums[j]){
-                temp = nums[j];
+        int temp = nums[i];
+        while(j >= 0){
+            if(nums[j] > temp){
+                nums[j + 1] = nums[j];
             }
             else{
                 break;
             }
+            j--;
         }
         nums[j + 1] = temp;
-        i++;
     }
 
     for(int i = 0; i < nums.size(); i++){
