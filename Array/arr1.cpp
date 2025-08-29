@@ -75,25 +75,117 @@ void rotate(vector<int> &nums, int k)
     reverse(nums.begin() + k, nums.end());
 }
 
-void rotaeByOnePlace(){
+void rotaeByOnePlace()
+{
     vector<int> nums;
     nums = {1, 2, 3, 4, 5};
 
     int first = nums[0];
-    if(nums.size() == 1) return;
+    if (nums.size() == 1)
+        return;
 
-    for(int i = 1; i < nums.size(); i++){
+    for (int i = 1; i < nums.size(); i++)
+    {
         nums[i - 1] = nums[i];
     }
 
     nums[nums.size() - 1] = first;
-    for(int i = 0; i < nums.size(); i++){
+    for (int i = 0; i < nums.size(); i++)
+    {
         cout << nums[i] << " ";
+    }
+}
+
+void moveZeroes()
+{
+    vector<int> nums = {0};
+
+    int j = 0;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] != 0)
+        {
+            swap(nums[i], nums[j]);
+            j++;
+        }
+    }
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        cout << nums[i] << " ";
+    }
+}
+
+void LinearSearch()
+{
+    vector<int> nums;
+    nums = {3, 1, 5, 4, 2, 7, 81, 5, 9, 5, 0};
+    int target = 5;
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (target == nums[i])
+        {
+            cout << i;
+            break;
+        }
+    }
+}
+
+void FindTheUnion()
+{
+    vector<int> arr1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    vector<int> arr2 = {2, 3, 4, 4, 5, 11, 12};
+    vector<int> ans;
+    int i = 0;
+    int j = 0;
+
+    while (i < arr1.size() && j < arr2.size())
+    {
+        if (arr1[i] <= arr2[j])
+        {
+            if (ans.size() == 0 || ans.back() != arr1[i])
+            {
+                ans.push_back(arr1[i]);
+            }
+            i++;
+        }
+        else
+        {
+            if (ans.size() == 0 || ans.back() != arr2[j])
+            {
+                ans.push_back(arr2[j]);
+            }
+            j++;
+        }
+    }
+
+    while (i < arr1.size())
+    {
+        if (ans.size() >= 1 && ans.back() != arr1[i])
+        {
+            ans.push_back(arr1[i]);
+        }
+        i++;
+    }
+
+    while (j < arr2.size())
+    {
+        if (ans.size() >= 1 && ans.back() != arr2[j])
+        {
+            ans.push_back(arr2[j]);
+        }
+        j++;
+    }
+
+    for (int i = 0; i < ans.size(); i++)
+    {
+        cout << ans[i] << " ";
     }
 }
 
 int main()
 {
-    rotaeByOnePlace();
+    FindTheUnion();
     return 0;
 }
