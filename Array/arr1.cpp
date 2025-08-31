@@ -203,8 +203,26 @@ int singleNumber(vector<int>& nums) {
         return -1;
     }
 
+void sumKPositives(){
+    vector<int> nums = {2, 4, 1, 3};
+    int k = 10;
+    unordered_map<int, int> mp;
+    int maxi = 0;
+    mp.insert({0, -1});
+    int sum = 0;
+    for(int i = 0; i < nums.size(); i++){
+        sum = sum + nums[i];
+        int need = abs(sum - k);
+        if(mp.find(need) != mp.end()){
+            maxi = max(maxi, i - mp[need]);
+        }
+        mp.insert({sum, i});
+    }
+    cout << "The answer is: " << maxi;
+}
+
 int main()
 {
-    FindTheUnion();
+    sumKPositives();
     return 0;
 }
