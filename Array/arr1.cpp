@@ -223,8 +223,81 @@ void sumKPositives(){
     cout << "The answer is: " << maxi;
 }
 
+void sumK(){
+     vector<int> nums = {2, 3, 5, 1, 9};
+    int k = 10;
+
+    int left = 0;
+    int right = 0;
+    int maxi = 0;
+    int sum = 0;
+    while(right < nums.size()){
+        sum = sum + nums[right];
+
+        while(left <= right && sum > k){
+            sum = sum - nums[left];
+            left++;
+        }
+
+        if(sum == k){
+            maxi = max(maxi, right - left + 1);
+        }
+        
+        right++;
+    }
+
+    cout << "The answer is: " << maxi;
+}
+
+void sortColors(){
+    vector<int> nums = {2,0,1};
+
+    int zeroes = 0;
+    int ones = 0;
+    int two = 0;
+
+    for(int i = 0; i < nums.size(); i++){
+        if(nums[i] == 0){
+            zeroes++;
+        }
+        else if(nums[i] == 1){
+            ones++;
+        }
+        else{
+            two++;
+        }
+    }
+
+    for(int i = 0; i < nums.size(); i++){
+        if(zeroes > 0){
+            nums[i] = 0;
+            zeroes--;
+        }
+
+        else if(ones > 0){
+            nums[i] = 1;
+            ones--;
+        }
+
+        else{
+            nums[i] = 2;
+            two--;
+        }
+    }
+
+    for(int i = 0; i < nums.size(); i++){
+        cout << nums[i] << " ";
+    }
+}
+
+
+int majorityElement(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+
+        return nums[nums.size() / 2]; 
+    }
 int main()
 {
-    sumKPositives();
+    sortColors();
     return 0;
 }
