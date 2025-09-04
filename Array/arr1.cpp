@@ -290,14 +290,44 @@ void sortColors(){
     }
 }
 
-
 int majorityElement(vector<int>& nums) {
         sort(nums.begin(), nums.end());
 
         return nums[nums.size() / 2]; 
     }
+
+void KadaneAlgo(){
+    vector<int> nums = { 1 };
+
+    int maxi = INT_MIN;
+    int sum = 0;
+
+    for(int i = 0; i < nums.size(); i++){
+        sum = sum + nums[i];
+
+        maxi = max(maxi, sum);
+
+        if(sum <= 0){
+            sum = 0;
+        }
+    }
+
+    cout << "The maxi is: " << maxi;
+}
+
+int maxProfit(vector<int>& prices) {
+        int minValue = INT_MAX;
+        int maxValue = INT_MIN;
+
+        for(int i = 0; i < prices.size(); i++){
+            minValue = min(prices[i], minValue);
+            maxValue = max(maxValue, prices[i] - minValue);
+        }
+
+        return maxValue;
+    }
 int main()
 {
-    sortColors();
+    KadaneAlgo();
     return 0;
 }
