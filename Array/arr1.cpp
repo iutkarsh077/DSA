@@ -326,8 +326,52 @@ int maxProfit(vector<int>& prices) {
 
         return maxValue;
     }
+
+vector<int> rearrangeArray(vector<int>& nums) {
+        vector<int> dupNums(nums.size(), 0);
+        int posIndex = 0;
+        int negIndex = 1;
+
+        for(int i = 0; i < nums.size(); i++){
+            if(nums[i] >= 0){
+                dupNums[posIndex] = nums[i];
+                posIndex = posIndex + 2;
+            }
+            else{
+                dupNums[negIndex] = nums[i];
+                negIndex = negIndex + 2;
+            }
+        }
+
+        copy(dupNums.begin(), dupNums.end(), nums.begin());
+        return nums;
+    }
+
+void longestConsecutiveBrute(){
+    vector<int> nums = {1};
+    sort(nums.begin(), nums.end());
+    int maxCnt = 0;
+    int n = nums.size();
+    for(int i = 0; i < n; i++){
+        int cnt = 1;
+        for(int j = i; j < n - 1; j++){
+            if(nums[j] + 1 == nums[j + 1] || nums[j] == nums[j + 1]){
+                if(nums[j] + 1 == nums[j + 1]){
+                    cnt++;
+                }
+            }
+            else{
+                break;
+            }
+        }
+        maxCnt = max(maxCnt, cnt);
+    }
+
+    cout << "The longest consecutive is: " << maxCnt;
+}
+
 int main()
 {
-    KadaneAlgo();
+    longestConsecutiveBrute();
     return 0;
 }
