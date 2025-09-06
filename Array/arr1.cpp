@@ -184,130 +184,158 @@ void FindTheUnion()
     }
 }
 
-int singleNumber(vector<int>& nums) {
-        if(nums.size() == 1) return nums[0];
-        sort(nums.begin(), nums.end());
+int singleNumber(vector<int> &nums)
+{
+    if (nums.size() == 1)
+        return nums[0];
+    sort(nums.begin(), nums.end());
 
-        if(nums[0] != nums[1]) return nums[0];
+    if (nums[0] != nums[1])
+        return nums[0];
 
-        for(int i = 1; i < nums.size() - 1; i++){
-            if(nums[i] != nums[i - 1] && nums[i] != nums[i + 1]){
-                return nums[i];
-            }
+    for (int i = 1; i < nums.size() - 1; i++)
+    {
+        if (nums[i] != nums[i - 1] && nums[i] != nums[i + 1])
+        {
+            return nums[i];
         }
-
-        if(nums[nums.size() - 1] != nums[nums.size() - 2]){
-            return nums[nums.size() - 1];
-        }
-
-        return -1;
     }
 
-void sumKPositives(){
+    if (nums[nums.size() - 1] != nums[nums.size() - 2])
+    {
+        return nums[nums.size() - 1];
+    }
+
+    return -1;
+}
+
+void sumKPositives()
+{
     vector<int> nums = {2, 3, 5};
     int k = 5;
     unordered_map<int, int> mp;
     int maxi = 0;
     mp.insert({0, -1});
     int sum = 0;
-    for(int i = 0; i < nums.size(); i++){
+    for (int i = 0; i < nums.size(); i++)
+    {
         sum = sum + nums[i];
         int need = sum - k;
-        if(mp.find(need) != mp.end()){
+        if (mp.find(need) != mp.end())
+        {
             maxi = max(maxi, i - mp[need]);
         }
-        if (mp.find(sum) == mp.end()) {
+        if (mp.find(sum) == mp.end())
+        {
             mp[sum] = i;
         }
     }
     cout << "The answer is: " << maxi;
 }
 
-void sumK(){
-     vector<int> nums = {2, 3, 5, 1, 9};
+void sumK()
+{
+    vector<int> nums = {2, 3, 5, 1, 9};
     int k = 10;
 
     int left = 0;
     int right = 0;
     int maxi = 0;
     int sum = 0;
-    while(right < nums.size()){
+    while (right < nums.size())
+    {
         sum = sum + nums[right];
 
-        while(left <= right && sum > k){
+        while (left <= right && sum > k)
+        {
             sum = sum - nums[left];
             left++;
         }
 
-        if(sum == k){
+        if (sum == k)
+        {
             maxi = max(maxi, right - left + 1);
         }
-        
+
         right++;
     }
 
     cout << "The answer is: " << maxi;
 }
 
-void sortColors(){
-    vector<int> nums = {2,0,1};
+void sortColors()
+{
+    vector<int> nums = {2, 0, 1};
 
     int zeroes = 0;
     int ones = 0;
     int two = 0;
 
-    for(int i = 0; i < nums.size(); i++){
-        if(nums[i] == 0){
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] == 0)
+        {
             zeroes++;
         }
-        else if(nums[i] == 1){
+        else if (nums[i] == 1)
+        {
             ones++;
         }
-        else{
+        else
+        {
             two++;
         }
     }
 
-    for(int i = 0; i < nums.size(); i++){
-        if(zeroes > 0){
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (zeroes > 0)
+        {
             nums[i] = 0;
             zeroes--;
         }
 
-        else if(ones > 0){
+        else if (ones > 0)
+        {
             nums[i] = 1;
             ones--;
         }
 
-        else{
+        else
+        {
             nums[i] = 2;
             two--;
         }
     }
 
-    for(int i = 0; i < nums.size(); i++){
+    for (int i = 0; i < nums.size(); i++)
+    {
         cout << nums[i] << " ";
     }
 }
 
-int majorityElement(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
+int majorityElement(vector<int> &nums)
+{
+    sort(nums.begin(), nums.end());
 
-        return nums[nums.size() / 2]; 
-    }
+    return nums[nums.size() / 2];
+}
 
-void KadaneAlgo(){
-    vector<int> nums = { 1 };
+void KadaneAlgo()
+{
+    vector<int> nums = {1};
 
     int maxi = INT_MIN;
     int sum = 0;
 
-    for(int i = 0; i < nums.size(); i++){
+    for (int i = 0; i < nums.size(); i++)
+    {
         sum = sum + nums[i];
 
         maxi = max(maxi, sum);
 
-        if(sum <= 0){
+        if (sum <= 0)
+        {
             sum = 0;
         }
     }
@@ -315,63 +343,126 @@ void KadaneAlgo(){
     cout << "The maxi is: " << maxi;
 }
 
-int maxProfit(vector<int>& prices) {
-        int minValue = INT_MAX;
-        int maxValue = INT_MIN;
+int maxProfit(vector<int> &prices)
+{
+    int minValue = INT_MAX;
+    int maxValue = INT_MIN;
 
-        for(int i = 0; i < prices.size(); i++){
-            minValue = min(prices[i], minValue);
-            maxValue = max(maxValue, prices[i] - minValue);
-        }
-
-        return maxValue;
+    for (int i = 0; i < prices.size(); i++)
+    {
+        minValue = min(prices[i], minValue);
+        maxValue = max(maxValue, prices[i] - minValue);
     }
 
-vector<int> rearrangeArray(vector<int>& nums) {
-        vector<int> dupNums(nums.size(), 0);
-        int posIndex = 0;
-        int negIndex = 1;
+    return maxValue;
+}
 
-        for(int i = 0; i < nums.size(); i++){
-            if(nums[i] >= 0){
-                dupNums[posIndex] = nums[i];
-                posIndex = posIndex + 2;
-            }
-            else{
-                dupNums[negIndex] = nums[i];
-                negIndex = negIndex + 2;
-            }
+vector<int> rearrangeArray(vector<int> &nums)
+{
+    vector<int> dupNums(nums.size(), 0);
+    int posIndex = 0;
+    int negIndex = 1;
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] >= 0)
+        {
+            dupNums[posIndex] = nums[i];
+            posIndex = posIndex + 2;
         }
-
-        copy(dupNums.begin(), dupNums.end(), nums.begin());
-        return nums;
+        else
+        {
+            dupNums[negIndex] = nums[i];
+            negIndex = negIndex + 2;
+        }
     }
 
-void longestConsecutiveBrute(){
-    vector<int> nums = {1};
-    sort(nums.begin(), nums.end());
+    copy(dupNums.begin(), dupNums.end(), nums.begin());
+    return nums;
+}
+
+int longestConsecutive()
+{
+    vector<int> nums = {1, 0, 1, 2};
+    if (nums.size() == 0)
+        return 0;
+
     int maxCnt = 0;
     int n = nums.size();
-    for(int i = 0; i < n; i++){
-        int cnt = 1;
-        for(int j = i; j < n - 1; j++){
-            if(nums[j] + 1 == nums[j + 1] || nums[j] == nums[j + 1]){
-                if(nums[j] + 1 == nums[j + 1]){
-                    cnt++;
-                }
-            }
-            else{
-                break;
-            }
+    int cnt = 1;
+    set<int> st;
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        st.insert(nums[i]);
+    }
+    for (auto i = st.begin(); i != st.end(); i++)
+    {
+        int needVal = (*i) + 1;
+        auto it = st.find(needVal);
+
+        if (it != st.end())
+        {
+            cnt++;
         }
-        maxCnt = max(maxCnt, cnt);
+        else
+        {
+            maxCnt = max(maxCnt, cnt);
+            cnt = 1;
+        }
     }
 
-    cout << "The longest consecutive is: " << maxCnt;
+    maxCnt = max(maxCnt, cnt);
+
+    cout << maxCnt;
+
+    return maxCnt;
+}
+
+void setZeroes()
+{
+    vector<vector<int>> matrix = {{0, 1, 2, 0}, {3, 4, 5, 2}, {1, 3, 1, 5}};
+    int m = matrix.size();
+    int n = matrix[0].size();
+
+    vector<int> rows(m, 1);
+    vector<int> column(n, 1);
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (matrix[i][j] == 0)
+            {
+                rows[i] = 0;
+                column[j] = 0;
+            }
+        }
+    }
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (rows[i] == 0 || column[j] == 0)
+            {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
 }
 
 int main()
 {
-    longestConsecutiveBrute();
+    setZeroes();
     return 0;
 }
