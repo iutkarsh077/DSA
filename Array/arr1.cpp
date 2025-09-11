@@ -497,8 +497,35 @@ int subarraySum(vector<int>& nums, int k) {
         return cnt;
     }
 
+void generate(){
+    int numRows = 5;
+    vector<vector<int>> ans;
+
+    for(int i = 0; i < numRows; i++){
+        vector<int> temp(i + 1, 1);
+        for(int j = 0; j <= i; j++){
+            if(j == 0 || j == i){
+                continue;
+            }
+
+            int val = ans[i - 1][j - 1] + ans[i - 1][j];
+            temp[j] = val;
+        }
+        ans.push_back(temp);
+    }
+
+    int n = ans.size();
+
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < ans[i].size(); j++){
+            cout << ans[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
 int main()
 {
-    setZeroes();
+    generate();
     return 0;
 }
