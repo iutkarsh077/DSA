@@ -524,6 +524,27 @@ void generate(){
     }
 }
 
+vector<int> majorityElement2(vector<int>& nums) {
+        unordered_map<int, int> mp;
+        int n = nums.size();
+
+        for(int i = 0; i < nums.size(); i++){
+            mp[nums[i]]++;
+        }
+
+        vector<int> ans;
+
+        for(auto i = mp.begin(); i != mp.end(); i++){
+            int val = i->second;
+            int val2 = i->first;
+            if(val > n / 3){
+                ans.push_back(val2);
+            }
+        }
+
+        return ans;
+    }
+
 int main()
 {
     generate();
