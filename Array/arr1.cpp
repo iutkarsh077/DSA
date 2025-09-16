@@ -480,31 +480,37 @@ void rotate(vector<vector<int>> &matrix)
     return;
 }
 
-int subarraySum(vector<int>& nums, int k) {
-        int cnt = 0;
-        int sum = 0;
-        unordered_map<int, int> mp;
+int subarraySum(vector<int> &nums, int k)
+{
+    int cnt = 0;
+    int sum = 0;
+    unordered_map<int, int> mp;
 
-        mp[0] = 1;
+    mp[0] = 1;
 
-        for(int i = 0; i < nums.size(); i++){
-            sum = sum + nums[i];
-            int need = sum - k;
-            cnt += mp[need];
-            mp[sum] += 1;
-        }
-
-        return cnt;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        sum = sum + nums[i];
+        int need = sum - k;
+        cnt += mp[need];
+        mp[sum] += 1;
     }
 
-void generate(){
+    return cnt;
+}
+
+void generate()
+{
     int numRows = 5;
     vector<vector<int>> ans;
 
-    for(int i = 0; i < numRows; i++){
+    for (int i = 0; i < numRows; i++)
+    {
         vector<int> temp(i + 1, 1);
-        for(int j = 0; j <= i; j++){
-            if(j == 0 || j == i){
+        for (int j = 0; j <= i; j++)
+        {
+            if (j == 0 || j == i)
+            {
                 continue;
             }
 
@@ -516,37 +522,92 @@ void generate(){
 
     int n = ans.size();
 
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < ans[i].size(); j++){
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < ans[i].size(); j++)
+        {
             cout << ans[i][j] << " ";
         }
         cout << endl;
     }
 }
 
-vector<int> majorityElement2(vector<int>& nums) {
-        unordered_map<int, int> mp;
-        int n = nums.size();
+vector<int> majorityElement2(vector<int> &nums)
+{
+    unordered_map<int, int> mp;
+    int n = nums.size();
 
-        for(int i = 0; i < nums.size(); i++){
-            mp[nums[i]]++;
-        }
-
-        vector<int> ans;
-
-        for(auto i = mp.begin(); i != mp.end(); i++){
-            int val = i->second;
-            int val2 = i->first;
-            if(val > n / 3){
-                ans.push_back(val2);
-            }
-        }
-
-        return ans;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        mp[nums[i]]++;
     }
+
+    vector<int> ans;
+
+    for (auto i = mp.begin(); i != mp.end(); i++)
+    {
+        int val = i->second;
+        int val2 = i->first;
+        if (val > n / 3)
+        {
+            ans.push_back(val2);
+        }
+    }
+
+    return ans;
+}
+
+void sprialMatrix()
+{
+    vector<vector<int>> nums = {{1, 2, 3, 4, 5, 6}, {7, 8, 9, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {19, 20, 21, 22, 23, 24}, {25, 26, 27, 28, 29, 30}};
+
+    int row = nums.size();
+    int column = nums[0].size();
+    int left = 0;
+    int right = column - 1;
+    int top = 0;
+    int bottom = row - 1;
+    vector<int> ans;
+    while (left <= right && top <= bottom)
+    {
+        for (int i = left; i <= right; i++)
+        {
+            ans.push_back(nums[top][i]);
+        }
+        top++;
+
+        for (int i = top; i <= bottom; i++)
+        {
+            ans.push_back(nums[i][right]);
+        }
+        right--;
+
+        if (top <= bottom)
+        {
+            for (int i = right; i >= left; i--)
+            {
+                ans.push_back(nums[bottom][i]);
+            }
+            bottom--;
+        }
+
+        if (left <= right)
+        {
+            for (int i = bottom; i >= top; i--)
+            {
+                ans.push_back(nums[i][left]);
+            }
+            left++;
+        }
+    }
+
+    for(int i = 0; i < ans.size(); i++){
+        cout << ans[i] << " ";
+    }
+}
 
 int main()
 {
-    generate();
+    sprialMatrix();
     return 0;
 }
