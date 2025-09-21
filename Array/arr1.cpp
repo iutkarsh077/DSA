@@ -601,54 +601,104 @@ void sprialMatrix()
         }
     }
 
-    for(int i = 0; i < ans.size(); i++){
+    for (int i = 0; i < ans.size(); i++)
+    {
         cout << ans[i] << " ";
     }
 }
 
-vector<vector<int>> threeSum(vector<int>& nums) {
-        set<vector<int>> ans;
-        sort(nums.begin(), nums.end());
-        for (int i = 0; i < nums.size() - 2; i++) {
-            int left = i + 1;
-            int right = nums.size() - 1;
+vector<vector<int>> threeSum(vector<int> &nums)
+{
+    set<vector<int>> ans;
+    sort(nums.begin(), nums.end());
+    for (int i = 0; i < nums.size() - 2; i++)
+    {
+        int left = i + 1;
+        int right = nums.size() - 1;
 
-            while (left < right) {
-                int sum = nums[i] + nums[left] + nums[right];
-                if (sum == 0) {
-                    ans.insert({nums[i], nums[left], nums[right]});
-                    left++;
-                    right--;
-                }
+        while (left < right)
+        {
+            int sum = nums[i] + nums[left] + nums[right];
+            if (sum == 0)
+            {
+                ans.insert({nums[i], nums[left], nums[right]});
+                left++;
+                right--;
+            }
 
-                else if (sum > 0) {
-                    right--;
-                }
+            else if (sum > 0)
+            {
+                right--;
+            }
 
-                else {
-                    left++;
-                }
+            else
+            {
+                left++;
             }
         }
-        return vector<vector<int>>(ans.begin(), ans.end());
     }
+    return vector<vector<int>>(ans.begin(), ans.end());
+}
 
-
-    void subArrayZero(){
+void subArrayZero()
+{
     vector<int> nums = {6, -2, 2, -8, 1, 7, 4, -10};
     unordered_map<int, int> mp;
     int maxi = 0;
-    for(int i = 0; i < nums.size(); i++){
-        int sum = 0;
-        for(int j = i; j < nums.size(); j++){
-            sum = sum + nums[j];
-            if(sum == 0){
-                maxi = max(maxi, j - i + 1);
-            }
+    int sum = 0;
+    mp.insert({0, -1});
+    for (int i = 0; i < nums.size(); i++)
+    {
+        sum = sum + nums[i];
+        int need = -1 * sum;
+        if (mp.find(need) != mp.end())
+        {
+            int index = mp[need];
+            maxi = max(maxi, index - i);
         }
+        mp[sum] = i;
     }
 
     cout << "Maximum subarray is: " << maxi;
+}
+
+void merge(vector<int> &nums1, int m, vector<int> &nums2, int n)
+{
+    int left = 0;
+    int right = 0;
+    vector<int> ans;
+
+    while (left < m && right < n)
+    {
+        if (nums1[left] <= nums2[right])
+        {
+            ans.push_back(nums1[left]);
+            left++;
+        }
+        else
+        {
+            ans.push_back(nums2[right]);
+            right++;
+        }
+    }
+
+    while (left < m)
+    {
+        ans.push_back(nums1[left]);
+        left++;
+    }
+
+    while (right < n)
+    {
+        ans.push_back(nums2[right]);
+        right++;
+    }
+
+    nums1.clear();
+    for (int i = 0; i < ans.size(); i++)
+    {
+        nums1.push_back(ans[i]);
+    }
 }
 
 int main()
