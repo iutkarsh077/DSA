@@ -704,6 +704,40 @@ void merge(vector<int> &nums1, int m, vector<int> &nums2, int n)
     }
 }
 
+vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
+        vector<int> ans;
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < grid[i].size(); j++) {
+                ans.push_back(grid[i][j]);
+            }
+        }
+
+        sort(ans.begin(), ans.end());
+        int repeated = -1;
+
+        for(int i = 0; i < ans.size() - 1; i++){
+            if(ans[i] == ans[i + 1]){
+                repeated = ans[i];
+                break;
+            }
+        }
+
+        int length = ans.size();
+        int total = (length * (length + 1))/2;
+        int ansSum = 0;
+        for(int i = 0; i < ans.size(); i++){
+            ansSum += ans[i];
+        }
+
+        ansSum = ansSum - repeated;
+
+        int val = total - ansSum;
+
+        return {repeated, val};
+
+    }
+
+
 int main()
 {
     subArrayZero();
