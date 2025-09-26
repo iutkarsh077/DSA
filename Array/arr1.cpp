@@ -815,8 +815,80 @@ int findCeil(vector<int> &arr, int x)
     return result;
 }
 
+int lowerBound(vector<int> &arr, int target)
+{
+    // code here
+    int n = arr.size();
+    int indexAns = n;
+    int s = 0;
+    int e = n - 1;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        if (arr[mid] >= target)
+        {
+            e = mid - 1;
+            indexAns = mid;
+        }
+        else
+        {
+            s = mid + 1;
+        }
+    }
+
+    return indexAns;
+}
+
+int search2(vector<int> &nums, int target)
+{
+    int n = nums.size();
+
+    int s = 0;
+    int e = n - 1;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        if (nums[mid] == target)
+        {
+            return mid;
+        }
+
+        if (nums[s] <= nums[mid])
+        {
+            if (nums[mid] >= target && nums[s] <= target)
+            {
+                e = mid - 1;
+            }
+            else
+            {
+                s = mid + 1;
+            }
+        }
+
+        if (nums[mid] < nums[e])
+        {
+            if (nums[mid] <= target && nums[e] >= target)
+            {
+                s = mid + 1;
+            }
+            else
+            {
+                e = mid - 1;
+            }
+        }
+    }
+
+    return -1;
+}
+
 int main()
 {
-    subArrayZero();
+    vector<int> nums = {1, 3, 5};
+    int ans = search2(nums, 3);
+    cout << ans;
     return 0;
 }
