@@ -885,6 +885,65 @@ int search2(vector<int> &nums, int target)
     return -1;
 }
 
+int minEatingSpeed(vector<int>& piles, int h) {
+        int maxi = INT_MIN;
+        int n = piles.size();
+
+        for(int i = 0; i < n; i++){
+            maxi = max(piles[i], maxi);
+        }
+
+        int s = 1;
+        int e = maxi;
+        int ans = -1;
+
+        while(s <= e){
+            int mid = s + ((e - s)/2);
+            double hour = 0;
+
+            for(int i = 0; i < n; i++){
+                double val= ceil((double)piles[i]/mid);
+                hour += val;
+            }
+
+            if(hour <= h){
+                ans = mid;
+                e = mid - 1;
+            }
+
+            else{
+                s = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+
+int searchInsert(vector<int>& nums, int target) {
+        int n = nums.size();
+        int s = 0;
+        int e = n - 1;
+        int index = 0;
+        while(s <= e){
+            int mid = s + ((e - s)/2);
+
+            if(nums[mid] == target){
+                return mid;
+            }
+
+            else if(nums[mid] < target){
+                index = mid + 1;
+                s = mid + 1;
+            }
+
+            else{
+                e = mid - 1;
+            }
+        }
+
+        return index;
+    }
+
 int main()
 {
     vector<int> nums = {1, 3, 5};
