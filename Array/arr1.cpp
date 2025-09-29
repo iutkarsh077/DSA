@@ -885,152 +885,289 @@ int search2(vector<int> &nums, int target)
     return -1;
 }
 
-int minEatingSpeed(vector<int>& piles, int h) {
-        int maxi = INT_MIN;
-        int n = piles.size();
+int minEatingSpeed(vector<int> &piles, int h)
+{
+    int maxi = INT_MIN;
+    int n = piles.size();
 
-        for(int i = 0; i < n; i++){
-            maxi = max(piles[i], maxi);
-        }
-
-        int s = 1;
-        int e = maxi;
-        int ans = -1;
-
-        while(s <= e){
-            int mid = s + ((e - s)/2);
-            double hour = 0;
-
-            for(int i = 0; i < n; i++){
-                double val= ceil((double)piles[i]/mid);
-                hour += val;
-            }
-
-            if(hour <= h){
-                ans = mid;
-                e = mid - 1;
-            }
-
-            else{
-                s = mid + 1;
-            }
-        }
-
-        return ans;
+    for (int i = 0; i < n; i++)
+    {
+        maxi = max(piles[i], maxi);
     }
 
-int searchInsert(vector<int>& nums, int target) {
-        int n = nums.size();
-        int s = 0;
-        int e = n - 1;
-        int index = 0;
-        while(s <= e){
-            int mid = s + ((e - s)/2);
+    int s = 1;
+    int e = maxi;
+    int ans = -1;
 
-            if(nums[mid] == target){
-                return mid;
-            }
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+        double hour = 0;
 
-            else if(nums[mid] < target){
-                index = mid + 1;
-                s = mid + 1;
-            }
-
-            else{
-                e = mid - 1;
-            }
+        for (int i = 0; i < n; i++)
+        {
+            double val = ceil((double)piles[i] / mid);
+            hour += val;
         }
 
-        return index;
+        if (hour <= h)
+        {
+            ans = mid;
+            e = mid - 1;
+        }
+
+        else
+        {
+            s = mid + 1;
+        }
     }
 
-bool search3(vector<int>& nums, int target) {
-        int s = 0;
-        int e = nums.size() - 1;
+    return ans;
+}
 
-        while(s <= e){
-            int mid = s +((e - s)/2);
+int searchInsert(vector<int> &nums, int target)
+{
+    int n = nums.size();
+    int s = 0;
+    int e = n - 1;
+    int index = 0;
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
 
-            if(nums[mid] == target){
-                return true;
-            }
-
-            if (nums[s] == nums[mid] && nums[mid] == nums[e]) {
-                s++;
-                e--;
-                continue;
-            }
-
-            if(nums[s] <= nums[mid]){
-                 if(nums[s] <= target && nums[mid] >= target){
-                    e = mid - 1;
-                }
-                else{
-                    s = mid + 1;
-                }
-            }
-
-            if(nums[mid] <= nums[e]){
-                 if(nums[mid] <= target && nums[e] >= target){
-                    s = mid + 1;
-                }
-                else{
-                    e = mid - 1;
-                }
-            }
+        if (nums[mid] == target)
+        {
+            return mid;
         }
 
-        return false;
+        else if (nums[mid] < target)
+        {
+            index = mid + 1;
+            s = mid + 1;
+        }
+
+        else
+        {
+            e = mid - 1;
+        }
     }
 
-vector<int> searchRange(vector<int>& nums, int target) {
-        int n = nums.size();
-        int s = 0;
-        int e = n - 1;
-        int ans1 = -1;
-        int ans2 = -1;
+    return index;
+}
 
-        while(s <= e){
-            int mid = s + ((e - s)/2);
+bool search3(vector<int> &nums, int target)
+{
+    int s = 0;
+    int e = nums.size() - 1;
 
-            if(nums[mid] == target){
-                ans1 = mid;
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        if (nums[mid] == target)
+        {
+            return true;
+        }
+
+        if (nums[s] == nums[mid] && nums[mid] == nums[e])
+        {
+            s++;
+            e--;
+            continue;
+        }
+
+        if (nums[s] <= nums[mid])
+        {
+            if (nums[s] <= target && nums[mid] >= target)
+            {
                 e = mid - 1;
             }
-            else if(nums[mid] < target){
+            else
+            {
                 s = mid + 1;
-            }
-            else{
-                e = mid - 1;
             }
         }
 
-
-        s = 0;
-        e = n - 1;
-
-        while(s <= e){
-            int mid = s + ((e - s)/2);
-
-            if(nums[mid] == target){
-                ans2 = mid;
+        if (nums[mid] <= nums[e])
+        {
+            if (nums[mid] <= target && nums[e] >= target)
+            {
                 s = mid + 1;
             }
-            else if(nums[mid] < target){
-                s = mid + 1;
-            }
-            else{
+            else
+            {
                 e = mid - 1;
             }
         }
-
-        return {ans1, ans2};
     }
+
+    return false;
+}
+
+vector<int> searchRange(vector<int> &nums, int target)
+{
+    int n = nums.size();
+    int s = 0;
+    int e = n - 1;
+    int ans1 = -1;
+    int ans2 = -1;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        if (nums[mid] == target)
+        {
+            ans1 = mid;
+            e = mid - 1;
+        }
+        else if (nums[mid] < target)
+        {
+            s = mid + 1;
+        }
+        else
+        {
+            e = mid - 1;
+        }
+    }
+
+    s = 0;
+    e = n - 1;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        if (nums[mid] == target)
+        {
+            ans2 = mid;
+            s = mid + 1;
+        }
+        else if (nums[mid] < target)
+        {
+            s = mid + 1;
+        }
+        else
+        {
+            e = mid - 1;
+        }
+    }
+
+    return {ans1, ans2};
+}
+
+void findMin()
+{
+    vector<int> nums = {4, 5, 6, 7, 8, 1, 2};
+
+    int s = 0;
+    int e = nums.size() - 1;
+    int ans = INT_MAX;
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+        if (nums[s] <= nums[mid])
+        {
+            ans = min(ans, nums[s]);
+            s = mid + 1;
+        }
+
+        if (nums[mid] <= nums[e])
+        {
+            ans = min(nums[mid], ans);
+            e = mid - 1;
+        }
+    }
+
+    cout << "Minimum ans is: " << ans;
+}
+
+void minDays()
+{
+    vector<int> nums = {1, 10, 3, 10, 2};
+
+    int minVal = INT_MAX;
+    int maxVal = INT_MIN;
+    int k = 1;
+    int m = 3;
+
+    for (int x : nums)
+    {
+        minVal = min(minVal, x);
+        maxVal = max(maxVal, x);
+    }
+
+    int s = minVal, e = maxVal;
+    int ans = -1;
+
+    while (s <= e)
+    {
+        int mid = s + (e - s) / 2;
+        int cnt = 0, flowerCnt = 0;
+
+        for (int x : nums)
+        {
+            if (x <= mid)
+            {
+                cnt++;
+                if (cnt == k)
+                {
+                    flowerCnt++;
+                    cnt = 0; 
+                }
+            }
+            else
+            {
+                cnt = 0; 
+            }
+        }
+
+        if (flowerCnt >= m)
+        {
+            ans = mid;
+            e = mid - 1;
+        }
+        else
+        {
+            s = mid + 1; 
+        }
+    }
+
+    cout << "Minimum days is: " << ans;
+}
+
+void findMin2(){
+    vector<int> nums = {3, 4, 5, -2, 1, 2, 3};
+    int s = 0;
+    int e = nums.size() - 1;
+    int mini = INT_MAX;
+    int minIndex = -1;
+
+    while(s <= e){
+        int mid = s + ((e - s)/2);
+
+        if(nums[s] <= nums[mid]){
+            if(nums[s] < mini){
+                mini = nums[s];
+                minIndex = s;
+            }
+            s = mid + 1;
+        }
+
+        if(nums[mid] <= nums[e]){
+            if(nums[mid] < mini){
+                mini = nums[mid];
+                minIndex = mid;
+            }
+            e = mid - 1;
+        }
+    }
+
+    cout << "The minimum number of when array is rotated: " << minIndex << " " << mini;
+}
 
 int main()
 {
-    vector<int> nums = {1, 3, 5};
-    int ans = search2(nums, 3);
-    cout << ans;
+    findMin2();
     return 0;
 }
