@@ -1113,12 +1113,12 @@ void minDays()
                 if (cnt == k)
                 {
                     flowerCnt++;
-                    cnt = 0; 
+                    cnt = 0;
                 }
             }
             else
             {
-                cnt = 0; 
+                cnt = 0;
             }
         }
 
@@ -1129,33 +1129,39 @@ void minDays()
         }
         else
         {
-            s = mid + 1; 
+            s = mid + 1;
         }
     }
 
     cout << "Minimum days is: " << ans;
 }
 
-void findMin2(){
+void findMin2()
+{
     vector<int> nums = {3, 4, 5, -2, 1, 2, 3};
     int s = 0;
     int e = nums.size() - 1;
     int mini = INT_MAX;
     int minIndex = -1;
 
-    while(s <= e){
-        int mid = s + ((e - s)/2);
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
 
-        if(nums[s] <= nums[mid]){
-            if(nums[s] < mini){
+        if (nums[s] <= nums[mid])
+        {
+            if (nums[s] < mini)
+            {
                 mini = nums[s];
                 minIndex = s;
             }
             s = mid + 1;
         }
 
-        if(nums[mid] <= nums[e]){
-            if(nums[mid] < mini){
+        if (nums[mid] <= nums[e])
+        {
+            if (nums[mid] < mini)
+            {
                 mini = nums[mid];
                 minIndex = mid;
             }
@@ -1166,8 +1172,131 @@ void findMin2(){
     cout << "The minimum number of when array is rotated: " << minIndex << " " << mini;
 }
 
+void sqrt()
+{
+    int x = 0;
+    int ans = 0;
+    int s = 1;
+    int e = x / 2;
+    if (x == 1)
+        return;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+        long long val = static_cast<long long>(mid) * mid;
+
+        if (val <= x)
+        {
+            ans = mid;
+            s = mid + 1;
+        }
+        else
+        {
+            e = mid - 1;
+        }
+    }
+
+    cout << "The sqrt is: " << ans;
+}
+
+void minDays2()
+{
+    vector<int> nums = {7,7,7,7,12,7,7};
+    int m = 2;
+    int k = 3;
+    int n = nums.size();
+    int mini = INT_MAX;
+    int maxi = INT_MIN;
+
+    for(int i = 0; i < n; i++){
+        maxi = max(maxi, nums[i]);
+        mini = min(mini, nums[i]);
+    }
+
+    int s = mini;
+    int e = maxi;
+    int minDay = -1;
+
+    while(s <= e){
+        int mid = s + ((e - s)/2);
+        int cnt = 0;
+        int bouquetCnt = 0;
+
+        for(int i = 0; i < n; i++){
+            if(nums[i] <= mid){
+                cnt++;
+                if(cnt == k){
+                    bouquetCnt++;
+                    cnt = 0;
+                }
+            }
+
+            else{
+                cnt = 0;
+            }
+        }
+
+        if(bouquetCnt >= m){
+            minDay = mid;
+            e = mid - 1;
+        }
+        else{
+            s = mid + 1;
+        }
+    }
+
+    cout << "Min days is: " << minDay;
+}
+
+int singleNonDuplicate(vector<int>& nums) {
+        int n = nums.size();
+
+        if (n == 1) {
+            return nums[0];
+        }
+
+        if (nums[0] != nums[1]) {
+            return nums[0];
+        }
+
+        if (nums[n - 1] != nums[n - 2]) {
+            return nums[n - 1];
+        }
+
+        int s = 1;
+        int e = n - 2;
+
+        while (s <= e) {
+            int mid = s + ((e - s) / 2);
+
+            if (nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1]) {
+                return nums[mid];
+            }
+
+            else if (nums[mid] == nums[mid - 1]) {
+                if (mid % 2 == 1) {
+                    s = mid + 1;
+                } else {
+                    e = mid - 1;
+                }
+            }
+
+            else if (nums[mid] == nums[mid + 1]) {
+                if (mid % 2 == 1) {
+                    e = mid - 1;
+                } else {
+                    s = mid + 1;
+                }
+            }
+        }
+
+        return -1;
+    }
+
+
 int main()
 {
-    findMin2();
+    minDays2();
     return 0;
 }
