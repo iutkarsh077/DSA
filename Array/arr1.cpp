@@ -1202,14 +1202,15 @@ void sqrt()
 
 void minDays2()
 {
-    vector<int> nums = {7,7,7,7,12,7,7};
+    vector<int> nums = {7, 7, 7, 7, 12, 7, 7};
     int m = 2;
     int k = 3;
     int n = nums.size();
     int mini = INT_MAX;
     int maxi = INT_MIN;
 
-    for(int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++)
+    {
         maxi = max(maxi, nums[i]);
         mini = min(mini, nums[i]);
     }
@@ -1218,30 +1219,37 @@ void minDays2()
     int e = maxi;
     int minDay = -1;
 
-    while(s <= e){
-        int mid = s + ((e - s)/2);
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
         int cnt = 0;
         int bouquetCnt = 0;
 
-        for(int i = 0; i < n; i++){
-            if(nums[i] <= mid){
+        for (int i = 0; i < n; i++)
+        {
+            if (nums[i] <= mid)
+            {
                 cnt++;
-                if(cnt == k){
+                if (cnt == k)
+                {
                     bouquetCnt++;
                     cnt = 0;
                 }
             }
 
-            else{
+            else
+            {
                 cnt = 0;
             }
         }
 
-        if(bouquetCnt >= m){
+        if (bouquetCnt >= m)
+        {
             minDay = mid;
             e = mid - 1;
         }
-        else{
+        else
+        {
             s = mid + 1;
         }
     }
@@ -1249,54 +1257,103 @@ void minDays2()
     cout << "Min days is: " << minDay;
 }
 
-int singleNonDuplicate(vector<int>& nums) {
-        int n = nums.size();
+int singleNonDuplicate(vector<int> &nums)
+{
+    int n = nums.size();
 
-        if (n == 1) {
-            return nums[0];
-        }
-
-        if (nums[0] != nums[1]) {
-            return nums[0];
-        }
-
-        if (nums[n - 1] != nums[n - 2]) {
-            return nums[n - 1];
-        }
-
-        int s = 1;
-        int e = n - 2;
-
-        while (s <= e) {
-            int mid = s + ((e - s) / 2);
-
-            if (nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1]) {
-                return nums[mid];
-            }
-
-            else if (nums[mid] == nums[mid - 1]) {
-                if (mid % 2 == 1) {
-                    s = mid + 1;
-                } else {
-                    e = mid - 1;
-                }
-            }
-
-            else if (nums[mid] == nums[mid + 1]) {
-                if (mid % 2 == 1) {
-                    e = mid - 1;
-                } else {
-                    s = mid + 1;
-                }
-            }
-        }
-
-        return -1;
+    if (n == 1)
+    {
+        return nums[0];
     }
 
+    if (nums[0] != nums[1])
+    {
+        return nums[0];
+    }
+
+    if (nums[n - 1] != nums[n - 2])
+    {
+        return nums[n - 1];
+    }
+
+    int s = 1;
+    int e = n - 2;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        if (nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1])
+        {
+            return nums[mid];
+        }
+
+        else if (nums[mid] == nums[mid - 1])
+        {
+            if (mid % 2 == 1)
+            {
+                s = mid + 1;
+            }
+            else
+            {
+                e = mid - 1;
+            }
+        }
+
+        else if (nums[mid] == nums[mid + 1])
+        {
+            if (mid % 2 == 1)
+            {
+                e = mid - 1;
+            }
+            else
+            {
+                s = mid + 1;
+            }
+        }
+    }
+
+    return -1;
+}
+
+void smallestdivisor()
+{
+    vector<int> nums = {1,2,5,9};
+    int threshold = 6;
+    int maxi = INT_MIN;
+    int n = nums.size();
+
+    for (int i = 0; i < n; i++)
+    {
+        maxi = max(maxi, nums[i]);
+    }
+
+    int s = 1;
+    int e = maxi;
+    int ans = -1;
+
+    while(s <= e){
+        int mid = s + ((e - s)/2);
+        int sum = 0;
+        for(int i = 0; i < n; i++){
+            int divison = ceil((double)nums[i]/mid);
+            sum += divison;
+        }
+
+        if(sum <= threshold){
+            ans = mid;
+            e = mid - 1;
+        }
+        else{
+            s = mid + 1;
+        }
+    }
+
+    cout << ans;
+}
 
 int main()
 {
-    minDays2();
+    smallestdivisor();
     return 0;
 }
