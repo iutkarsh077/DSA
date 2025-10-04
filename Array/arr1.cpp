@@ -1352,6 +1352,35 @@ void smallestdivisor()
     cout << ans;
 }
 
+int findKthPositive(vector<int>& nums, int k) {
+        int missing = 0;
+        int val = 1;
+        int i = 0;
+
+        while(missing < k && i < nums.size()){
+            if(val != nums[i]){
+                missing++;
+                if(missing == k) return val;
+                val++;
+            }
+
+            if(val == nums[i]){
+                val++;
+                i++;
+            }
+        }
+
+        if(missing == k) return val;
+
+        while(missing < k){
+            missing++;
+            if (missing == k) return val;
+            val++;
+        }
+
+        return val;
+    }
+
 int main()
 {
     smallestdivisor();
