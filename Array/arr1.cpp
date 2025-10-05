@@ -1381,6 +1381,30 @@ int findKthPositive(vector<int>& nums, int k) {
         return val;
     }
 
+vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
+        int maxi = -1;
+        int index = -1;
+        int row = mat.size();
+        int column = mat[0].size();
+
+        for(int i = 0; i < row; i++){
+            int cnt = 0;
+            for(int j = 0; j < column; j++){
+                if(mat[i][j] == 1){
+                    cnt++;
+                }
+            }
+
+            if(cnt > maxi){
+                maxi = max(maxi, cnt);
+                index = i;
+            }
+        }
+
+        return { index, maxi };
+
+    }
+
 int main()
 {
     smallestdivisor();
