@@ -1405,8 +1405,26 @@ vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
 
     }
 
+
+void removeOuterParentheses(){
+    string s = "(()())(())(()(()))";
+    string ans = "";
+    int cnt = -1;
+    for(int i = 0; i < s.size(); i++){
+       if(s[i] == '(') cnt++;
+
+            if(s[i] == ')') cnt--;
+
+            if(s[i] == '(' && cnt >= 1) ans += s[i];
+
+            if(s[i] == ')' && cnt >= 0) ans += s[i];
+    }
+
+    cout << ans;
+}
+
 int main()
 {
-    smallestdivisor();
+    removeOuterParentheses();
     return 0;
 }
