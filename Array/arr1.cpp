@@ -1318,7 +1318,7 @@ int singleNonDuplicate(vector<int> &nums)
 
 void smallestdivisor()
 {
-    vector<int> nums = {1,2,5,9};
+    vector<int> nums = {1, 2, 5, 9};
     int threshold = 6;
     int maxi = INT_MIN;
     int n = nums.size();
@@ -1332,19 +1332,23 @@ void smallestdivisor()
     int e = maxi;
     int ans = -1;
 
-    while(s <= e){
-        int mid = s + ((e - s)/2);
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
         int sum = 0;
-        for(int i = 0; i < n; i++){
-            int divison = ceil((double)nums[i]/mid);
+        for (int i = 0; i < n; i++)
+        {
+            int divison = ceil((double)nums[i] / mid);
             sum += divison;
         }
 
-        if(sum <= threshold){
+        if (sum <= threshold)
+        {
             ans = mid;
             e = mid - 1;
         }
-        else{
+        else
+        {
             s = mid + 1;
         }
     }
@@ -1352,75 +1356,120 @@ void smallestdivisor()
     cout << ans;
 }
 
-int findKthPositive(vector<int>& nums, int k) {
-        int missing = 0;
-        int val = 1;
-        int i = 0;
+int findKthPositive(vector<int> &nums, int k)
+{
+    int missing = 0;
+    int val = 1;
+    int i = 0;
 
-        while(missing < k && i < nums.size()){
-            if(val != nums[i]){
-                missing++;
-                if(missing == k) return val;
-                val++;
-            }
-
-            if(val == nums[i]){
-                val++;
-                i++;
-            }
-        }
-
-        if(missing == k) return val;
-
-        while(missing < k){
+    while (missing < k && i < nums.size())
+    {
+        if (val != nums[i])
+        {
             missing++;
-            if (missing == k) return val;
+            if (missing == k)
+                return val;
             val++;
         }
 
-        return val;
+        if (val == nums[i])
+        {
+            val++;
+            i++;
+        }
     }
 
-vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
-        int maxi = -1;
-        int index = -1;
-        int row = mat.size();
-        int column = mat[0].size();
+    if (missing == k)
+        return val;
 
-        for(int i = 0; i < row; i++){
-            int cnt = 0;
-            for(int j = 0; j < column; j++){
-                if(mat[i][j] == 1){
-                    cnt++;
-                }
-            }
+    while (missing < k)
+    {
+        missing++;
+        if (missing == k)
+            return val;
+        val++;
+    }
 
-            if(cnt > maxi){
-                maxi = max(maxi, cnt);
-                index = i;
+    return val;
+}
+
+vector<int> rowAndMaximumOnes(vector<vector<int>> &mat)
+{
+    int maxi = -1;
+    int index = -1;
+    int row = mat.size();
+    int column = mat[0].size();
+
+    for (int i = 0; i < row; i++)
+    {
+        int cnt = 0;
+        for (int j = 0; j < column; j++)
+        {
+            if (mat[i][j] == 1)
+            {
+                cnt++;
             }
         }
 
-        return { index, maxi };
-
+        if (cnt > maxi)
+        {
+            maxi = max(maxi, cnt);
+            index = i;
+        }
     }
 
+    return {index, maxi};
+}
 
-void removeOuterParentheses(){
+void removeOuterParentheses()
+{
     string s = "(()())(())(()(()))";
     string ans = "";
     int cnt = -1;
-    for(int i = 0; i < s.size(); i++){
-       if(s[i] == '(') cnt++;
+    for (int i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '(')
+            cnt++;
 
-            if(s[i] == ')') cnt--;
+        if (s[i] == ')')
+            cnt--;
 
-            if(s[i] == '(' && cnt >= 1) ans += s[i];
+        if (s[i] == '(' && cnt >= 1)
+            ans += s[i];
 
-            if(s[i] == ')' && cnt >= 0) ans += s[i];
+        if (s[i] == ')' && cnt >= 0)
+            ans += s[i];
     }
 
     cout << ans;
+}
+
+string reverseWords(string s)
+{
+    int i = 0;
+    int n = s.size();
+    string result = "";
+    while (i < n)
+    {
+        if (s[i] == ' ')
+        {
+            i++;
+            continue;
+        }
+
+        string ans = "";
+        while (s[i] != ' ' && i < n)
+        {
+            ans += s[i];
+            i++;
+        }
+
+        result = ans + ' ' + result;
+    }
+
+    result.pop_back();
+
+    return result;
 }
 
 int main()
