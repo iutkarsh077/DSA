@@ -1472,23 +1472,44 @@ string reverseWords(string s)
     return result;
 }
 
- string largestOddNumber(string num) {
-        string ans = "";
+string largestOddNumber(string num)
+{
+    string ans = "";
 
-        for(int i = num.size() - 1; i >= 0; i--){
-            int digit = num[i] - '0';
+    for (int i = num.size() - 1; i >= 0; i--)
+    {
+        int digit = num[i] - '0';
 
-            if(digit % 2 != 0){
-                ans = num.substr(0, i  + 1);
-                break;
-            }
+        if (digit % 2 != 0)
+        {
+            ans = num.substr(0, i + 1);
+            break;
         }
-
-        return ans;
     }
+
+    return ans;
+}
+
+bool rotateString(string s, string goal)
+{
+    for (int i = 0; i < s.size(); i++)
+    {
+        rotate(s.begin(), s.begin() + 1, s.end());
+        if (s == goal)
+            return true;
+    }
+
+    return false;
+}
 
 int main()
 {
-    removeOuterParentheses();
+    vector<int> nums = {1, 2, 3, 4, 5};
+    rotate(nums.begin(), nums.begin() + 2, nums.end());
+
+    for (int i : nums)
+    {
+        cout << i << " ";
+    }
     return 0;
 }
