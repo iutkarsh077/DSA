@@ -1502,14 +1502,99 @@ bool rotateString(string s, string goal)
     return false;
 }
 
+bool isAnagram(string s, string t)
+{
+    unordered_map<char, int> mp1;
+    unordered_map<char, int> mp2;
+
+    if (s.size() != t.size())
+        return false;
+
+    for (int i = 0; i < s.size(); i++)
+    {
+        mp1[s[i]]++;
+    }
+
+    for (int i = 0; i < t.size(); i++)
+    {
+        mp2[t[i]]++;
+    }
+
+    for (auto i = mp1.begin(); i != mp1.end(); i++)
+    {
+        char val = i->first;
+        if (mp1.find(val) == mp2.end())
+        {
+            return false;
+        }
+        if (mp1[val] != mp2[val])
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int maxDepth(string s) {
+        int maxi = INT_MIN;
+        int cnt = 0;
+        for(int i = 0; i < s.size(); i++){
+            if(s[i] == '('){
+                cnt++;
+            }
+
+            maxi = max(maxi, cnt);
+
+            if(s[i] == ')'){
+                cnt--;
+            }
+        }
+
+        return maxi;
+    }
+
+int romanToInt(string s) {
+        int i = 0;
+        int val = 0;
+        unordered_map<string, int> mp;
+
+        mp.insert({"I", 1});
+        mp.insert({"V", 5});
+        mp.insert({"X", 10});
+        mp.insert({"L", 50});
+        mp.insert({"C", 100});
+        mp.insert({"D", 500});
+        mp.insert({"M", 1000});
+
+        string x1;
+        string x2;
+        while (i < s.size()) {
+            x1 = s.substr(i, 1);
+            x2 = s.substr(i + 1, 1);
+
+            auto it = mp.find(x1);
+            auto it2 = mp.find(x2);
+
+            if (it2 != mp.end() && it2->second > it->second) {
+                int ans = it2->second - it->second;
+                val = val + ans;
+                i = i + 2;
+            }
+
+            else if (it != mp.end()) {
+                val = val + it->second;
+                i = i + 1;
+            }
+        }
+
+        return val;
+    }
+
 int main()
 {
-    vector<int> nums = {1, 2, 3, 4, 5};
-    rotate(nums.begin(), nums.begin() + 2, nums.end());
-
-    for (int i : nums)
-    {
-        cout << i << " ";
-    }
+   string a = "tree";
+   string val = a.substr(1);
+   cout << val;
     return 0;
 }
