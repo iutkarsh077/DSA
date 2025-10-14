@@ -122,7 +122,7 @@ void deleteNode(int data, int pos, Node *&head, Node *&tail)
     delete deleteElement;
 }
 
-int main()
+int main2()
 {
     Node *head = nullptr;
     Node *tail = head;
@@ -139,4 +139,22 @@ int main()
          << "Head is: " << head->data << endl;
     cout << "Tail is: " << tail->data << endl;
     return 0;
+}
+
+class DoublyEndedNode{
+    public:
+    int data;
+    DoublyEndedNode *prev;
+    DoublyEndedNode *next;
+
+    DoublyEndedNode(int data){
+        this->data = data;
+        this->prev = nullptr;
+        this->next = nullptr;
+    }
+};
+
+
+int main(){
+    
 }
