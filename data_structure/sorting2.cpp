@@ -99,7 +99,8 @@ void MergeSort(vector<int> &arr, int low, int mid, int high)
         right++;
     }
 
-    for(int i = low; i <= high; i++){
+    for (int i = low; i <= high; i++)
+    {
         arr[i] = temp[i - low];
     }
 }
@@ -116,10 +117,58 @@ void divide(vector<int> &arr, int low, int high)
     MergeSort(arr, low, mid, high);
 }
 
+int partition(vector<int> &arr, int low, int high)
+{
+    int i = low;
+    int j = high;
+
+    int pivot = arr[i];
+    int cnt = 0;
+    int tracker = low + 1;
+    while (tracker <= high)
+    {
+        if (pivot >= arr[tracker])
+            cnt++;
+        tracker++;
+    }
+
+    int pivotIndex = cnt + i;
+
+    swap(arr[pivotIndex], arr[low]);
+
+    while (i < pivotIndex && j > pivotIndex)
+    {
+        while (arr[i] <= pivot)
+            i++;
+
+        while (arr[j] >= pivot)
+            j--;
+
+        if (i < pivotIndex && j > pivotIndex)
+        {
+            swap(arr[i], arr[j]);
+            i++;
+            j--;
+        }
+    }
+
+    return pivotIndex;
+}
+
+void quickSort(vector<int> &arr, int low, int high)
+{
+    if (low >= high)
+        return;
+
+    int p = partition(arr, low, high);
+    quickSort(arr, low, p - 1);
+    quickSort(arr, p + 1, high);
+}
+
 int main()
 {
-    vector<int> arr = {5, 1, 6, 2, 8, 4, 4, 1, 1, 8};
-    divide(arr, 0, arr.size() - 1);
+    vector<int> arr = {9};
+    quickSort(arr, 0, arr.size() - 1);
     print(arr);
     return 0;
 }
