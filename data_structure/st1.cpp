@@ -1,46 +1,78 @@
-#include<bits/stdc++.h>
-#include<iostream>
+#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
-int nextElement(vector<int> &nums2, int value){
-        bool found = false;
-        for(int i = 0; i < nums2.size(); i++){
-            if(nums2[i] == value){
-                found = true;
-                continue;
+int nextElement(vector<int> &nums2, int value)
+{
+    bool found = false;
+    for (int i = 0; i < nums2.size(); i++)
+    {
+        if (nums2[i] == value)
+        {
+            found = true;
+            continue;
+        }
+        if (found == true && nums2[i] > value)
+        {
+            return nums2[i];
+        }
+    }
+
+    return -1;
+}
+vector<int> nextGreaterElement(vector<int> &nums1, vector<int> &nums2)
+{
+    vector<int> result;
+
+    for (int i = 0; i < nums1.size(); i++)
+    {
+        int ans = nextElement(nums2, nums1[i]);
+        result.push_back(ans);
+    }
+
+    return result;
+}
+
+vector<int> dailyTemperatures(vector<int>& temp) {
+        int n = temp.size();
+        vector<int> result(n, 0);
+        stack<vector<int>> st;
+
+        for(int i = n - 1; i >= 0; i--){
+           while(!st.empty()){
+            vector<int> val = st.top();
+            if(val[0] > temp[i]){
+                int distance = val[1] - i;
+                result[i] = distance;
+                break;
             }
-            if(found == true && nums2[i] > value){
-                return nums2[i];
-            } 
+            st.pop();
+           }
+           vector<int> values = { temp[i], i };
+           st.push(values);
         }
 
-        return -1;
-    }
-    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-            vector<int> result;
-
-            for(int i = 0; i < nums1.size(); i++){
-                int ans = nextElement(nums2, nums1[i]);
-                result.push_back(ans);
-            }
-
-            return result;
+        return result;
     }
 
-class MyStack{
-    public:
+class MyStack
+{
+public:
     int *arr;
     int size;
     int top;
 
-    MyStack(int size1){
+    MyStack(int size1)
+    {
         this->arr = new int[size1];
         this->size = size1;
         this->top = -1;
     }
 
-    void push(int data){
-        if(top >= size){
+    void push(int data)
+    {
+        if (top >= size)
+        {
             cout << "Stack is already full" << endl;
             return;
         }
@@ -49,9 +81,10 @@ class MyStack{
         arr[top] = data;
     }
 
-
-    void pop(){
-        if(top < 0){
+    void pop()
+    {
+        if (top < 0)
+        {
             cout << "Stack Underflow" << endl;
             return;
         }
@@ -59,18 +92,20 @@ class MyStack{
         top--;
     }
 
-
-    void peak(){
-        if(top < 0){
+    void peak()
+    {
+        if (top < 0)
+        {
             cout << "Stack Underflow" << endl;
             return;
         }
         cout << arr[top] << endl;
     }
 
-
-    void Length(){
-        if(top < 0){
+    void Length()
+    {
+        if (top < 0)
+        {
             cout << "Stack Underflow" << endl;
             return;
         }
@@ -79,7 +114,8 @@ class MyStack{
     }
 };
 
-int main(){
+int main()
+{
     MyStack st(5);
     st.push(1);
     st.push(2);
