@@ -12,7 +12,7 @@ void RightHighest(){
         if(nums[i] > maxi){
             maxi = nums[i];
         }
-        nums[i] = temp;
+        result[i] = temp;
     }
 
 
@@ -21,7 +21,26 @@ void RightHighest(){
     }
 }
 
+void FlipTheArray(){
+    vector<int> arr = {4, 5, 1, 2, 3};
+
+    int s = 0;
+    int e = arr.size() - 1;
+
+    while(s < e){
+        int temp = arr[s];
+        arr[s] = arr[e];
+        arr[e] = temp;
+        s++;
+        e--;
+    }
+
+    for(int i = 0; i < arr.size(); i++){
+        cout << arr[i] << " ";
+    }
+}
+
 int main(){
-    RightHighest();
+    FlipTheArray();
     return 0;
 }
