@@ -412,8 +412,32 @@ void HollowRectangle(){
     }
 }
 
+void gcd(){
+    int a = 40;
+    int b = 20;
+    int mini = min(a, b);
+
+    while(mini > 0){
+        if(a % mini == 0 && b % mini == 0){
+            cout << mini;
+            break;
+        }
+        mini = mini - 1;
+    }
+}
+
+void allDivisor(){
+    int n = 36;
+
+    for(int i = 1; i <= n; i++){
+        if(n % i == 0){
+            cout << i << " ";
+        }
+    }
+}
+
 int main()
 {
-    HollowRectangle();
+    allDivisor();
     return 0;
 }
