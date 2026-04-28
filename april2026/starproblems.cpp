@@ -159,9 +159,69 @@ void Triangle9(int n)
     }
 }
 
+void Triangle10(int n){
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j <= i; j++){
+            cout << j + 1;
+        }
+
+        for(int j = i + 1; j <= (n * 2) - 2 - i; j++){
+            cout << "_";
+        }
+
+        for(int j = i + 1; j > 0; j--){
+            cout << j;
+        }
+        cout << endl;
+    }
+}
+
+void Triangle11(int n){
+    int count = 1;
+
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j <= i; j++){
+            cout << count << " ";
+            count++;
+        }
+        cout << endl;
+    }
+}
+
+void Triangle12(int n){
+    for(int i = 0; i < n; i++){
+        int val = 65;
+        for(int j = 0; j <= i; j++){
+            cout << char(val);
+            val++;
+        }
+        cout << endl;
+    }
+}
+
+void Triangle13(int n){
+    for(int i = 0; i < n; i++){
+        int val = 65;
+        for(int j = 0; j < n - i; j++){
+            cout << char(val);
+            val++;
+        }
+        cout << endl;
+    }
+}
+
+void Triangle14(int n){
+    for(int i = 0; i < n; i++){
+        int val = 65;
+        for(int j = 0; j <= i; j++){
+            cout << char(val + i);
+        }
+        cout << endl;
+    }
+}
 
 int main()
 {
-    Triangle9(10);
+    Triangle14(5);
     return 0;
 }
