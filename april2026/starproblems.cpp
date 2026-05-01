@@ -241,7 +241,8 @@ void Triangle15(int n)
 {
     for (int i = 0; i < n; i++)
     {
-        for(int j = 0; j < n - i; j++){
+        for (int j = 0; j < n - i; j++)
+        {
             cout << '_';
         }
         int val = 65;
@@ -251,7 +252,8 @@ void Triangle15(int n)
             val++;
         }
         val = 65 + i;
-        for(int j = n; j < n + i; j++){
+        for (int j = n; j < n + i; j++)
+        {
             val--;
             cout << char(val);
         }
@@ -260,12 +262,15 @@ void Triangle15(int n)
     }
 }
 
-void Triangle16(int n){
+void Triangle16(int n)
+{
     int val = 69;
 
-    for(int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++)
+    {
         int hello = val - i;
-        for(int j = 0; j <= i; j++){
+        for (int j = 0; j <= i; j++)
+        {
             cout << char(hello) << " ";
             hello++;
         }
@@ -273,17 +278,22 @@ void Triangle16(int n){
     }
 }
 
-void Triangle17(int n){
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n - i; j++){
+void Triangle17(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n - i; j++)
+        {
             cout << '*';
         }
 
-        for(int j = 0; j < i * 2; j++){
+        for (int j = 0; j < i * 2; j++)
+        {
             cout << ' ';
         }
 
-        for(int j = 0; j < n - i; j++){
+        for (int j = 0; j < n - i; j++)
+        {
             cout << '*';
         }
         cout << endl;
@@ -291,27 +301,94 @@ void Triangle17(int n){
 
     int space = (n * 2) - 2;
 
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j <= i; j++){
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j <= i; j++)
+        {
             cout << '*';
         }
 
-        for(int j = 0; j < space; j++){
+        for (int j = 0; j < space; j++)
+        {
             cout << ' ';
         }
 
-        for(int j = 0; j <= i; j++){
+        for (int j = 0; j <= i; j++)
+        {
             cout << '*';
         }
 
         space = space - 2;
         cout << endl;
     }
+}
 
+void Triangle18(int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        int j = 0;
+        for (; j < i + 1; j++)
+        {
+            cout << '*';
+        }
+        for (; j < (2 * n) - i - 1; j++)
+        {
+            cout << " ";
+        }
+
+        for (; j < 2 * n; j++)
+        {
+            cout << '*';
+        }
+        cout << endl;
+    }
+
+    for (int i = 0; i < (2 * n); i++)
+    {
+        cout << '*';
+    }
+    cout << endl;
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            cout << '*';
+        }
+
+        for (int j = 0; j < (2 * i) + 2; j++)
+        {
+            cout << ' ';
+        }
+
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            cout << '*';
+        }
+        cout << endl;
+    }
+}
+
+void Triangle19(int n){
+    for(int i = 0; i < n - 1; i++){
+        for(int j = 0; j < n - 1; j++){
+            if(i == 0 || i == n - 2){
+                cout << "*";
+            }
+            else if(j == 0 || j == n - 2){
+                cout << "*";
+            }
+            else{
+                cout << " ";
+            }
+        }
+        cout << endl;
+    }
 }
 
 int main()
 {
-    Triangle17(6);
+    Triangle19(10);
     return 0;
 }
