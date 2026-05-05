@@ -44,8 +44,47 @@ int reverse(int x)
     return ans * isPositive;
 }
 
+int gcd(int a, int b){
+    while(a > 0 && b > 0){
+        if(a > b){
+            a = a % b;
+        }
+        else{
+            b = b % a;
+        }
+    }
+
+    cout << max(a, b);
+}
+
+void allDivisor(int n){
+    vector<int> nums;
+    for(int i = 1; i <= n; i++){
+        if(n % i == 0){
+            nums.push_back(i);
+        }
+    }
+
+    for(int i = 0; i < nums.size(); i++){
+        cout << nums[i] << " ";
+    }
+}
+
+void CheckPrimeNumber(int n){
+    for(int i = 2; i < n; i++){
+        if(n % i == 0){
+            cout << "No, its not a prime number" << endl;
+            return;
+        }
+    }
+
+    cout << "Yes, Its a prime number";
+}
+
 int main()
 {
-    CountNumber(-675675);
+    // CountNumber(-675675);
+    // gcd(12, 9);
+    CheckPrimeNumber(3);
     return 0;
 }
