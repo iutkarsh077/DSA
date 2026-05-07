@@ -222,6 +222,56 @@ void InsertionSort(vector<int> arr)
     }
 }
 
+void MergeSort(vector<int> &arr, int low, int mid, int high)
+{
+    vector<int> temp;
+
+    int i = low;
+    int j = mid + 1;
+
+    while (i <= mid && j <= high)
+    {
+        if (arr[i] <= arr[j])
+        {
+            temp.push_back(arr[i]);
+            i++;
+        }
+        else
+        {
+            temp.push_back(arr[j]);
+            j++;
+        }
+    }
+
+    while (i <= mid)
+    {
+        temp.push_back(arr[i]);
+        i++;
+    }
+
+    while (j <= high)
+    {
+        temp.push_back(arr[j]);
+        j++;
+    }
+
+    for (int i = low; i <= high; i++)
+    {
+        arr[i] = temp[i - low];
+    }
+}
+
+void Divide(vector<int> &arr, int low, int high)
+{
+    if (low >= high)
+        return;
+
+    int mid = low + ((high - low) / 2);
+    Divide(arr, low, mid);
+    Divide(arr, mid + 1, high);
+    MergeSort(arr, low, mid, high);
+}
+
 int main()
 {
     // NToOne(10);
@@ -230,12 +280,12 @@ int main()
     // int n = sizeof(arr) / sizeof(arr[0]);
     // ReverserArray(0, n - 1, arr);
 
-    // for (int i = 0; i < n; i++)
-    // {
-    //     cout << arr[i] << " ";
-    // }
-
-    vector<int> arr = {5, 2, 3, 1, 6, 6, 8, 9, 3};
-    InsertionSort(arr);
+    vector<int> arr = {4, 2, 7, 1, 5, 3};
+    int n = arr.size();
+    Divide(arr, 0, n - 1);
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
     return 0;
 }
