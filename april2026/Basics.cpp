@@ -272,6 +272,35 @@ void Divide(vector<int> &arr, int low, int high)
     MergeSort(arr, low, mid, high);
 }
 
+void RecursiveBubbleSort2(vector<int> &arr, int i, int j)
+{
+    if (j >= arr.size() - i - 1)
+        return;
+
+    if (arr[j] > arr[j + 1])
+    {
+        swap(arr[j], arr[j + 1]);
+    }
+
+    RecursiveBubbleSort2(arr, i, j + 1);
+}
+
+void RecursiveBubbleSort1(vector<int> &arr)
+{
+    for (int i = 0; i < arr.size(); i++)
+    {
+        int j = 0;
+        RecursiveBubbleSort2(arr, i, j);
+    }
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        cout << arr[i] << " ";
+    }
+}
+
+
+
 int main()
 {
     // NToOne(10);
@@ -280,12 +309,14 @@ int main()
     // int n = sizeof(arr) / sizeof(arr[0]);
     // ReverserArray(0, n - 1, arr);
 
-    vector<int> arr = {4, 2, 7, 1, 5, 3};
-    int n = arr.size();
-    Divide(arr, 0, n - 1);
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << " ";
-    }
+    vector<int> arr = {4, 1};
+    // int n = arr.size();
+    // Divide(arr, 0, n - 1);
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cout << arr[i] << " ";
+    // }
+
+    RecursiveBubbleSort1(arr);
     return 0;
 }
