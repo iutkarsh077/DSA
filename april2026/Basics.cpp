@@ -299,7 +299,26 @@ void RecursiveBubbleSort1(vector<int> &arr)
     }
 }
 
+vector<vector<int>> generate(int n)
+{
+    vector<vector<int>> nums;
 
+    for (int i = 0; i < n; i++)
+    {
+        vector<int> ans(i + 1, 1);
+        for (int j = 0; j <= i; j++)
+        {
+            if (j != 0 && j != i)
+            {
+                int val = nums[i - 1][j - 1] + nums[i - 1][j];
+                ans[j] = val;
+            }
+        }
+        nums.push_back(ans);
+    }
+
+    return nums;
+}
 
 int main()
 {
