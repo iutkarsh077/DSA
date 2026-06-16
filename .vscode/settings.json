@@ -71,5 +71,11 @@
         "typeinfo": "cpp",
         "valarray": "cpp"
     },
-    "C_Cpp.default.compilerPath": "C:/MinGW/bin/g++.exe"
+    "C_Cpp.default.compilerPath": "C:/MinGW/bin/g++.exe",
+    "code-runner.showRunIconInEditorTitleMenu": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.runInTerminal": true,
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && C:\\MinGW\\bin\\g++.exe -std=c++17 \"$fileName\" -o \"$fileNameWithoutExt.exe\" && .\\$fileNameWithoutExt.exe"
+    }
 }
