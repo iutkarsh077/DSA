@@ -53,6 +53,34 @@ void InsertAtTail(int data, Node *&head, Node *&tail)
     tail = temp;
 }
 
+void insertAtAnyPosition(Node *&head, Node *&tail, int data, int pos)
+{
+    if (head == nullptr || pos == 1)
+    {
+        InsertAtHead(data, head);
+        return;
+    }
+
+    Node *tracker = head;
+    int count = 1;
+    while (count < pos - 1 && tracker != nullptr)
+    {
+        tracker = tracker->next;
+        count++;
+    }
+
+    if (tracker == nullptr || tracker->next == nullptr)
+    {
+        InsertAtTail(data, head, tail);
+        return;
+    }
+
+    Node *temp = new Node(data);
+    temp->next = tracker->next;
+    tracker->next = temp;
+    return;
+}
+
 int main()
 {
     Node *head = nullptr;
@@ -68,6 +96,8 @@ int main()
     InsertAtTail(3, head, tail);
     InsertAtTail(4, head, tail);
     InsertAtTail(5, head, tail);
+
+    insertAtAnyPosition(head, tail, 78, 8989898);
     PrintNode(head);
     return 0;
 }
