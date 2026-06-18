@@ -81,6 +81,59 @@ void insertAtAnyPosition(Node *&head, Node *&tail, int data, int pos)
     return;
 }
 
+int LengthofLL(Node *head)
+{
+    Node *tracker = head;
+    int count = 1;
+    while (tracker != nullptr)
+    {
+        tracker = tracker->next;
+        count = count + 1;
+    }
+}
+
+void deleteNode1(Node *&head, Node *&tail, int pos)
+{
+    if (pos == 1)
+    {
+        Node *deleteNode = head;
+        head = head->next;
+        deleteNode->next = nullptr;
+        delete deleteNode;
+        return;
+    }
+
+
+    Node *tracker = head;
+    int count = 1;
+
+    while (tracker != nullptr && count < pos - 1)
+    {
+        tracker = tracker->next;
+        count++;
+    }
+
+    if(tracker->next == nullptr){
+        cout << "The Length of Linked list is smaller then your position";
+        return;
+    }
+
+    if (tracker->next->next == nullptr)
+    {
+        Node *deleteNode = tail;
+        tail = tracker;
+        tail->next = nullptr;
+        delete deleteNode;
+        return;
+    }
+
+    Node *deleteNode = tracker->next;
+    tracker->next = deleteNode->next;
+    deleteNode->next = nullptr;
+    delete deleteNode;
+    return;
+}
+
 int main()
 {
     Node *head = nullptr;
@@ -96,8 +149,8 @@ int main()
     InsertAtTail(3, head, tail);
     InsertAtTail(4, head, tail);
     InsertAtTail(5, head, tail);
-
-    insertAtAnyPosition(head, tail, 78, 8989898);
+    insertAtAnyPosition(head, tail, 78, 2);
+    deleteNode1(head, tail, 7);
     PrintNode(head);
     return 0;
 }
