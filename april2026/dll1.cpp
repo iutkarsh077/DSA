@@ -41,6 +41,29 @@ void printNode(Node *head){
     }
 }
 
+void deleteHead(Node *&head){
+    Node *deleteNode = head;
+    head = head->next;
+    head->prev = nullptr;
+    deleteNode->next = nullptr;
+    delete deleteNode;
+}
+
+void reverseLL(Node *&head, Node *&tail){
+    Node *curr = head;
+    Node *prev = nullptr;
+    tail = head;
+    while(curr != nullptr){
+        Node *forward = curr->next;
+        curr->prev = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = forward;
+    }
+
+    head = prev;
+}
+
 int main()
 {
     Node *head = nullptr;
@@ -49,6 +72,8 @@ int main()
     InsertAtHead(2, head);
     InsertAtHead(3, head);
     InsertAtHead(4, head);
+    // deleteHead(head);
+    reverseLL(head, tail);
     printNode(head);
     cout << "\n\n";
     cout << "Head is: " << head->val;
