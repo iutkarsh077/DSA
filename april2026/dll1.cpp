@@ -1,4 +1,5 @@
 #include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Node
@@ -32,16 +33,19 @@ void InsertAtHead(int data, Node *&head)
     return;
 }
 
-void printNode(Node *head){
+void printNode(Node *head)
+{
     Node *temp = head;
 
-    while(temp != nullptr){
+    while (temp != nullptr)
+    {
         cout << temp->val << " ";
         temp = temp->next;
     }
 }
 
-void deleteHead(Node *&head){
+void deleteHead(Node *&head)
+{
     Node *deleteNode = head;
     head = head->next;
     head->prev = nullptr;
@@ -49,11 +53,13 @@ void deleteHead(Node *&head){
     delete deleteNode;
 }
 
-void reverseLL(Node *&head, Node *&tail){
+void reverseLL(Node *&head, Node *&tail)
+{
     Node *curr = head;
     Node *prev = nullptr;
     tail = head;
-    while(curr != nullptr){
+    while (curr != nullptr)
+    {
         Node *forward = curr->next;
         curr->prev = curr->next;
         curr->next = prev;
@@ -62,6 +68,84 @@ void reverseLL(Node *&head, Node *&tail){
     }
 
     head = prev;
+}
+
+int getLength(Node *head)
+{
+    int cnt = 0;
+    while (head != nullptr)
+    {
+        cnt++;
+        head = head->next;
+    }
+    return cnt;
+}
+Node *getIntersectionNode(Node *headA, Node *headB)
+{
+    int first = getLength(headA);
+    int second = getLength(headB);
+
+    Node *firstNode = headA;
+    Node *secondNode = headB;
+    if (first > second)
+    {
+        int remaining = first - second;
+        while (remaining > 0)
+        {
+            firstNode = firstNode->next;
+            remaining--;
+        }
+    }
+    else
+    {
+        int remaining = second - first;
+        while (remaining > 0)
+        {
+            secondNode = secondNode->next;
+            remaining--;
+        }
+    }
+
+    while (firstNode != nullptr && secondNode != nullptr)
+    {
+        if (firstNode == secondNode)
+        {
+            return firstNode;
+        }
+        firstNode = firstNode->next;
+        secondNode = secondNode->next;
+    }
+
+    return nullptr;
+}
+
+Node *sortList(Node *head)
+{
+    vector<int> nums;
+    Node *temp = head;
+
+    while (temp != nullptr)
+    {
+        nums.push_back(temp->val);
+        temp = temp->next;
+    }
+
+    sort(nums.begin(), nums.end());
+    if (nums.size() == 0)
+        return nullptr;
+    Node *hello = new Node(nums[0]);
+    Node *tail = hello;
+
+    int i = 1;
+    while (i < nums.size())
+    {
+        Node *second = new Node(nums[i]);
+        tail->next = second;
+        tail = second;
+        i++;
+    }
+
+    return hello;
 }
 
 int main()
