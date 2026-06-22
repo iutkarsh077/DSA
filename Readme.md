@@ -1,0 +1,1 @@
+# This repository represents my consistency in coding every day.
