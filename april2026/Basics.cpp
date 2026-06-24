@@ -369,6 +369,49 @@ int lowerBound(vector<int> &arr, int target)
     return ans;
 }
 
+int myAtoi(string nums)
+{
+    int i = 0;
+    int sign = 1;
+
+    while (nums[i] == ' ')
+    {
+        i++;
+    }
+
+    while (nums[i] == '-' || nums[i] == '+')
+    {
+        if (nums[i] == '+')
+        {
+            sign = 1 * sign;
+            i++;
+            break;
+        }
+        if (nums[i] == '-')
+        {
+            sign = -1 * sign;
+            i++;
+            break;
+        }
+    }
+
+    long long val = 0;
+
+    while (isdigit(nums[i]))
+    {
+        int digit = nums[i] - '0';
+        val = (val * 10) + digit;
+        if (sign * val > INT_MAX)
+            return INT_MAX;
+        if (sign * val < INT_MIN)
+            return INT_MIN;
+        i++;
+    }
+
+    val = val * sign;
+    return val;
+}
+
 int main()
 {
     // NToOne(10);
