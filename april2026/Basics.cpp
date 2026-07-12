@@ -443,6 +443,25 @@ double myPow(double x, int n)
     return recur(x, dupN);
 }
 
+
+void rotate(vector<vector<int>>& matrix) {
+        int rows = matrix.size();
+
+        for(int i = 0; i < rows; i++){
+            for(int j = i; j < matrix[i].size(); j++){
+                int val = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = val;
+            }
+        }
+
+        for(int i = 0; i < rows; i++){
+            reverse(matrix[i].begin(), matrix[i].end());
+        }
+
+        return;
+    }
+
 int main()
 {
     // NToOne(10);
