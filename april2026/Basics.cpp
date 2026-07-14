@@ -21,15 +21,16 @@ void CountNumber(int n)
     cout << "The number " << n << " has " << cnt << " numbers";
 }
 
-
-void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        for(int i = 0; i < n; i++){
-            nums1[m + i] = nums2[i];
-        }
-
-        sort(nums1.begin(), nums1.end());
-        return;
+void merge(vector<int> &nums1, int m, vector<int> &nums2, int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        nums1[m + i] = nums2[i];
     }
+
+    sort(nums1.begin(), nums1.end());
+    return;
+}
 
 int reverse(int x)
 {
@@ -453,24 +454,58 @@ double myPow(double x, int n)
     return recur(x, dupN);
 }
 
+void rotate(vector<vector<int>> &matrix)
+{
+    int rows = matrix.size();
 
-void rotate(vector<vector<int>>& matrix) {
-        int rows = matrix.size();
-
-        for(int i = 0; i < rows; i++){
-            for(int j = i; j < matrix[i].size(); j++){
-                int val = matrix[i][j];
-                matrix[i][j] = matrix[j][i];
-                matrix[j][i] = val;
-            }
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = i; j < matrix[i].size(); j++)
+        {
+            int val = matrix[i][j];
+            matrix[i][j] = matrix[j][i];
+            matrix[j][i] = val;
         }
-
-        for(int i = 0; i < rows; i++){
-            reverse(matrix[i].begin(), matrix[i].end());
-        }
-
-        return;
     }
+
+    for (int i = 0; i < rows; i++)
+    {
+        reverse(matrix[i].begin(), matrix[i].end());
+    }
+
+    return;
+}
+
+void sortIt()
+{
+    vector<vector<int>> nums = {{1, 3}, {2, 6}, {8, 10}, {2, 4}, {15, 18}};
+
+    for(int i = 0; i < nums.size(); i++){
+        sort(nums.begin(), nums.end());
+    }
+
+
+    for(int i = 0; i < nums.size(); i++){
+        for(int j = 0; j < nums[i].size(); j++){
+            cout << nums[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int findDuplicate(vector<int>& nums) {
+        unordered_map<int, int> mp;
+        int n = nums.size();
+
+        for(int i = 0; i < n; i++){
+            if(mp.find(nums[i]) != mp.end()){
+                return nums[i];
+            }
+            mp[nums[i]]++;
+        }
+
+        return -1;
+}
 
 int main()
 {
@@ -480,7 +515,7 @@ int main()
     // int n = sizeof(arr) / sizeof(arr[0]);
     // ReverserArray(0, n - 1, arr);
 
-    vector<int> arr = {4, 1};
+    // vector<int> arr = {4, 1};
     // int n = arr.size();
     // Divide(arr, 0, n - 1);
     // for (int i = 0; i < n; i++)
@@ -488,6 +523,6 @@ int main()
     //     cout << arr[i] << " ";
     // }
 
-    RecursiveBubbleSort1(arr);
+    sortIt();
     return 0;
 }
