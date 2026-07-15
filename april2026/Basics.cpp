@@ -480,31 +480,98 @@ void sortIt()
 {
     vector<vector<int>> nums = {{1, 3}, {2, 6}, {8, 10}, {2, 4}, {15, 18}};
 
-    for(int i = 0; i < nums.size(); i++){
+    for (int i = 0; i < nums.size(); i++)
+    {
         sort(nums.begin(), nums.end());
     }
 
-
-    for(int i = 0; i < nums.size(); i++){
-        for(int j = 0; j < nums[i].size(); j++){
+    for (int i = 0; i < nums.size(); i++)
+    {
+        for (int j = 0; j < nums[i].size(); j++)
+        {
             cout << nums[i][j] << " ";
         }
         cout << endl;
     }
 }
 
-int findDuplicate(vector<int>& nums) {
-        unordered_map<int, int> mp;
-        int n = nums.size();
+bool searchMatrix(vector<vector<int>> &matrix, int target)
+{
+    int rows = matrix.size();
+    int cols = matrix[0].size();
 
-        for(int i = 0; i < n; i++){
-            if(mp.find(nums[i]) != mp.end()){
-                return nums[i];
+    for (int i = 0; i < rows; i++)
+    {
+        if (matrix[i][0] <= target && matrix[i][cols - 1] >= target)
+        {
+            int start = 0;
+            int end = cols - 1;
+            while (start <= end)
+            {
+                int mid = start + ((end - start) / 2);
+
+                if (matrix[i][mid] == target)
+                {
+                    return true;
+                }
+
+                else if (matrix[i][mid] > target)
+                {
+                    end = mid - 1;
+                }
+                else
+                {
+                    start = mid + 1;
+                }
             }
-            mp[nums[i]]++;
+        }
+    }
+
+    return false;
+}
+
+double recur(double x, long n) {
+        if (n == 0)
+            return 1;
+        if (n == 1)
+            return x;
+
+        double half = recur(x, n / 2);
+
+        if (n % 2 == 0) {
+            return half * half;
+        } else {
+            return x * half * half;
+        }
+}
+double myPow(double x, int n) {
+        long dupN = n;
+
+        if (dupN < 0) {
+            dupN = dupN * -1;
+            double result = recur(x, dupN);
+            return 1.0 / result;
         }
 
-        return -1;
+        double result = recur(x, n);
+        return result;
+}
+
+int findDuplicate(vector<int> &nums)
+{
+    unordered_map<int, int> mp;
+    int n = nums.size();
+
+    for (int i = 0; i < n; i++)
+    {
+        if (mp.find(nums[i]) != mp.end())
+        {
+            return nums[i];
+        }
+        mp[nums[i]]++;
+    }
+
+    return -1;
 }
 
 int main()
