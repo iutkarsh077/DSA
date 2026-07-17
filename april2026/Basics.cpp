@@ -557,6 +557,29 @@ double myPow(double x, int n) {
         return result;
 }
 
+
+vector<int> majorityElementSecond(vector<int>& nums) {
+        unordered_map<int, int> mp;
+
+        for(int i = 0; i < nums.size(); i++){
+            mp[nums[i]]++;
+        }
+        int cnt = 0;
+        vector<int> result;
+        for(auto i = mp.begin(); i != mp.end(); i++){
+            int count = i->second;
+            if(count > nums.size() / 3){
+                result.push_back(i->first);
+                cnt++;
+            }
+            if(cnt == 2){
+                break;
+            }
+        }
+
+        return result;
+}
+
 int findDuplicate(vector<int> &nums)
 {
     unordered_map<int, int> mp;
