@@ -557,6 +557,23 @@ double myPow(double x, int n) {
         return result;
 }
 
+vector<int> targetFinder(vector<int>& nums, int target) {
+        unordered_map<int, int> mp;
+        int n = nums.size();
+
+        for(int i = 0; i < n; i++){
+            int val = nums[i];
+            int need = target - val;
+            if(mp.find(need) != mp.end()){
+                return { mp[need], i };
+            }
+            mp[val] = i;
+        }
+
+
+        return { -1, -1 };      
+}
+
 
 vector<int> majorityElementSecond(vector<int>& nums) {
         unordered_map<int, int> mp;
