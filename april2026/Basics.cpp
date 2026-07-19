@@ -574,6 +574,34 @@ vector<int> targetFinder(vector<int>& nums, int target) {
         return { -1, -1 };      
 }
 
+int longestConsecutive(vector<int>& nums) {
+
+        if(nums.empty()) return 0;
+
+        sort(nums.begin(), nums.end());
+
+        int maxi = 1;
+        int cnt = 1;
+
+        for(int i = 1; i < nums.size(); i++) {
+
+            if(nums[i] == nums[i-1]) {
+                continue;
+            }
+            else if(nums[i] == nums[i-1] + 1) {
+                cnt++;
+            }
+            else {
+                maxi = max(maxi, cnt);
+                cnt = 1;
+            }
+        }
+
+        maxi = max(maxi, cnt);
+
+        return maxi;
+}
+
 
 vector<int> majorityElementSecond(vector<int>& nums) {
         unordered_map<int, int> mp;
