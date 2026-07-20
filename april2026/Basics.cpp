@@ -602,6 +602,26 @@ int longestConsecutive(vector<int>& nums) {
         return maxi;
 }
 
+int lengthOfLongestSubstring(string s) {
+        int maxi = 0;
+        int n = s.size();
+
+        for(int i = 0; i < n; i++){
+            unordered_map<int, int> mp;
+
+            for(int j = i; j < n; j++){
+                if(mp[s[j]] == 1) break;
+
+                int distance = j - i + 1;
+
+                maxi = max(maxi, distance);
+                mp[s[j]] = 1;
+            }
+        }
+
+        return maxi;
+}
+
 
 vector<int> majorityElementSecond(vector<int>& nums) {
         unordered_map<int, int> mp;
