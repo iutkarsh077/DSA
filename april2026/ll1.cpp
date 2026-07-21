@@ -92,6 +92,21 @@ int LengthofLL(Node *head)
     }
 }
 
+
+Node* reverseList(Node* head) {
+        Node *curr = head;
+        Node *prev = nullptr;
+
+        while(curr != nullptr){
+            Node*forward = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = forward;
+        }
+
+        return prev;
+    }
+
 void deleteNode1(Node *&head, Node *&tail, int pos)
 {
     if (pos == 1)
