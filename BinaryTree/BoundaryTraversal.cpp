@@ -16,6 +16,8 @@ public:
         left = NULL;
 };
 
+
+
 Node *BuildTree(Node *&root)
 {
     cout << "Enter data: " << endl;
