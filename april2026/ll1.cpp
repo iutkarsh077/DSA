@@ -93,6 +93,44 @@ int LengthofLL(Node *head)
 }
 
 
+Node* mergeTwoLists(Node* list1, Node* list2) {
+        Node* firstHead = new Node(-1);
+        Node* firstTail = firstHead;
+
+        while (list1 != nullptr && list2 != nullptr) {
+            if (list1->val <= list2->val) {
+                Node* data = new Node(list1->val);
+                firstTail->next = data;
+                firstTail = data;
+                list1 = list1->next;
+            } else {
+                Node* data = new Node(list2->val);
+                firstTail->next = data;
+                firstTail = data;
+                list2 = list2->next;
+            }
+        }
+
+        while (list1 != nullptr) {
+            Node* data = new Node(list1->val);
+            firstTail->next = data;
+            firstTail = data;
+            list1 = list1->next;
+        }
+
+        while (list2 != nullptr) {
+            Node* data = new Node(list2->val);
+            firstTail->next = data;
+            firstTail = data;
+            list2 = list2->next;
+        }
+
+        firstHead = firstHead->next;
+
+        return firstHead;
+}
+
+
 Node* reverseList(Node* head) {
         Node *curr = head;
         Node *prev = nullptr;
