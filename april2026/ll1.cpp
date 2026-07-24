@@ -92,6 +92,44 @@ int LengthofLL(Node *head)
     }
 }
 
+Node* removeNthFromEnd(Node* head, int n) {
+        int len = 0;
+        Node *temp = head;
+
+        while(temp != nullptr){
+            len++;
+            temp = temp->next;
+        }
+
+        int nFront = len - n;
+
+        if(nFront == 0){
+            Node *deleteNode = head;
+            head = head->next;
+
+            deleteNode->next = nullptr;
+            delete deleteNode;
+            return head;
+        }
+
+        temp = head;
+
+        int cnt = 0;
+        while(cnt < nFront - 1){
+            temp = temp->next;
+            cnt++;
+        }
+
+        Node *deleteNode = temp->next;
+        temp->next = deleteNode->next;
+        deleteNode->next = nullptr;
+
+        delete deleteNode;
+
+
+        return head;
+}
+
 
 Node* mergeTwoLists(Node* list1, Node* list2) {
         Node* firstHead = new Node(-1);
