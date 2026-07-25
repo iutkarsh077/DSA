@@ -131,6 +131,43 @@ Node* removeNthFromEnd(Node* head, int n) {
 }
 
 
+Node* addTwoNumbers(Node* l1, Node* l2) {
+        int num1 = 0;
+        int num2 = 0;
+
+        while(l1 != nullptr){
+            int val = l1->val;
+            num1 = (num1 *  10) + val;
+            l1 = l1->next;
+        }
+
+        while(l2 != nullptr){
+            int val = l2->val;
+            num2 = (num2 *  10) + val;
+            l2 = l2->next;
+        }
+
+        long long result = num1 + num2;
+
+        Node *head = new Node(-1);
+        Node *tail = head;
+
+        if(result == 0){
+            return new Node(0);
+        }
+
+
+        while(result != 0){
+            int val = result % 10;
+            Node *temp = new Node(val);
+            tail->next = temp;
+            tail = temp;
+            result = result / 10;
+        }
+        return head->next;
+}
+
+
 Node* mergeTwoLists(Node* list1, Node* list2) {
         Node* firstHead = new Node(-1);
         Node* firstTail = firstHead;
