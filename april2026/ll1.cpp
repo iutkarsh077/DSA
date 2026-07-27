@@ -205,42 +205,61 @@ Node* mergeTwoLists(Node* list1, Node* list2) {
         return firstHead;
 }
 
+Node *getIntersectionNode(Node *headA, Node *headB) {
+        int len1 = 0;
+        int len2 = 0;
 
-Node* mergeTwoLists2(Node* list1, Node* list2) {
-        Node* firstHead = new Node(-1);
-        Node* firstTail = firstHead;
+        Node *temp1 = headA;
+        Node *temp2 = headB;
 
-        while (list1 != nullptr && list2 != nullptr) {
-            if (list1->val <= list2->val) {
-                Node* data = new Node(list1->val);
-                firstTail->next = data;
-                firstTail = data;
-                list1 = list1->next;
-            } else {
-                Node* data = new Node(list2->val);
-                firstTail->next = data;
-                firstTail = data;
-                list2 = list2->next;
+        while(temp1 != nullptr){
+            len1++;
+            temp1 = temp1->next;
+        }
+
+        while(temp2 != nullptr){
+            len2++;
+            temp2 = temp2->next;
+        }
+
+        temp1 = headA;
+        temp2 = headB;
+
+        if(len1 > len2){
+            int footsteps = len1 - len2;
+
+            while(footsteps > 0){
+                temp1 = temp1->next;
+                footsteps--;
+            }
+        }
+        else{
+            int footsteps = len2 - len1;
+
+            while(footsteps > 0){
+                temp2 = temp2->next;
+                footsteps--;
             }
         }
 
-        while (list1 != nullptr) {
-            Node* data = new Node(list1->val);
-            firstTail->next = data;
-            firstTail = data;
-            list1 = list1->next;
+        while(temp1 != nullptr && temp2 != nullptr){
+            if(temp1 == temp2) return temp1;
+            temp1 = temp1->next;
+            temp2 = temp2->next;
         }
 
-        while (list2 != nullptr) {
-            Node* data = new Node(list2->val);
-            firstTail->next = data;
-            firstTail = data;
-            list2 = list2->next;
-        }
+        return nullptr;
+    }
 
-        firstHead = firstHead->next;
 
-        return firstHead;
+void deleteNode(Node* node) {
+        Node *deleteMe = node->next;
+        node->val = node->next->val;
+        node->next = node->next->next;
+
+        deleteMe->next = nullptr;
+
+        delete deleteMe;
 }
 
 Node* reverseList(Node* head) {
