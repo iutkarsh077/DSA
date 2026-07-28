@@ -1,4 +1,5 @@
 #include <iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
 class Node
@@ -204,6 +205,24 @@ Node* mergeTwoLists(Node* list1, Node* list2) {
 
         return firstHead;
 }
+
+
+bool hasCycle(Node *head) {
+        unordered_map<Node*, int> mp;
+
+        Node *temp = head;
+
+        while(temp != nullptr){
+            if(mp.find(temp) != mp.end()){
+                return true;
+            }
+
+            mp[temp] = temp->val;
+            temp = temp->next;
+        }
+
+        return false;
+    }
 
 Node *getIntersectionNode(Node *headA, Node *headB) {
         int len1 = 0;
