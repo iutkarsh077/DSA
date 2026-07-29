@@ -530,119 +530,167 @@ bool searchMatrix(vector<vector<int>> &matrix, int target)
     return false;
 }
 
-double recur(double x, long n) {
-        if (n == 0)
-            return 1;
-        if (n == 1)
-            return x;
+double recur(double x, long n)
+{
+    if (n == 0)
+        return 1;
+    if (n == 1)
+        return x;
 
-        double half = recur(x, n / 2);
+    double half = recur(x, n / 2);
 
-        if (n % 2 == 0) {
-            return half * half;
-        } else {
-            return x * half * half;
-        }
+    if (n % 2 == 0)
+    {
+        return half * half;
+    }
+    else
+    {
+        return x * half * half;
+    }
 }
-double myPow(double x, int n) {
-        long dupN = n;
+double myPow(double x, int n)
+{
+    long dupN = n;
 
-        if (dupN < 0) {
-            dupN = dupN * -1;
-            double result = recur(x, dupN);
-            return 1.0 / result;
-        }
+    if (dupN < 0)
+    {
+        dupN = dupN * -1;
+        double result = recur(x, dupN);
+        return 1.0 / result;
+    }
 
-        double result = recur(x, n);
-        return result;
+    double result = recur(x, n);
+    return result;
 }
 
-vector<int> targetFinder(vector<int>& nums, int target) {
+vector<int> targetFinder(vector<int> &nums, int target)
+{
+    unordered_map<int, int> mp;
+    int n = nums.size();
+
+    for (int i = 0; i < n; i++)
+    {
+        int val = nums[i];
+        int need = target - val;
+        if (mp.find(need) != mp.end())
+        {
+            return {mp[need], i};
+        }
+        mp[val] = i;
+    }
+
+    return {-1, -1};
+}
+
+int longestConsecutive(vector<int> &nums)
+{
+
+    if (nums.empty())
+        return 0;
+
+    sort(nums.begin(), nums.end());
+
+    int maxi = 1;
+    int cnt = 1;
+
+    for (int i = 1; i < nums.size(); i++)
+    {
+
+        if (nums[i] == nums[i - 1])
+        {
+            continue;
+        }
+        else if (nums[i] == nums[i - 1] + 1)
+        {
+            cnt++;
+        }
+        else
+        {
+            maxi = max(maxi, cnt);
+            cnt = 1;
+        }
+    }
+
+    maxi = max(maxi, cnt);
+
+    return maxi;
+}
+
+int lengthOfLongestSubstring(string s)
+{
+    int maxi = 0;
+    int n = s.size();
+
+    for (int i = 0; i < n; i++)
+    {
         unordered_map<int, int> mp;
-        int n = nums.size();
 
-        for(int i = 0; i < n; i++){
-            int val = nums[i];
-            int need = target - val;
-            if(mp.find(need) != mp.end()){
-                return { mp[need], i };
-            }
-            mp[val] = i;
-        }
-
-
-        return { -1, -1 };      
-}
-
-int longestConsecutive(vector<int>& nums) {
-
-        if(nums.empty()) return 0;
-
-        sort(nums.begin(), nums.end());
-
-        int maxi = 1;
-        int cnt = 1;
-
-        for(int i = 1; i < nums.size(); i++) {
-
-            if(nums[i] == nums[i-1]) {
-                continue;
-            }
-            else if(nums[i] == nums[i-1] + 1) {
-                cnt++;
-            }
-            else {
-                maxi = max(maxi, cnt);
-                cnt = 1;
-            }
-        }
-
-        maxi = max(maxi, cnt);
-
-        return maxi;
-}
-
-int lengthOfLongestSubstring(string s) {
-        int maxi = 0;
-        int n = s.size();
-
-        for(int i = 0; i < n; i++){
-            unordered_map<int, int> mp;
-
-            for(int j = i; j < n; j++){
-                if(mp[s[j]] == 1) break;
-
-                int distance = j - i + 1;
-
-                maxi = max(maxi, distance);
-                mp[s[j]] = 1;
-            }
-        }
-
-        return maxi;
-}
-
-
-vector<int> majorityElementSecond(vector<int>& nums) {
-        unordered_map<int, int> mp;
-
-        for(int i = 0; i < nums.size(); i++){
-            mp[nums[i]]++;
-        }
-        int cnt = 0;
-        vector<int> result;
-        for(auto i = mp.begin(); i != mp.end(); i++){
-            int count = i->second;
-            if(count > nums.size() / 3){
-                result.push_back(i->first);
-                cnt++;
-            }
-            if(cnt == 2){
+        for (int j = i; j < n; j++)
+        {
+            if (mp[s[j]] == 1)
                 break;
+
+            int distance = j - i + 1;
+
+            maxi = max(maxi, distance);
+            mp[s[j]] = 1;
+        }
+    }
+
+    return maxi;
+}
+
+vector<vector<int>> PascalTriangle(int numRows)
+{
+    vector<vector<int>> nums;
+    int n = numRows;
+    for (int i = 0; i < n; i++)
+    {
+        vector<int> temp;
+        for (int j = 0; j < i + 1; j++)
+        {
+            if (j == 0 || j == i)
+            {
+                temp.push_back(1);
+            }
+            else
+            {
+                int value = nums[i - 1][j - 1] + nums[i - 1][j];
+                temp.push_back(value);
             }
         }
 
-        return result;
+        nums.push_back(temp);
+    }
+
+    return nums;
+}
+
+vector<int> majorityElementSecond(vector<int> &nums)
+{
+    unordered_map<int, int> mp;
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        mp[nums[i]]++;
+    }
+    int cnt = 0;
+    vector<int> result;
+    for (auto i = mp.begin(); i != mp.end(); i++)
+    {
+        int count = i->second;
+        if (count > nums.size() / 3)
+        {
+            result.push_back(i->first);
+            cnt++;
+        }
+        if (cnt == 2)
+        {
+            break;
+        }
+    }
+
+    return result;
 }
 
 int findDuplicate(vector<int> &nums)
