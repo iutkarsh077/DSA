@@ -256,6 +256,77 @@ Node *ReverseNode(Node *head, int k)
     return prev;
 }
 
+bool isPalindrome(Node *head)
+{
+    if (head == nullptr || head->next == nullptr)
+        return true;
+    Node *slow = head;
+    Node *fast = head;
+
+    while (fast != nullptr && fast->next != nullptr)
+    {
+        slow = slow->next;
+        fast = fast->next;
+
+        if (fast->next != nullptr)
+        {
+            fast = fast->next;
+        }
+    }
+
+    Node *curr = slow;
+    Node *prev = nullptr;
+
+    while (curr != nullptr)
+    {
+        Node *forward = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = forward;
+    }
+
+    Node *first = head;
+    Node *second = prev;
+
+    while (first != nullptr && second != nullptr)
+    {
+        if (first->val != second->val)
+            return false;
+        first = first->next;
+        second = second->next;
+    }
+
+    return true;
+}
+
+Node *detectCycle(Node *head)
+{
+    Node *slow = head;
+    Node *fast = head;
+
+    bool isCircle = false;
+
+    while (fast != nullptr && fast->next != nullptr)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast)
+        {
+            slow = head;
+
+            while (slow != fast)
+            {
+                slow = slow->next;
+                fast = fast->next;
+            }
+
+            return slow;
+        }
+    }
+    return nullptr;
+}
+
 Node *reverseKGroup(Node *head, int k)
 {
     if (head == nullptr || k == 1)
