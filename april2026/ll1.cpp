@@ -327,6 +327,44 @@ Node *detectCycle(Node *head)
     return nullptr;
 }
 
+Node *rotateRight(Node *head, int k)
+{
+    vector<int> arr;
+
+    Node *temp = head;
+
+    while (temp != nullptr)
+    {
+        arr.push_back(temp->val);
+        temp = temp->next;
+    }
+
+    if (arr.size() == 0)
+        return nullptr;
+
+    k = k % arr.size();
+
+    reverse(arr.begin(), arr.end());
+    reverse(arr.begin(), arr.begin() + k);
+    reverse(arr.begin() + k, arr.end());
+
+    Node *newHead = new Node(arr[0]);
+    Node *newtail = newHead;
+
+    if (arr.size() == 1)
+        return newHead;
+    int i = 1;
+    while (i < arr.size())
+    {
+        Node *node = new Node(arr[i]);
+        newtail->next = node;
+        newtail = node;
+        i++;
+    }
+
+    return newHead;
+}
+
 Node *reverseKGroup(Node *head, int k)
 {
     if (head == nullptr || k == 1)
