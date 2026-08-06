@@ -3,21 +3,13 @@ using namespace std;
 
 void patterns()
 {
-    int n = 7;
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < i; j++)
-        {
-            cout << " " << " ";
+    int n = 5;
+    int val = 65;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < i + 1; j++){
+            cout << char(val) << " ";
         }
-
-        int starsCount = (2 * (n - i)) - 1;
-        for (int j = 0; j < starsCount; j++)
-        {
-            cout << "*" << " ";
-        }
-
+        val++;
         cout << endl;
     }
 }
