@@ -3,28 +3,48 @@ using namespace std;
 
 void patterns()
 {
-    int n = 4;
+    int n = 5;
 
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n - i - 1; j++){
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n - i; j++)
+        {
+            cout << "*" << " ";
+        }
+
+        for (int j = 0; j < i * 2; j++)
+        {
             cout << "_" << " ";
         }
 
-        int val = 65;
-        for(int j = 0; j <= i; j++){
-            cout << char(val) << " ";
-            val++;
-        }
-
-        val = val - 2;
-        for(int j = 0; j < i; j++){
-            cout << char(val) << " ";
-            val--;
+        for (int j = 0; j < n - i; j++)
+        {
+            cout << "*" << " ";
         }
 
         cout << endl;
     }
-    
+
+    for (int i = 0; i < n; i++)
+    {
+        int j = 0;
+        for (; j <= i; j++)
+        {
+            cout << "*" << " ";
+            
+        }
+
+        for (; j < (n * 2) - i - 1; j++)
+        {
+            cout << "_" << " ";
+         
+        }
+
+        for(; j < (n * 2); j++){
+            cout << "*" << " ";
+        }
+        cout << endl;
+    }
 }
 
 int main()
