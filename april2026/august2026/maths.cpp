@@ -66,6 +66,27 @@ int gcd(int a, int b)
     return a;
 }
 
+bool armstrongNumber(int n)
+{
+    // code here
+    int val = 0;
+    int dupN = n;
+
+    if (dupN < 0)
+    {
+        dupN = dupN * -1;
+    }
+
+    while (dupN > 0)
+    {
+        int digit = dupN % 10;
+        int cube = pow(digit, 3);
+        val = val + cube;
+        dupN = dupN / 10;
+    }
+
+    return val == n ? true : false;
+}
 
 int main()
 {
