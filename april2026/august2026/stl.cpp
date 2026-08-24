@@ -96,7 +96,8 @@ void MergeArray(vector<int> &arr, int start, int mid, int end)
 
 void printMe(vector<int> arr)
 {
-    for(int i = 0; i < arr.size(); i++){
+    for (int i = 0; i < arr.size(); i++)
+    {
         cout << arr[i] << " ";
     }
 }
@@ -113,10 +114,62 @@ void DivideMe(vector<int> &arr, int start, int end)
     MergeArray(arr, start, mid, end);
 }
 
+int partition(vector<int> &arr, int low, int high)
+{
+    int left = low;
+    int right = high;
+
+    int cnt = 0;
+    int i = low;
+    while (i <= high)
+    {
+        if (arr[low] >= arr[i])
+        {
+            cnt++;
+        }
+        i++;
+    }
+
+    int partitionIndex = cnt + low - 1;
+
+    swap(arr[partitionIndex], arr[low]);
+
+    while (left < partitionIndex && right > partitionIndex)
+    {
+        while (arr[left] <= arr[partitionIndex])
+        {
+            left++;
+        }
+
+        while (arr[right] > arr[partitionIndex])
+        {
+            right--;
+        }
+
+        if (left < partitionIndex && right > partitionIndex)
+        {
+            swap(arr[left++], arr[right--]);
+        }
+    }
+
+    return partitionIndex;
+}
+
+void Quicksort(vector<int> &arr, int low, int high)
+{
+    if (low >= high)
+        return;
+
+    int p = partition(arr, low, high);
+
+    Quicksort(arr, low, p - 1);
+    Quicksort(arr, p + 1, high);
+}
+
 int main()
 {
     vector<int> arr = {5, 6, 2, 1, 9, 8, 6, 4};
-    DivideMe(arr, 0, arr.size() - 1);
+    Quicksort(arr, 0, arr.size() - 1);
     printMe(arr);
     return 0;
 }
