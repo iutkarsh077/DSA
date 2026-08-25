@@ -155,6 +155,20 @@ int partition(vector<int> &arr, int low, int high)
     return partitionIndex;
 }
 
+int largest(vector<int> &arr)
+{
+    if (arr.size() == 0)
+        return -1;
+    int maxi = arr[0];
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        maxi = max(maxi, arr[i]);
+    }
+
+    return maxi;
+}
+
 void Quicksort(vector<int> &arr, int low, int high)
 {
     if (low >= high)
