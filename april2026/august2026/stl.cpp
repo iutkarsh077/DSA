@@ -169,6 +169,78 @@ int largest(vector<int> &arr)
     return maxi;
 }
 
+int getSecondLargest(vector<int> &arr)
+{
+    int maxi = arr[0];
+    int maxiIndex = 0;
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        if (maxi < arr[i])
+        {
+            maxi = arr[i];
+            maxiIndex = i;
+        }
+    }
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        if (arr[i] == maxi)
+        {
+            arr[i] = -111;
+        }
+    }
+
+    maxi = -1;
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        maxi = max(maxi, arr[i]);
+    }
+
+    return maxi;
+}
+
+bool check(vector<int> &arr)
+{
+    int cnt = 0;
+
+    if (arr[0] < arr[arr.size() - 1])
+        cnt++;
+
+    for (int i = 0; i < arr.size() - 1; i++)
+    {
+        if (arr[i] > arr[i + 1])
+        {
+            cnt++;
+        }
+    }
+
+    if (cnt <= 1)
+        return true;
+
+    return false;
+}
+
+int removeDuplicates(vector<int> &nums)
+{
+    int i = 0;
+
+    while (i < nums.size() - 1)
+    {
+        if (nums[i] == nums[i + 1])
+        {
+            nums.erase(nums.begin() + i, nums.begin() + i + 1);
+        }
+        else
+        {
+            i++;
+        }
+    }
+
+    return nums.size();
+}
+
 void Quicksort(vector<int> &arr, int low, int high)
 {
     if (low >= high)
