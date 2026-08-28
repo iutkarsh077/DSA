@@ -222,6 +222,17 @@ bool check(vector<int> &arr)
     return false;
 }
 
+void rotate(vector<int> &nums, int k)
+{
+    k = k % nums.size();
+
+    reverse(nums.begin(), nums.end());
+
+    reverse(nums.begin(), nums.begin() + k);
+
+    reverse(nums.begin() + k, nums.end());
+}
+
 int removeDuplicates(vector<int> &nums)
 {
     int i = 0;
@@ -241,6 +252,29 @@ int removeDuplicates(vector<int> &nums)
     return nums.size();
 }
 
+void moveZeroes(vector<int> &nums)
+{
+    int cnt = 0;
+    int i = 0;
+    while (i < nums.size())
+    {
+        if (nums[i] == 0)
+        {
+            cnt++;
+            nums.erase(nums.begin() + i, nums.begin() + i + 1);
+        }
+
+        else
+        {
+            i++;
+        }
+    }
+
+    for (int i = 0; i < cnt; i++)
+    {
+        nums.push_back(0);
+    }
+}
 void Quicksort(vector<int> &arr, int low, int high)
 {
     if (low >= high)
