@@ -252,29 +252,103 @@ int removeDuplicates(vector<int> &nums)
     return nums.size();
 }
 
-vector<int> findUnion(vector<int> &a, vector<int> &b) {
-        set<int> st;
-        
-        for(int i = 0; i < a.size(); i++){
-            st.insert(a[i]);
-        }
-        
-        for(int i = 0; i < a.size(); i++){
-            st.insert(a[i]);
-        }
-        
-        for(int i = 0; i < b.size(); i++){
-            st.insert(b[i]);
-        }
-        
-        vector<int> result;
-        
-        for(auto i = st.begin(); i != st.end(); i++){
-            result.push_back(*i);
-        }
-        
-        return result;
+vector<int> findUnion(vector<int> &a, vector<int> &b)
+{
+    set<int> st;
+
+    for (int i = 0; i < a.size(); i++)
+    {
+        st.insert(a[i]);
     }
+
+    for (int i = 0; i < a.size(); i++)
+    {
+        st.insert(a[i]);
+    }
+
+    for (int i = 0; i < b.size(); i++)
+    {
+        st.insert(b[i]);
+    }
+
+    vector<int> result;
+
+    for (auto i = st.begin(); i != st.end(); i++)
+    {
+        result.push_back(*i);
+    }
+
+    return result;
+}
+
+int missingNum(vector<int> &arr)
+{
+
+    long long sum = 0;
+    for (long long i = 0; i < arr.size(); i++)
+    {
+        sum = sum + arr[i];
+    }
+
+    long long n = arr.size() + 1;
+    long long totalSum = (n * (n + 1)) / 2;
+
+    long long remaining = totalSum - sum;
+
+    return remaining;
+}
+
+int findMaxConsecutiveOnes(vector<int> &nums)
+{
+    int maxi = 0;
+    int cnt = 0;
+    int n = nums.size();
+    int i = 0;
+    while (i < n)
+    {
+        if (nums[i] == 1)
+        {
+            cnt++;
+        }
+        else
+        {
+            maxi = max(cnt, maxi);
+            cnt = 0;
+        }
+        i++;
+    }
+
+    maxi = max(cnt, maxi);
+
+    return maxi;
+}
+
+int longestSubarray(vector<int> &arr, int k)
+{
+
+    unordered_map<int, int> mp;
+    mp[0] = -1;
+    int maxi = 0;
+    int sum = 0;
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        sum = sum + arr[i];
+        int need = sum - k;
+
+        if (mp.find(need) != mp.end())
+        {
+            maxi = max(maxi, i - mp[need]);
+        }
+
+        if (mp.find(sum) == mp.end())
+        {
+            mp[sum] = i;
+        }
+    }
+
+    return maxi;
+}
 
 void moveZeroes(vector<int> &nums)
 {
