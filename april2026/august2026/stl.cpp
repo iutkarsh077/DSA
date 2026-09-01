@@ -350,6 +350,51 @@ int longestSubarray(vector<int> &arr, int k)
     return maxi;
 }
 
+vector<int> targetArea(vector<int> &nums, int target)
+{
+    unordered_map<int, int> mp;
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        int need = target - nums[i];
+
+        if (mp.find(need) != mp.end())
+        {
+            return {mp[need], i};
+        }
+
+        mp[nums[i]] = i;
+    }
+
+    return {-1, -1};
+}
+
+
+int majorityElement(vector<int>& nums) {
+        int val = nums[0];
+        int cnt = 1;
+        int maxi = 0;
+        int realVal = nums[0];
+        for(int i = 1; i < nums.size(); i++){
+            if(nums[i] != val){
+                if(cnt > maxi){
+                    realVal = val;
+                }
+                maxi = max(maxi, cnt);
+                cnt = 1;
+                val = nums[i];
+            }
+
+            else{
+                cnt++;
+            }
+        }
+
+        maxi = max(cnt, maxi);
+
+        return realVal;
+    }
+
 void moveZeroes(vector<int> &nums)
 {
     int cnt = 0;
