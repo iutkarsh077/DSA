@@ -369,30 +369,67 @@ vector<int> targetArea(vector<int> &nums, int target)
     return {-1, -1};
 }
 
-
-int majorityElement(vector<int>& nums) {
-        int val = nums[0];
-        int cnt = 1;
-        int maxi = 0;
-        int realVal = nums[0];
-        for(int i = 1; i < nums.size(); i++){
-            if(nums[i] != val){
-                if(cnt > maxi){
-                    realVal = val;
-                }
-                maxi = max(maxi, cnt);
-                cnt = 1;
-                val = nums[i];
+int majorityElement(vector<int> &nums)
+{
+    int val = nums[0];
+    int cnt = 1;
+    int maxi = 0;
+    int realVal = nums[0];
+    for (int i = 1; i < nums.size(); i++)
+    {
+        if (nums[i] != val)
+        {
+            if (cnt > maxi)
+            {
+                realVal = val;
             }
+            maxi = max(maxi, cnt);
+            cnt = 1;
+            val = nums[i];
+        }
 
+        else
+        {
+            cnt++;
+        }
+    }
+
+    maxi = max(cnt, maxi);
+
+    return realVal;
+}
+
+int ProfitMaximum(vector<int> &prices)
+{
+    int maxiProfit = 0;
+    int minPurchase = prices[0];
+    for (int i = 0; i < prices.size(); i++)
+    {
+        minPurchase = min(minPurchase, prices[i]);
+        maxiProfit = max(maxiProfit, prices[i] - minPurchase);
+    }
+
+    return maxiProfit;
+}
+
+vector<int> rearrangeArray(vector<int>& nums) {
+        int pos = 0;
+        int neg = 1;
+        int n = nums.size();
+        vector<int> ans(n, 0);
+
+        for(int i = 0; i < n; i++){
+            if(nums[i] >= 0){
+                ans[pos] = nums[i];
+                pos = pos + 2;
+            }
             else{
-                cnt++;
+                ans[neg] = nums[i];
+                neg = neg + 2;
             }
         }
 
-        maxi = max(cnt, maxi);
-
-        return realVal;
+        return ans;
     }
 
 void moveZeroes(vector<int> &nums)
