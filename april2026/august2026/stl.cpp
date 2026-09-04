@@ -412,25 +412,49 @@ int ProfitMaximum(vector<int> &prices)
     return maxiProfit;
 }
 
-vector<int> rearrangeArray(vector<int>& nums) {
-        int pos = 0;
-        int neg = 1;
-        int n = nums.size();
-        vector<int> ans(n, 0);
+vector<int> rearrangeArray(vector<int> &nums)
+{
+    int pos = 0;
+    int neg = 1;
+    int n = nums.size();
+    vector<int> ans(n, 0);
 
-        for(int i = 0; i < n; i++){
-            if(nums[i] >= 0){
-                ans[pos] = nums[i];
-                pos = pos + 2;
-            }
-            else{
-                ans[neg] = nums[i];
-                neg = neg + 2;
-            }
+    for (int i = 0; i < n; i++)
+    {
+        if (nums[i] >= 0)
+        {
+            ans[pos] = nums[i];
+            pos = pos + 2;
         }
-
-        return ans;
+        else
+        {
+            ans[neg] = nums[i];
+            neg = neg + 2;
+        }
     }
+
+    return ans;
+}
+
+vector<int> BiggerOne(vector<int> &arr)
+{
+    vector<int> ans;
+    int n = arr.size();
+    ans.push_back(arr[n - 1]);
+    int maxi = arr[n - 1];
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if (arr[i] >= maxi)
+        {
+            maxi = arr[i];
+            ans.push_back(maxi);
+        }
+    }
+
+    reverse(ans.begin(), ans.end());
+
+    return ans;
+}
 
 void moveZeroes(vector<int> &nums)
 {
