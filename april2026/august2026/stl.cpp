@@ -456,6 +456,32 @@ vector<int> BiggerOne(vector<int> &arr)
     return ans;
 }
 
+
+int longestConsecutive(vector<int>& nums) {
+
+        if(nums.size() == 0) return 0;
+        int maxi = 1;
+        sort(nums.begin(), nums.end());
+        int cnt = 1;
+        int n = nums.size();
+        for (int i = 0; i < n - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
+                continue;
+            } else if (nums[i] + 1 != nums[i + 1]) {
+                maxi = max(cnt, maxi);
+                cnt = 1;
+            }
+
+            else {
+                cnt++;
+            }
+        }
+
+        maxi = max(cnt, maxi);
+
+        return maxi;
+}
+
 void moveZeroes(vector<int> &nums)
 {
     int cnt = 0;
