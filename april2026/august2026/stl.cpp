@@ -456,30 +456,127 @@ vector<int> BiggerOne(vector<int> &arr)
     return ans;
 }
 
+int longestConsecutive(vector<int> &nums)
+{
 
-int longestConsecutive(vector<int>& nums) {
-
-        if(nums.size() == 0) return 0;
-        int maxi = 1;
-        sort(nums.begin(), nums.end());
-        int cnt = 1;
-        int n = nums.size();
-        for (int i = 0; i < n - 1; i++) {
-            if (nums[i] == nums[i + 1]) {
-                continue;
-            } else if (nums[i] + 1 != nums[i + 1]) {
-                maxi = max(cnt, maxi);
-                cnt = 1;
-            }
-
-            else {
-                cnt++;
-            }
+    if (nums.size() == 0)
+        return 0;
+    int maxi = 1;
+    sort(nums.begin(), nums.end());
+    int cnt = 1;
+    int n = nums.size();
+    for (int i = 0; i < n - 1; i++)
+    {
+        if (nums[i] == nums[i + 1])
+        {
+            continue;
+        }
+        else if (nums[i] + 1 != nums[i + 1])
+        {
+            maxi = max(cnt, maxi);
+            cnt = 1;
         }
 
-        maxi = max(cnt, maxi);
+        else
+        {
+            cnt++;
+        }
+    }
 
-        return maxi;
+    maxi = max(cnt, maxi);
+
+    return maxi;
+}
+
+void setZeroes(vector<vector<int>> &matrix)
+{
+    vector<int> rows(matrix.size(), -1);
+    vector<int> cols(matrix[0].size(), -1);
+
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        for (int j = 0; j < matrix[i].size(); j++)
+        {
+            if (matrix[i][j] == 0)
+            {
+                rows[i] = 0;
+                cols[j] = 0;
+            }
+        }
+    }
+
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        for (int j = 0; j < matrix[i].size(); j++)
+        {
+            if (rows[i] == 0 || cols[j] == 0)
+            {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+}
+
+vector<int> spiralOrder(vector<vector<int>> &matrix)
+{
+    vector<int> ans;
+
+    int top = 0;
+    int bottom = matrix.size() - 1;
+    int left = 0;
+    int right = matrix[0].size() - 1;
+
+    while (top <= bottom && left <= right)
+    {
+
+        for (int j = left; j <= right; j++)
+        {
+            ans.push_back(matrix[top][j]);
+        }
+        top++;
+
+        for (int i = top; i <= bottom; i++)
+        {
+            ans.push_back(matrix[i][right]);
+        }
+        right--;
+
+        if (top <= bottom)
+        {
+            for (int j = right; j >= left; j--)
+            {
+                ans.push_back(matrix[bottom][j]);
+            }
+            bottom--;
+        }
+
+        if (left <= right)
+        {
+            for (int i = bottom; i >= top; i--)
+            {
+                ans.push_back(matrix[i][left]);
+            }
+            left++;
+        }
+    }
+
+    return ans;
+}
+
+void rotate(vector<vector<int>> &matrix)
+{
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        for (int j = i; j < matrix[i].size(); j++)
+        {
+            swap(matrix[i][j], matrix[j][i]);
+        }
+    }
+
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        reverse(matrix[i].begin(), matrix[i].end());
+    }
 }
 
 void moveZeroes(vector<int> &nums)
