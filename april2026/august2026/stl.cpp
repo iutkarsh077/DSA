@@ -563,6 +563,51 @@ vector<int> spiralOrder(vector<vector<int>> &matrix)
     return ans;
 }
 
+vector<vector<int>> generate(int numRows)
+{
+    vector<vector<int>> ans;
+
+    for (int i = 0; i < numRows; i++)
+    {
+        vector<int> temp;
+        for (int j = 0; j <= i; j++)
+        {
+            if (j == 0 || j == i)
+            {
+                temp.push_back(1);
+            }
+            else
+            {
+                int value = ans[i - 1][j - 1] + ans[i - 1][j];
+                temp.push_back(value);
+            }
+        }
+        ans.push_back(temp);
+    }
+
+    return ans;
+}
+
+vector<int> majorityElement22(vector<int> &nums)
+{
+    unordered_map<int, int> mp;
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        mp[nums[i]]++;
+    }
+    vector<int> ans;
+    for (auto i = mp.begin(); i != mp.end(); i++)
+    {
+        if (i->second > nums.size() / 3)
+        {
+            ans.push_back(i->first);
+        }
+    }
+
+    return ans;
+}
+
 void rotate(vector<vector<int>> &matrix)
 {
     for (int i = 0; i < matrix.size(); i++)
