@@ -614,11 +614,14 @@ vector<vector<int>> threeSum(vector<int> &nums)
     return result;
 }
 
-void LinearSearch(){
+void LinearSearch()
+{
     int target = 5;
     vector<int> ans = {1, 5, 4, 2, 37, 8, 5};
-    for(int i = 0; i < ans.size(); i++){
-        if(ans[i] == target){
+    for (int i = 0; i < ans.size(); i++)
+    {
+        if (ans[i] == target)
+        {
             cout << "Index for target is: " << i << endl;
         }
     }
@@ -690,6 +693,30 @@ vector<int> majorityElement22(vector<int> &nums)
     }
 
     return ans;
+}
+
+void moveZeroes(vector<int> &nums)
+{
+    int cnt = 0;
+    int i = 0;
+    while (i < nums.size())
+    {
+        if (nums[i] == 0)
+        {
+            cnt++;
+            nums.erase(nums.begin() + i, nums.begin() + i + 1);
+        }
+
+        else
+        {
+            i++;
+        }
+    }
+
+    for (int i = 0; i < cnt; i++)
+    {
+        nums.push_back(0);
+    }
 }
 
 void rotate(vector<vector<int>> &matrix)
