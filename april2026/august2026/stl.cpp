@@ -624,6 +624,22 @@ void LinearSearch(){
     }
 }
 
+void rotateSecond(vector<vector<int>> &matrix)
+{
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        for (int j = i; j < matrix[i].size(); j++)
+        {
+            swap(matrix[i][j], matrix[j][i]);
+        }
+    }
+
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        reverse(matrix[i].begin(), matrix[i].end());
+    }
+}
+
 vector<int> majorityElement22(vector<int> &nums)
 {
     unordered_map<int, int> mp;
