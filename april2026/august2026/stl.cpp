@@ -614,6 +614,16 @@ vector<vector<int>> threeSum(vector<int> &nums)
     return result;
 }
 
+void LinearSearch(){
+    int target = 5;
+    vector<int> ans = {1, 5, 4, 2, 37, 8, 5};
+    for(int i = 0; i < ans.size(); i++){
+        if(ans[i] == target){
+            cout << "Index for target is: " << i << endl;
+        }
+    }
+}
+
 vector<int> majorityElement22(vector<int> &nums)
 {
     unordered_map<int, int> mp;
