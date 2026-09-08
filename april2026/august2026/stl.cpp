@@ -588,6 +588,32 @@ vector<vector<int>> generate(int numRows)
     return ans;
 }
 
+vector<vector<int>> threeSum(vector<int> &nums)
+{
+    set<vector<int>> ans;
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        set<int> hashset;
+        for (int j = i + 1; j < nums.size(); j++)
+        {
+            int need = nums[i] + nums[j];
+            need = need * -1;
+
+            if (hashset.find(need) != hashset.end())
+            {
+                vector<int> temp = {nums[i], nums[j], need};
+                sort(temp.begin(), temp.end());
+                ans.insert(temp);
+            }
+
+            hashset.insert(nums[j]);
+        }
+    }
+    vector<vector<int>> result(ans.begin(), ans.end());
+    return result;
+}
+
 vector<int> majorityElement22(vector<int> &nums)
 {
     unordered_map<int, int> mp;
