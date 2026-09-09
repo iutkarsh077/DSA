@@ -719,6 +719,24 @@ void moveZeroes(vector<int> &nums)
     }
 }
 
+
+vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>> ans;
+
+        sort(intervals.begin(), intervals.end());
+
+        for(int i = 0; i < intervals.size(); i++){
+            if(ans.empty() || ans.back()[1] < intervals[i][0]){
+                ans.push_back(intervals[i]);
+            }
+            else{
+                ans.back()[1] = max(ans.back()[1], intervals[i][1]);
+            }
+        }
+
+        return ans;
+}
+
 void rotate(vector<vector<int>> &matrix)
 {
     for (int i = 0; i < matrix.size(); i++)
