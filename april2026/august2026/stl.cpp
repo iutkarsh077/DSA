@@ -719,22 +719,64 @@ void moveZeroes(vector<int> &nums)
     }
 }
 
+int threeSumClosest(vector<int> &nums, int target)
+{
+    sort(nums.begin(), nums.end());
+    // O(nlogn) + O(n ^ 2)
 
-vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        vector<vector<int>> ans;
+    int closed = nums[0] + nums[1] + nums[2];
 
-        sort(intervals.begin(), intervals.end());
+    for (int i = 0; i < nums.size() - 2; i++)
+    {
+        int left = i + 1;
+        int right = nums.size() - 1;
 
-        for(int i = 0; i < intervals.size(); i++){
-            if(ans.empty() || ans.back()[1] < intervals[i][0]){
-                ans.push_back(intervals[i]);
+        while (left < right)
+        {
+            int sum = nums[i] + nums[left] + nums[right];
+            if (abs(sum - target) < abs(closed - target))
+            {
+                closed = sum;
             }
-            else{
-                ans.back()[1] = max(ans.back()[1], intervals[i][1]);
+
+            if (sum > target)
+            {
+                right--;
+            }
+            else if (sum < target)
+            {
+                left++;
+            }
+            else
+            {
+                // equal too
+                return sum;
             }
         }
+    }
 
-        return ans;
+    return closed;
+}
+
+vector<vector<int>> merge(vector<vector<int>> &intervals)
+{
+    vector<vector<int>> ans;
+
+    sort(intervals.begin(), intervals.end());
+
+    for (int i = 0; i < intervals.size(); i++)
+    {
+        if (ans.empty() || ans.back()[1] < intervals[i][0])
+        {
+            ans.push_back(intervals[i]);
+        }
+        else
+        {
+            ans.back()[1] = max(ans.back()[1], intervals[i][1]);
+        }
+    }
+
+    return ans;
 }
 
 void rotate(vector<vector<int>> &matrix)
