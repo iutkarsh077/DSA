@@ -684,6 +684,44 @@ void Quicksort(vector<int> &arr, int low, int high)
     Quicksort(arr, p + 1, high);
 }
 
+int threeSumClosest(vector<int> &nums, int target)
+{
+    sort(nums.begin(), nums.end());
+
+    int closed = nums[0] + nums[1] + nums[2];
+
+    for (int i = 0; i < nums.size() - 2; i++)
+    {
+        int left = i + 1;
+        int right = nums.size() - 1;
+
+        while (left < right)
+        {
+            int sum = nums[i] + nums[left] + nums[right];
+            if (abs(sum - target) < abs(closed - target))
+            {
+                closed = sum;
+            }
+
+            if (sum > target)
+            {
+                right--;
+            }
+            else if (sum < target)
+            {
+                left++;
+            }
+            else
+            {
+                // equal too
+                return sum;
+            }
+        }
+    }
+
+    return closed;
+}
+
 int main()
 {
     vector<int> arr = {5, 6, 2, 1, 9, 8, 6, 4};
