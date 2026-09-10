@@ -94,6 +94,67 @@ void MergeArray(vector<int> &arr, int start, int mid, int end)
     }
 }
 
+int Merge(vector<int> &arr, int low, int mid, int high)
+{
+    int left = low;
+    int right = mid + 1;
+    int cnt = 0;
+
+    vector<int> temp;
+
+    while (left <= mid && right <= high)
+    {
+        if (arr[left] <= arr[right])
+        {
+            temp.push_back(arr[left]);
+            left++;
+        }
+        else
+        {
+            temp.push_back(arr[right]);
+            right++;
+            cnt += (mid - left + 1);
+        }
+    }
+
+    while (left <= mid)
+    {
+        temp.push_back(arr[left]);
+        left++;
+    }
+
+    while (right <= high)
+    {
+        temp.push_back(arr[right]);
+        right++;
+    }
+
+    for (int i = low; i <= high; i++)
+    {
+        arr[i] = temp[i - low];
+    }
+
+    return cnt;
+}
+
+int DivideIt(vector<int> &arr, int low, int high)
+{
+    int cnt = 0;
+    if (low >= high)
+        return cnt;
+    int mid = (low + high) / 2;
+    cnt += DivideIt(arr, low, mid);
+    cnt += DivideIt(arr, mid + 1, high);
+    cnt += Merge(arr, low, mid, high);
+
+    return cnt;
+}
+int inversionCount(vector<int> &arr)
+{
+    int cnt = DivideIt(arr, 0, arr.size() - 1);
+    return cnt;
+}
+
 void printMe(vector<int> arr)
 {
     for (int i = 0; i < arr.size(); i++)
@@ -614,11 +675,14 @@ vector<vector<int>> threeSum(vector<int> &nums)
     return result;
 }
 
-void LinearSearch(){
+void LinearSearch()
+{
     int target = 5;
     vector<int> ans = {1, 5, 4, 2, 37, 8, 5};
-    for(int i = 0; i < ans.size(); i++){
-        if(ans[i] == target){
+    for (int i = 0; i < ans.size(); i++)
+    {
+        if (ans[i] == target)
+        {
             cout << "Index for target is: " << i << endl;
         }
     }
