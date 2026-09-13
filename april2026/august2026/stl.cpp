@@ -116,6 +116,257 @@ int maxProduct(vector<int> &nums)
     return maxi;
 }
 
+int lowerBound(vector<int> &arr, int target)
+{
+    int index = arr.size();
+
+    int start = 0;
+    int end = arr.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (arr[mid] >= target)
+        {
+            index = min(mid, index);
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    return index;
+}
+
+int searchInsert(vector<int> &arr, int target)
+{
+    int index = arr.size();
+
+    int start = 0;
+    int end = arr.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (arr[mid] == target)
+            return mid;
+        if (arr[mid] > target)
+        {
+            index = min(mid, index);
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    return index;
+}
+
+vector<int> searchRange(vector<int> &arr, int target)
+{
+    int lowerBound = -1;
+
+    int start = 0;
+    int end = arr.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (arr[mid] == target)
+        {
+            lowerBound = mid;
+            end = mid - 1;
+        }
+
+        else if (arr[mid] > target)
+        {
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    if (lowerBound == -1)
+    {
+        return {-1, -1};
+    }
+
+    int upperBound = lowerBound;
+    start = lowerBound + 1;
+    end = arr.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (arr[mid] == target)
+        {
+            upperBound = mid;
+            start = mid + 1;
+        }
+
+        else if (arr[mid] > target)
+        {
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    return {lowerBound, upperBound};
+}
+
+int countFreq(vector<int> &arr, int target)
+{
+    int startIndex = INT_MAX;
+    int endIndex = INT_MIN;
+
+    int start = 0;
+    int end = arr.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (arr[mid] == target)
+        {
+            startIndex = min(mid, startIndex);
+            end = mid - 1;
+        }
+
+        else if (arr[mid] > target)
+        {
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    if (startIndex == INT_MAX)
+    {
+        return 0;
+    }
+
+    start = startIndex - 1;
+    end = arr.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (arr[mid] == target)
+        {
+            endIndex = max(mid, endIndex);
+            start = mid + 1;
+        }
+
+        else if (arr[mid] > target)
+        {
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    int series = (endIndex - startIndex) + 1;
+
+    return series;
+}
+
+int search(vector<int> &nums, int target)
+{
+    int s = 0;
+    int e = nums.size() - 1;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        if (nums[mid] == target)
+        {
+            return mid;
+        }
+
+        if (nums[s] <= nums[mid])
+        {
+
+            if (nums[s] <= target && target < nums[mid])
+            {
+                e = mid - 1;
+            }
+            else
+            {
+                s = mid + 1;
+            }
+        }
+
+        else
+        {
+
+            if (nums[mid] < target && target <= nums[e])
+            {
+                s = mid + 1;
+            }
+            else
+            {
+                e = mid - 1;
+            }
+        }
+    }
+
+    return -1;
+}
+
+int binarysearch(vector<int> &nums, int target)
+{
+    int start = 0;
+    int n = nums.size();
+    int end = n - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (nums[mid] == target)
+        {
+            return mid;
+        }
+
+        else if (nums[mid] > target)
+        {
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    return -1;
+}
+
 int Merge(vector<int> &arr, int low, int mid, int high)
 {
     int left = low;
