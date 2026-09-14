@@ -338,6 +338,74 @@ int search(vector<int> &nums, int target)
     return -1;
 }
 
+int singleNonDuplicate(vector<int> &nums)
+{
+    if (nums.size() == 1 || nums[0] != nums[1])
+        return nums[0];
+    int n = nums.size();
+    if (nums[n - 1] != nums[n - 2])
+        return nums[n - 1];
+
+    int s = 1;
+    int e = n - 2;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        if (nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1])
+        {
+            return nums[mid];
+        }
+
+        if (mid % 2 == 0)
+        {
+            if (nums[mid] == nums[mid + 1])
+            {
+                s = mid + 1;
+            }
+            else
+            {
+                e = mid - 1;
+            }
+        }
+
+        else if (mid % 2 != 0)
+        {
+            if (nums[mid] == nums[mid + 1])
+            {
+                e = mid - 1;
+            }
+            else
+            {
+                s = mid + 1;
+            }
+        }
+    }
+    return -1;
+}
+
+int findPeakElement(vector<int> &nums)
+{
+    if (nums.size() == 1 || nums[0] > nums[1])
+        return 0;
+    int n = nums.size();
+    if (nums[n - 1] > nums[n - 2])
+        return n - 1;
+
+    int maxi = INT_MIN;
+
+    for (int i = n - 2; i >= 1; i--)
+    {
+        if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1])
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
 int binarysearch(vector<int> &nums, int target)
 {
     int start = 0;
