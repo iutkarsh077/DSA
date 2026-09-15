@@ -1072,6 +1072,54 @@ void LinearSearch()
     }
 }
 
+void rotateSecond(vector<vector<int>> &matrix)
+{
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        for (int j = i; j < matrix[i].size(); j++)
+        {
+            swap(matrix[i][j], matrix[j][i]);
+        }
+    }
+
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        reverse(matrix[i].begin(), matrix[i].end());
+    }
+}
+
+void rotateThird(vector<vector<int>> &matrix)
+{
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        for (int j = i; j < matrix[i].size(); j++)
+        {
+            swap(matrix[i][j], matrix[j][i]);
+        }
+    }
+
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        reverse(matrix[i].begin(), matrix[i].end());
+    }
+}
+
+void rotateFourth(vector<vector<int>> &matrix)
+{
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        for (int j = i; j < matrix[i].size(); j++)
+        {
+            swap(matrix[i][j], matrix[j][i]);
+        }
+    }
+
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        reverse(matrix[i].begin(), matrix[i].end());
+    }
+}
+
 vector<int> majorityElement22(vector<int> &nums)
 {
     unordered_map<int, int> mp;
@@ -1086,6 +1134,90 @@ vector<int> majorityElement22(vector<int> &nums)
         if (i->second > nums.size() / 3)
         {
             ans.push_back(i->first);
+        }
+    }
+
+    return ans;
+}
+
+void moveZeroes(vector<int> &nums)
+{
+    int cnt = 0;
+    int i = 0;
+    while (i < nums.size())
+    {
+        if (nums[i] == 0)
+        {
+            cnt++;
+            nums.erase(nums.begin() + i, nums.begin() + i + 1);
+        }
+
+        else
+        {
+            i++;
+        }
+    }
+
+    for (int i = 0; i < cnt; i++)
+    {
+        nums.push_back(0);
+    }
+}
+
+int threeSumClosest(vector<int> &nums, int target)
+{
+    sort(nums.begin(), nums.end());
+    // O(nlogn) + O(n ^ 2)
+
+    int closed = nums[0] + nums[1] + nums[2];
+
+    for (int i = 0; i < nums.size() - 2; i++)
+    {
+        int left = i + 1;
+        int right = nums.size() - 1;
+
+        while (left < right)
+        {
+            int sum = nums[i] + nums[left] + nums[right];
+            if (abs(sum - target) < abs(closed - target))
+            {
+                closed = sum;
+            }
+
+            if (sum > target)
+            {
+                right--;
+            }
+            else if (sum < target)
+            {
+                left++;
+            }
+            else
+            {
+                // equal too
+                return sum;
+            }
+        }
+    }
+
+    return closed;
+}
+
+vector<vector<int>> merge(vector<vector<int>> &intervals)
+{
+    vector<vector<int>> ans;
+
+    sort(intervals.begin(), intervals.end());
+
+    for (int i = 0; i < intervals.size(); i++)
+    {
+        if (ans.empty() || ans.back()[1] < intervals[i][0])
+        {
+            ans.push_back(intervals[i]);
+        }
+        else
+        {
+            ans.back()[1] = max(ans.back()[1], intervals[i][1]);
         }
     }
 
