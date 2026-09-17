@@ -428,6 +428,87 @@ int minEatingSpeed(vector<int> &piles, int h)
     return s;
 }
 
+int checker(vector<int> arr, int mid, int days)
+{
+    int cnt = 1;
+    int sum = 0;
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        if (sum + arr[i] > mid)
+        {
+            cnt++;
+            sum = arr[i];
+        }
+        else
+        {
+            sum += arr[i];
+        }
+    }
+
+    return cnt;
+}
+
+int shipWithinDays(vector<int> &arr, int days)
+{
+    int maxi = 0;
+    int n = arr.size();
+
+    for (int i = 0; i < n; i++)
+    {
+        maxi = maxi + arr[i];
+    }
+
+    int ans = INT_MAX;
+    int s = 1;
+    int e = maxi;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        int count = checker(arr, mid, days);
+
+        if (count <= days)
+        {
+            ans = mid;
+            e = mid - 1;
+        }
+        else
+        {
+            s = mid + 1;
+        }
+    }
+
+    return ans;
+}
+
+int findKthPositive(vector<int> &arr, int k)
+{
+    int cnt = 0;
+    unordered_map<int, int> mp;
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        mp[arr[i]]++;
+    }
+
+    for (int i = 1; i <= 2000; i++)
+    {
+        if (mp.find(i) != mp.end())
+        {
+            continue;
+        }
+        cnt++;
+        if (cnt == k)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
 int findPeakElement(vector<int> &nums)
 {
     if (nums.size() == 1 || nums[0] > nums[1])
