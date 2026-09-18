@@ -428,6 +428,38 @@ int minEatingSpeed(vector<int> &piles, int h)
     return s;
 }
 
+string removeOuterParentheses(string s)
+{
+    string result = "";
+
+    int counter = 0;
+
+    for (int i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '(')
+        {
+            if (counter > 0)
+            {
+                result += s[i];
+            }
+
+            counter++;
+        }
+
+        else if (s[i] == ')')
+        {
+            counter--;
+
+            if (counter > 0)
+            {
+                result += s[i];
+            }
+        }
+    }
+
+    return result;
+}
+
 int checker(vector<int> arr, int mid, int days)
 {
     int cnt = 1;
