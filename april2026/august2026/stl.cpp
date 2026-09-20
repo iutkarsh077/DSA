@@ -428,6 +428,54 @@ int minEatingSpeed(vector<int> &piles, int h)
     return s;
 }
 
+string reverseWords(string s)
+{
+    int i = 0;
+    string ans = "";
+
+    while (i < s.size())
+    {
+        string val = "";
+
+        while (i < s.size() && s[i] == ' ')
+        {
+            i++;
+        }
+        while (i < s.size() && s[i] != ' ')
+        {
+            val += s[i];
+            i++;
+        }
+
+        if (!val.empty())
+        {
+            ans = val + ' ' + ans;
+        }
+    }
+
+    ans.pop_back();
+
+    return ans;
+}
+
+
+string largestOddNumber(string num) {
+        int n = num.size();
+        int i = n - 1;
+
+        while(i >= 0){
+            int val = num[i] - '0';
+
+            if(val % 2 != 0){
+                string ans = num.substr(0, i + 1);
+                return ans;
+            }
+            i--;
+        }
+
+        return "";
+}
+
 string removeOuterParentheses(string s)
 {
     string result = "";
