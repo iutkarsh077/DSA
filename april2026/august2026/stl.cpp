@@ -94,6 +94,624 @@ void MergeArray(vector<int> &arr, int start, int mid, int end)
     }
 }
 
+int maxProduct(vector<int> &nums)
+{
+    int n = nums.size();
+    int pre = 1;
+    int suf = 1;
+    int maxi = INT_MIN;
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (pre == 0)
+            pre = 1;
+        if (suf == 0)
+            suf = 1;
+
+        pre = pre * nums[i];
+        suf = suf * nums[n - i - 1];
+        maxi = max(maxi, max(pre, suf));
+    }
+
+    return maxi;
+}
+
+int lowerBound(vector<int> &arr, int target)
+{
+    int index = arr.size();
+
+    int start = 0;
+    int end = arr.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (arr[mid] >= target)
+        {
+            index = min(mid, index);
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    return index;
+}
+
+int searchInsert(vector<int> &arr, int target)
+{
+    int index = arr.size();
+
+    int start = 0;
+    int end = arr.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (arr[mid] == target)
+            return mid;
+        if (arr[mid] > target)
+        {
+            index = min(mid, index);
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    return index;
+}
+
+vector<int> searchRange(vector<int> &arr, int target)
+{
+    int lowerBound = -1;
+
+    int start = 0;
+    int end = arr.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (arr[mid] == target)
+        {
+            lowerBound = mid;
+            end = mid - 1;
+        }
+
+        else if (arr[mid] > target)
+        {
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    if (lowerBound == -1)
+    {
+        return {-1, -1};
+    }
+
+    int upperBound = lowerBound;
+    start = lowerBound + 1;
+    end = arr.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (arr[mid] == target)
+        {
+            upperBound = mid;
+            start = mid + 1;
+        }
+
+        else if (arr[mid] > target)
+        {
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    return {lowerBound, upperBound};
+}
+
+int countFreq(vector<int> &arr, int target)
+{
+    int startIndex = INT_MAX;
+    int endIndex = INT_MIN;
+
+    int start = 0;
+    int end = arr.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (arr[mid] == target)
+        {
+            startIndex = min(mid, startIndex);
+            end = mid - 1;
+        }
+
+        else if (arr[mid] > target)
+        {
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    if (startIndex == INT_MAX)
+    {
+        return 0;
+    }
+
+    start = startIndex - 1;
+    end = arr.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (arr[mid] == target)
+        {
+            endIndex = max(mid, endIndex);
+            start = mid + 1;
+        }
+
+        else if (arr[mid] > target)
+        {
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    int series = (endIndex - startIndex) + 1;
+
+    return series;
+}
+
+int search(vector<int> &nums, int target)
+{
+    int s = 0;
+    int e = nums.size() - 1;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        if (nums[mid] == target)
+        {
+            return mid;
+        }
+
+        if (nums[s] <= nums[mid])
+        {
+
+            if (nums[s] <= target && target < nums[mid])
+            {
+                e = mid - 1;
+            }
+            else
+            {
+                s = mid + 1;
+            }
+        }
+
+        else
+        {
+
+            if (nums[mid] < target && target <= nums[e])
+            {
+                s = mid + 1;
+            }
+            else
+            {
+                e = mid - 1;
+            }
+        }
+    }
+
+    return -1;
+}
+
+int singleNonDuplicate(vector<int> &nums)
+{
+    if (nums.size() == 1 || nums[0] != nums[1])
+        return nums[0];
+    int n = nums.size();
+    if (nums[n - 1] != nums[n - 2])
+        return nums[n - 1];
+
+    int s = 1;
+    int e = n - 2;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        if (nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1])
+        {
+            return nums[mid];
+        }
+
+        if (mid % 2 == 0)
+        {
+            if (nums[mid] == nums[mid + 1])
+            {
+                s = mid + 1;
+            }
+            else
+            {
+                e = mid - 1;
+            }
+        }
+
+        else if (mid % 2 != 0)
+        {
+            if (nums[mid] == nums[mid + 1])
+            {
+                e = mid - 1;
+            }
+            else
+            {
+                s = mid + 1;
+            }
+        }
+    }
+    return -1;
+}
+
+long long checker(vector<int> arr, int mid)
+{
+    long long total = 0;
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        int ans1 = (arr[i] + (long long)mid - 1) / mid;
+        total += ans1;
+    }
+
+    return total;
+}
+int minEatingSpeed(vector<int> &piles, int h)
+{
+    int maxi = 0;
+
+    for (int i = 0; i < piles.size(); i++)
+    {
+        maxi = max(maxi, piles[i]);
+    }
+
+    int s = 1;
+    int e = maxi;
+
+    while (s <= e)
+    {
+        int mid = s + (e - s) / 2;
+
+        long long ans = checker(piles, mid);
+
+        if (ans <= h)
+        {
+            e = mid - 1;
+        }
+        else
+        {
+            s = mid + 1;
+        }
+    }
+
+    return s;
+}
+
+string reverseWords(string s)
+{
+    int i = 0;
+    string ans = "";
+
+    while (i < s.size())
+    {
+        string val = "";
+
+        while (i < s.size() && s[i] == ' ')
+        {
+            i++;
+        }
+        while (i < s.size() && s[i] != ' ')
+        {
+            val += s[i];
+            i++;
+        }
+
+        if (!val.empty())
+        {
+            ans = val + ' ' + ans;
+        }
+    }
+
+    ans.pop_back();
+
+    return ans;
+}
+
+string reverseStr(string s, int k) {
+        int n = s.size();
+        for (int i = 0; i < n; i += 2 * k) {
+            if (i + k <= n) {
+                reverse(s.begin() + i, s.begin() + i + k);
+            } else {
+                reverse(s.begin() + i, s.end());
+            }
+        }
+        return s;
+    }
+
+
+string largestOddNumber(string num) {
+        int n = num.size();
+        int i = n - 1;
+
+        while(i >= 0){
+            int val = num[i] - '0';
+
+            if(val % 2 != 0){
+                string ans = num.substr(0, i + 1);
+                return ans;
+            }
+            i--;
+        }
+
+        return "";
+}
+
+string removeOuterParentheses(string s)
+{
+    string result = "";
+
+    int counter = 0;
+
+    for (int i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '(')
+        {
+            if (counter > 0)
+            {
+                result += s[i];
+            }
+
+            counter++;
+        }
+
+        else if (s[i] == ')')
+        {
+            counter--;
+
+            if (counter > 0)
+            {
+                result += s[i];
+            }
+        }
+    }
+
+    return result;
+}
+
+int checker(vector<int> arr, int mid, int days)
+{
+    int cnt = 1;
+    int sum = 0;
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        if (sum + arr[i] > mid)
+        {
+            cnt++;
+            sum = arr[i];
+        }
+        else
+        {
+            sum += arr[i];
+        }
+    }
+
+    return cnt;
+}
+
+int shipWithinDays(vector<int> &arr, int days)
+{
+    int maxi = 0;
+    int n = arr.size();
+
+    for (int i = 0; i < n; i++)
+    {
+        maxi = maxi + arr[i];
+    }
+
+    int ans = INT_MAX;
+    int s = 1;
+    int e = maxi;
+
+    while (s <= e)
+    {
+        int mid = s + ((e - s) / 2);
+
+        int count = checker(arr, mid, days);
+
+        if (count <= days)
+        {
+            ans = mid;
+            e = mid - 1;
+        }
+        else
+        {
+            s = mid + 1;
+        }
+    }
+
+    return ans;
+}
+
+int findKthPositive(vector<int> &arr, int k)
+{
+    int cnt = 0;
+    unordered_map<int, int> mp;
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        mp[arr[i]]++;
+    }
+
+    for (int i = 1; i <= 2000; i++)
+    {
+        if (mp.find(i) != mp.end())
+        {
+            continue;
+        }
+        cnt++;
+        if (cnt == k)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+int findPeakElement(vector<int> &nums)
+{
+    if (nums.size() == 1 || nums[0] > nums[1])
+        return 0;
+    int n = nums.size();
+    if (nums[n - 1] > nums[n - 2])
+        return n - 1;
+
+    int maxi = INT_MIN;
+
+    for (int i = n - 2; i >= 1; i--)
+    {
+        if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1])
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+int binarysearch(vector<int> &nums, int target)
+{
+    int start = 0;
+    int n = nums.size();
+    int end = n - 1;
+
+    while (start <= end)
+    {
+        int mid = start + ((end - start) / 2);
+
+        if (nums[mid] == target)
+        {
+            return mid;
+        }
+
+        else if (nums[mid] > target)
+        {
+            end = mid - 1;
+        }
+
+        else
+        {
+            start = mid + 1;
+        }
+    }
+
+    return -1;
+}
+
+int Merge(vector<int> &arr, int low, int mid, int high)
+{
+    int left = low;
+    int right = mid + 1;
+    int cnt = 0;
+
+    vector<int> temp;
+
+    while (left <= mid && right <= high)
+    {
+        if (arr[left] <= arr[right])
+        {
+            temp.push_back(arr[left]);
+            left++;
+        }
+        else
+        {
+            temp.push_back(arr[right]);
+            right++;
+            cnt += (mid - left + 1);
+        }
+    }
+
+    while (left <= mid)
+    {
+        temp.push_back(arr[left]);
+        left++;
+    }
+
+    while (right <= high)
+    {
+        temp.push_back(arr[right]);
+        right++;
+    }
+
+    for (int i = low; i <= high; i++)
+    {
+        arr[i] = temp[i - low];
+    }
+
+    return cnt;
+}
+
+int DivideIt(vector<int> &arr, int low, int high)
+{
+    int cnt = 0;
+    if (low >= high)
+        return cnt;
+    int mid = (low + high) / 2;
+    cnt += DivideIt(arr, low, mid);
+    cnt += DivideIt(arr, mid + 1, high);
+    cnt += Merge(arr, low, mid, high);
+
+    return cnt;
+}
+int inversionCount(vector<int> &arr)
+{
+    int cnt = DivideIt(arr, 0, arr.size() - 1);
+    return cnt;
+}
+
 void printMe(vector<int> arr)
 {
     for (int i = 0; i < arr.size(); i++)
@@ -827,6 +1445,44 @@ void Quicksort(vector<int> &arr, int low, int high)
 
     Quicksort(arr, low, p - 1);
     Quicksort(arr, p + 1, high);
+}
+
+int threeSumClosest(vector<int> &nums, int target)
+{
+    sort(nums.begin(), nums.end());
+
+    int closed = nums[0] + nums[1] + nums[2];
+
+    for (int i = 0; i < nums.size() - 2; i++)
+    {
+        int left = i + 1;
+        int right = nums.size() - 1;
+
+        while (left < right)
+        {
+            int sum = nums[i] + nums[left] + nums[right];
+            if (abs(sum - target) < abs(closed - target))
+            {
+                closed = sum;
+            }
+
+            if (sum > target)
+            {
+                right--;
+            }
+            else if (sum < target)
+            {
+                left++;
+            }
+            else
+            {
+                // equal too
+                return sum;
+            }
+        }
+    }
+
+    return closed;
 }
 
 int main()
