@@ -458,6 +458,18 @@ string reverseWords(string s)
     return ans;
 }
 
+string reverseStr(string s, int k) {
+        int n = s.size();
+        for (int i = 0; i < n; i += 2 * k) {
+            if (i + k <= n) {
+                reverse(s.begin() + i, s.begin() + i + k);
+            } else {
+                reverse(s.begin() + i, s.end());
+            }
+        }
+        return s;
+    }
+
 
 string largestOddNumber(string num) {
         int n = num.size();
