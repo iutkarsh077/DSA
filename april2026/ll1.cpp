@@ -87,6 +87,21 @@ void InsertAtTail(int data, Node *&head, Node *&tail)
     tail = temp;
 }
 
+void InsertAtTail2(int data, Node *&head, Node *&tail)
+{
+    if (head == nullptr)
+    {
+        Node *temp = new Node(data);
+        head = temp;
+        tail = temp;
+        return;
+    }
+
+    Node *temp = new Node(data);
+    tail->next = temp;
+    tail = temp;
+}
+
 void insertAtAnyPosition(Node *&head, Node *&tail, int data, int pos)
 {
     if (head == nullptr || pos == 1)
