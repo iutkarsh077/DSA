@@ -25,6 +25,39 @@ void PrintNode(Node *head)
     }
 }
 
+void PrintNode3(Node *head)
+{
+    Node *tracker = head;
+
+    while (tracker != nullptr)
+    {
+        cout << tracker->val << " ";
+        tracker = tracker->next;
+    }
+}
+
+void PrintNode4(Node *head)
+{
+    Node *tracker = head;
+
+    while (tracker != nullptr)
+    {
+        cout << tracker->val << " ";
+        tracker = tracker->next;
+    }
+}
+
+void PrintNode2(Node *head)
+{
+    Node *tracker = head;
+
+    while (tracker != nullptr)
+    {
+        cout << tracker->val << " ";
+        tracker = tracker->next;
+    }
+}
+
 void InsertAtHead(int data, Node *&head)
 {
     if (head == nullptr)
@@ -40,6 +73,21 @@ void InsertAtHead(int data, Node *&head)
 }
 
 void InsertAtTail(int data, Node *&head, Node *&tail)
+{
+    if (head == nullptr)
+    {
+        Node *temp = new Node(data);
+        head = temp;
+        tail = temp;
+        return;
+    }
+
+    Node *temp = new Node(data);
+    tail->next = temp;
+    tail = temp;
+}
+
+void InsertAtTail2(int data, Node *&head, Node *&tail)
 {
     if (head == nullptr)
     {
@@ -328,6 +376,44 @@ Node *detectCycle(Node *head)
 }
 
 Node *rotateRight(Node *head, int k)
+{
+    vector<int> arr;
+
+    Node *temp = head;
+
+    while (temp != nullptr)
+    {
+        arr.push_back(temp->val);
+        temp = temp->next;
+    }
+
+    if (arr.size() == 0)
+        return nullptr;
+
+    k = k % arr.size();
+
+    reverse(arr.begin(), arr.end());
+    reverse(arr.begin(), arr.begin() + k);
+    reverse(arr.begin() + k, arr.end());
+
+    Node *newHead = new Node(arr[0]);
+    Node *newtail = newHead;
+
+    if (arr.size() == 1)
+        return newHead;
+    int i = 1;
+    while (i < arr.size())
+    {
+        Node *node = new Node(arr[i]);
+        newtail->next = node;
+        newtail = node;
+        i++;
+    }
+
+    return newHead;
+}
+
+Node *rotateRight2(Node *head, int k)
 {
     vector<int> arr;
 
