@@ -36,6 +36,27 @@ Node *BSTInsert(Node *root, int data)
     return root;
 }
 
+
+Node *BSTInsert22(Node *root, int data)
+{
+    if (root == nullptr)
+    {
+        root = new Node(data);
+        return root;
+    }
+
+    if (data > root->data)
+    {
+        root->right = BSTInsert(root->right, data);
+    }
+    else
+    {
+        root->left = BSTInsert(root->left, data);
+    }
+
+    return root;
+}
+
 void LevelOrderTransversal(Node *root)
 {
     queue<Node *> q;

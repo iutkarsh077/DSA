@@ -16,6 +16,19 @@ void countDigits()
     cout << "The number of digits are: " << count;
 }
 
+void countDigits2()
+{
+    long long n = 8726786278;
+    int logResult = (int)(log10(n) + 1);
+    int count = 0;
+    while (n > 0)
+    {
+        n = n / 10;
+        count = count + 1;
+    }
+    cout << "The number of digits are: " << count;
+}
+
 void reverseNumber()
 {
     long long int n = 1534236469;
