@@ -25,6 +25,17 @@ void PrintNode(Node *head)
     }
 }
 
+void PrintNode(Node *head)
+{
+    Node *tracker = head;
+
+    while (tracker != nullptr)
+    {
+        cout << tracker->val << " ";
+        tracker = tracker->next;
+    }
+}
+
 void InsertAtHead(int data, Node *&head)
 {
     if (head == nullptr)
