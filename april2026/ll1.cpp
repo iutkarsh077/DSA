@@ -25,7 +25,18 @@ void PrintNode(Node *head)
     }
 }
 
-void PrintNode(Node *head)
+void PrintNode3(Node *head)
+{
+    Node *tracker = head;
+
+    while (tracker != nullptr)
+    {
+        cout << tracker->val << " ";
+        tracker = tracker->next;
+    }
+}
+
+void PrintNode2(Node *head)
 {
     Node *tracker = head;
 
