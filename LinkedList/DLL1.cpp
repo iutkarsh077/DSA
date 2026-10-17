@@ -31,6 +31,22 @@ void InsertAtHead(Node *&head, Node *&tail, int data)
     head = temp;
 }
 
+void InsertAtHead(Node *&head, Node *&tail, int data)
+{
+    if (head == nullptr)
+    {
+        Node *temp = new Node(data);
+        head = temp;
+        tail = head;
+        return;
+    }
+
+    Node *temp = new Node(data);
+    temp->next = head;
+    head->prev = temp;
+    head = temp;
+}
+
 void InsertAtTail(Node *&head, Node *&tail, int data)
 {
     if (head == nullptr)
